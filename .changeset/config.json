@@ -15,5 +15,5 @@
   "___experimentalUnsafeOptions_WILL_CHANGE_IN_PATCH": {
     "onlyUpdatePeerDependentsWhenOutOfRange": true
   },
-  "ignore": ["docs", "@chiastack/create-app", "react-play", "next-app-play"]
+  "ignore": ["docs"]
 }
