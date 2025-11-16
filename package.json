@@ -1,7 +1,7 @@
 {
   "$schema": "https://json.schemastore.org/package",
-  "name": "chia-stack",
-  "version": "2.0.0",
+  "name": "chiastack.dev",
+  "version": "3.0.0",
   "private": true,
   "sideEffects": false,
   "license": "MIT",
@@ -22,7 +22,7 @@
     "release:canary": "changeset publish --tag canary",
     "version:beta": "changeset version --snapshot beta",
     "release:beta": "changeset publish --tag beta",
-    "prepare": "husky install",
+    "prepare": "husky",
     "postinstall": "manypkg check",
     "build": "turbo run build",
     "dev": "turbo run dev --parallel",
@@ -35,41 +35,42 @@
     "clean:workspaces": "turbo clean --parallel",
     "test": "turbo run test --parallel",
     "test:watch": "turbo run test:watch --parallel",
-    "test:e2e": "turbo run test:e2e",
-    "next-sitemap": "turbo run next-sitemap --parallel"
+    "test:e2e": "turbo run test:e2e"
   },
   "engines": {
-    "node": ">=18.*"
+    "node": ">=22.*"
   },
-  "packageManager": "pnpm@8.6.2",
-  "dependencies": {
+  "packageManager": "pnpm@10.22.0",
+  "devDependencies": {
     "@changesets/changelog-github": "^0.4.8",
     "@changesets/cli": "^2.26.2",
-    "@manypkg/cli": "^0.21.0",
-    "@next/eslint-plugin-next": "13.4.12",
-    "@total-typescript/ts-reset": "0.5.1",
-    "@types/node": "20.4.6",
-    "@typescript-eslint/eslint-plugin": "^6.2.1",
-    "@typescript-eslint/parser": "^6.2.1",
-    "eslint": "^8.46.0",
-    "eslint-config-next": "^13.4.12",
-    "eslint-config-prettier": "^8.9.0",
-    "eslint-config-turbo": "^1.10.12",
-    "eslint-plugin-prettier": "^5.0.0",
-    "eslint-plugin-react": "7.33.1",
-    "eslint-plugin-tailwindcss": "3.13.0",
-    "happy-dom": "^10.5.2",
-    "husky": "^8.0.3",
-    "lint-staged": "^13.2.3",
-    "prettier": "^3.0.0",
-    "prettier-plugin-tailwindcss": "^0.4.1",
-    "shell-quote": "^1.8.1",
-    "superjson": "1.13.1",
-    "ts-node": "^10.9.1",
-    "tsx": "^3.12.7",
-    "turbo": "1.10.12",
-    "typescript": "^5.1.6",
-    "vitest": "^0.34.0",
-    "zod": "^3.21.4"
+    "@chiastack/tsconfig": "workspace:*",
+    "@manypkg/cli": "^0.25.1",
+    "@total-typescript/ts-reset": "0.6.1",
+    "@trivago/prettier-plugin-sort-imports": "^6.0.0",
+    "@turbo/gen": "^2.6.0",
+    "dotenv": "^17.2.3",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.2.6",
+    "prettier": "^3.6.2",
+    "prettier-plugin-tailwindcss": "^0.7.1",
+    "tsx": "^4.20.6",
+    "turbo": "2.6.0",
+    "typescript": "catalog:",
+    "vitest": "^4.0.8"
+  },
+  "manypkg": {
+    "ignoredRules": [
+      "ROOT_HAS_PROD_DEPENDENCIES"
+    ],
+    "workspaceProtocol": "require"
+  },
+  "lint-staged": {
+    "*.{js,jsx,cjs,mjs,ts,mts,tsx}": [
+      "prettier --write"
+    ],
+    "*.{json,md}": [
+      "prettier --write"
+    ]
   }
 }

@@ -1,14 +1,14 @@
 {
   "$schema": "https://json.schemastore.org/package",
   "name": "@chiastack/utils",
-  "version": "0.0.1-beta.2",
+  "version": "0.0.1-beta.3",
   "publishConfig": {
     "access": "public"
   },
   "types": "./dist/index.d.mts",
   "scripts": {
-    "build": "tsup",
-    "dev": "tsup --watch",
+    "build": "tsdown",
+    "dev": "tsdown --watch",
     "clean": "git clean -xdf .turbo node_modules dist",
     "lint": "eslint \"src/**/*.{ts,js,tsx,jsx}\" --fix",
     "type:check": "tsc --noEmit",
@@ -19,13 +19,14 @@
     ".": {
       "require": "./dist/index.js",
       "import": "./dist/index.mjs"
+    },
+    "./set-search-params": {
+      "require": "./dist/set-search-params/index.js",
+      "import": "./dist/set-search-params/index.mjs"
     }
   },
   "devDependencies": {
-    "@chiastack/tsconfig": "0.0.1-beta.2",
-    "tsup": "^7.1.0"
-  },
-  "engines": {
-    "node": ">=16"
+    "@chiastack/tsconfig": "workspace:*",
+    "tsdown": "catalog:"
   }
 }
