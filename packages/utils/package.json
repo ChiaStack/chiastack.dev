@@ -5,7 +5,6 @@
   "publishConfig": {
     "access": "public"
   },
-  "types": "./dist/index.d.mts",
   "scripts": {
     "build": "tsdown",
     "dev": "tsdown --watch",
@@ -15,20 +14,79 @@
     "test": "vitest run",
     "test:watch": "vitest"
   },
+  "main": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
   "exports": {
+    "./package.json": "./package.json",
     ".": {
-      "require": "./dist/index.js",
-      "import": "./dist/index.mjs"
+      "import": "./dist/index.mjs",
+      "types": "./dist/index.d.mts",
+      "require": "./dist/index.cjs"
+    },
+    "./index": {
+      "require": "./dist/index/index.cjs",
+      "import": "./dist/index/index.mjs",
+      "types": "./dist/index/index.d.mts"
     },
     "./set-search-params": {
-      "require": "./dist/set-search-params/index.js",
-      "import": "./dist/set-search-params/index.mjs"
+      "require": "./dist/set-search-params/set-search-params.cjs",
+      "import": "./dist/set-search-params/set-search-params.mjs",
+      "types": "./dist/set-search-params/set-search-params.d.mts"
+    },
+    "./day": {
+      "require": "./dist/day/day.cjs",
+      "import": "./dist/day/day.mjs",
+      "types": "./dist/day/day.d.mts"
+    },
+    "./try-catch": {
+      "require": "./dist/try-catch/try-catch.cjs",
+      "import": "./dist/try-catch/try-catch.mjs",
+      "types": "./dist/try-catch/try-catch.d.mts"
+    },
+    "./is": {
+      "require": "./dist/is/is.cjs",
+      "import": "./dist/is/is.mjs",
+      "types": "./dist/is/is.d.mts"
+    },
+    "./delay": {
+      "require": "./dist/delay/delay.cjs",
+      "import": "./dist/delay/delay.mjs",
+      "types": "./dist/delay/delay.d.mts"
     }
+  },
+  "typesVersions": {
+    "*": [
+      "./dist/*/*.d.mts"
+    ],
+    "index": [
+      "./dist/index/index.d.mts"
+    ],
+    "set-search-params": [
+      "./dist/set-search-params/set-search-params.d.mts"
+    ],
+    "day": [
+      "./dist/day/day.d.mts"
+    ],
+    "try-catch": [
+      "./dist/try-catch/try-catch.d.mts"
+    ],
+    "is": [
+      "./dist/is/is.d.mts"
+    ],
+    "delay": [
+      "./dist/delay/delay.d.mts"
+    ]
   },
   "devDependencies": {
     "@chiastack/eslint": "workspace:*",
     "@chiastack/tsconfig": "workspace:*",
+    "dayjs": "catalog:",
     "eslint": "catalog:eslint",
-    "tsdown": "catalog:"
+    "tsdown": "catalog:",
+    "zod": "catalog:"
+  },
+  "peerDependencies": {
+    "dayjs": "^1.11.19",
+    "zod": "^4.1.12"
   }
 }
