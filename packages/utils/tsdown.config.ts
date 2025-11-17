@@ -16,12 +16,12 @@ type PackageJson = {
 };
 
 const ESEntries = [
-  "./src/index.ts",
   "./src/set-search-params/set-search-params.ts",
   "./src/day/day.ts",
   "./src/try-catch/try-catch.ts",
   "./src/is/is.ts",
   "./src/delay/delay.ts",
+  "./src/server/server.ts",
 ];
 
 export default defineConfig((opts) => {
@@ -53,6 +53,9 @@ export default defineConfig((opts) => {
             import: "./dist/index.mjs",
             types: "./dist/index.d.mts",
           },
+        };
+        pkgJson.typesVersions = {
+          "*": {},
         };
         [...ESEntries]
           .filter((e) => e.endsWith(".ts"))

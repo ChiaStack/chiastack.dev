@@ -1,0 +1,5 @@
+{
+  "extends": ["@chiastack/tsconfig/compiled-package.json"],
+  "include": ["src", "vitest.config.ts", "tsdown.config.ts"],
+  "exclude": ["dist", "build", "node_modules"]
+}

@@ -3,3 +3,4 @@ export * from "./day/day";
 export * from "./try-catch/try-catch";
 export * from "./is/is";
 export * from "./delay/delay";
+export * from "./server/server";
