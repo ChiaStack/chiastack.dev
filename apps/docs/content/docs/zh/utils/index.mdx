@@ -1,0 +1,40 @@
+---
+title: Utils
+description: Practical utility functions collection
+---
+
+`@chiastack/utils` provides a series of practical utility functions covering date handling, error handling, type checking, delay execution, and more.
+
+## Installation
+
+```bash
+npm install @chiastack/utils
+```
+
+## Modules
+
+<Cards>
+  <Card title="Day" href="/docs/en/utils/day" description="Date and time handling" />
+  <Card title="Delay" href="/docs/en/utils/delay" description="Delay execution function" />
+  <Card title="Try Catch" href="/docs/en/utils/try-catch" description="Safe error handling" />
+  <Card title="Is" href="/docs/en/utils/is" description="Type checking utilities" />
+  <Card title="Server" href="/docs/en/utils/server" description="Server-side utilities" />
+  <Card title="Set Search Params" href="/docs/en/utils/set-search-params" description="URL query parameter handling" />
+</Cards>
+
+## Basic Usage
+
+```typescript
+import { delay, tryCatch, isNumber } from '@chiastack/utils';
+
+// Delay execution
+await delay(1000);
+
+// Safe error handling
+const result = await tryCatch(fetch('/api/data'));
+
+// Type checking
+if (isNumber(value)) {
+  console.log(value + 1);
+}
+```

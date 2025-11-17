@@ -11,9 +11,11 @@ import { notFound } from "next/navigation";
 import { getPageImage, source } from "@/lib/source";
 import { getMDXComponents } from "@/mdx-components";
 
-export default async function Page(props: PageProps<"/docs/[[...slug]]">) {
+export default async function Page(
+  props: PageProps<"/[locale]/docs/[[...slug]]">
+) {
   const params = await props.params;
-  const page = source.getPage(params.slug);
+  const page = source.getPage(params.slug, params.locale);
   if (!page) notFound();
 
   const MDX = page.data.body;
@@ -35,14 +37,14 @@ export default async function Page(props: PageProps<"/docs/[[...slug]]">) {
 }
 
 export function generateStaticParams() {
-  return source.generateParams();
+  return source.generateParams("slug", "locale");
 }
 
 export async function generateMetadata(
-  props: PageProps<"/docs/[[...slug]]">
+  props: PageProps<"/[locale]/docs/[[...slug]]">
 ): Promise<Metadata> {
   const params = await props.params;
-  const page = source.getPage(params.slug);
+  const page = source.getPage(params.slug, params.locale);
   if (!page) notFound();
 
   return {

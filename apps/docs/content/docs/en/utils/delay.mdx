@@ -1,0 +1,67 @@
+---
+title: Delay
+description: Delay execution function
+---
+
+The `delay` module provides a simple asynchronous delay function for pausing execution for a specified time in your program.
+
+## Installation
+
+```bash
+npm install @chiastack/utils
+```
+
+## Import
+
+```typescript
+import { delay } from '@chiastack/utils/delay';
+```
+
+## API
+
+### `delay`
+
+Create a Promise that resolves after the specified number of milliseconds.
+
+```typescript
+delay(ms: number): Promise<void>
+```
+
+**Parameters:**
+- `ms`: Number of milliseconds to delay
+
+**Returns:**
+- `Promise<void>`: Promise that resolves after the specified time
+
+**Example:**
+
+```typescript
+import { delay } from '@chiastack/utils/delay';
+
+// Wait 1 second
+await delay(1000);
+
+// Use in loops
+for (let i = 0; i < 5; i++) {
+  console.log(i);
+  await delay(500); // 500ms interval between each
+}
+
+// Combine with try-catch
+import { tryCatch } from '@chiastack/utils/try-catch';
+
+const result = await tryCatch(
+  (async () => {
+    await delay(1000);
+    return 'Complete';
+  })()
+);
+```
+
+## Use Cases
+
+- Throttling and debouncing
+- Simulating network delays
+- Animation and transition effects
+- Polling intervals
+- Time control in tests

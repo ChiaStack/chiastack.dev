@@ -1,0 +1,68 @@
+---
+title: Delay
+description: 延遲執行函數
+---
+
+`delay` 模組提供了一個簡單的異步延遲函數，用於在程式中暫停執行指定的時間。
+
+## 安裝
+
+```bash
+npm install @chiastack/utils
+```
+
+## 導入
+
+```typescript
+import { delay } from '@chiastack/utils/delay';
+```
+
+## API
+
+### `delay`
+
+創建一個 Promise，在指定的毫秒數後解析。
+
+```typescript
+delay(ms: number): Promise<void>
+```
+
+**參數：**
+- `ms`: 延遲的毫秒數
+
+**回傳值：**
+- `Promise<void>`: 在指定時間後解析的 Promise
+
+**範例：**
+
+```typescript
+import { delay } from '@chiastack/utils/delay';
+
+// 等待 1 秒
+await delay(1000);
+
+// 在迴圈中使用
+for (let i = 0; i < 5; i++) {
+  console.log(i);
+  await delay(500); // 每次間隔 500 毫秒
+}
+
+// 與 try-catch 結合使用
+import { tryCatch } from '@chiastack/utils/try-catch';
+
+const result = await tryCatch(
+  (async () => {
+    await delay(1000);
+    return '完成';
+  })()
+);
+```
+
+## 使用場景
+
+- 節流（throttling）和防抖（debouncing）
+- 模擬網路延遲
+- 動畫和過渡效果
+- 輪詢間隔
+- 測試中的時間控制
+

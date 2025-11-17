@@ -1,0 +1,104 @@
+---
+title: Set Search Params
+description: URL 查詢參數處理工具
+---
+
+`set-search-params` 模組提供了一個簡單的函數來構建 URL 查詢字串，自動處理編碼和過濾空值。
+
+## 安裝
+
+```bash
+npm install @chiastack/utils
+```
+
+## 導入
+
+```typescript
+import { setSearchParams } from '@chiastack/utils/set-search-params';
+```
+
+## API
+
+### `setSearchParams`
+
+將物件轉換為 URL 查詢字串。
+
+```typescript
+setSearchParams<T extends Partial<Record<string, string | null>>>(
+  searchParams?: T,
+  opts?: Options
+): string
+```
+
+**參數：**
+- `searchParams` (可選): 包含查詢參數的物件
+- `opts` (可選): 選項物件
+  - `baseUrl` (可選): 基礎 URL，會自動處理結尾的斜線和問號
+
+**回傳值：**
+- `string`: 構建好的查詢字串（包含前綴 `?` 如果提供了 `baseUrl`）
+
+**範例：**
+
+```typescript
+import { setSearchParams } from '@chiastack/utils/set-search-params';
+
+// 基本使用
+const query = setSearchParams({
+  name: 'John',
+  age: '30',
+  city: 'Taipei'
+});
+// 結果: "name=John&age=30&city=Taipei"
+
+// 過濾 null 值
+const query2 = setSearchParams({
+  name: 'John',
+  age: null, // 會被過濾
+  city: 'Taipei'
+});
+// 結果: "name=John&city=Taipei"
+
+// 與 baseUrl 一起使用
+const url = setSearchParams(
+  { page: '1', limit: '10' },
+  { baseUrl: 'https://api.example.com/users' }
+);
+// 結果: "https://api.example.com/users?page=1&limit=10"
+
+// baseUrl 自動處理斜線和問號
+const url2 = setSearchParams(
+  { q: 'search' },
+  { baseUrl: 'https://api.example.com/search/' }
+);
+// 結果: "https://api.example.com/search?q=search"
+
+const url3 = setSearchParams(
+  { q: 'search' },
+  { baseUrl: 'https://api.example.com/search?' }
+);
+// 結果: "https://api.example.com/search?q=search"
+```
+
+## 特性
+
+- **自動編碼**：所有參數值都會自動進行 URL 編碼
+- **過濾空值**：`null` 值會被自動過濾
+- **智能處理**：自動處理 `baseUrl` 的結尾斜線和問號
+- **類型安全**：完整的 TypeScript 類型支援
+
+## 使用場景
+
+- 構建 API 請求 URL
+- 動態生成查詢字串
+- 表單資料序列化
+- 分頁和篩選參數
+- 與第三方 API 整合
+
+## 注意事項
+
+- 所有參數值都會被轉換為字串並進行 URL 編碼
+- `null` 值會被過濾，不會出現在結果中
+- 如果 `baseUrl` 以斜線結尾，會被移除
+- 如果 `baseUrl` 以問號結尾，會被保留
+
