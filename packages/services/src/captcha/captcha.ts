@@ -1,6 +1,5 @@
 import { getClientIP } from "@chiastack/utils/server";
-import { resolveEnvImport } from "@chiastack/utils/server";
-import setSearchParams from "@chiastack/utils/set-search-params";
+import { setSearchParams } from "@chiastack/utils/set-search-params";
 
 export interface CapthcaResponse {
   success: boolean;
@@ -22,6 +21,8 @@ export type ErrorCode = (typeof ErrorCode)[keyof typeof ErrorCode];
 interface Options {
   onError?: (code: ErrorCode) => void;
   provider: "cloudflare-turnstile" | "google-recaptcha";
+  captchaSecretKey: string;
+  clientIP?: string;
 }
 
 export class CaptchaError extends Error {
@@ -43,9 +44,9 @@ export const captchaRequestDTO = (request: Request, options?: Options) => {
   }
 
   return {
-    secret: resolveEnvImport().CAPTCHA_SECRET_KEY,
+    secret: options?.captchaSecretKey,
     response: token,
-    remoteip: ip,
+    remoteip: options?.clientIP ?? ip,
   };
 };
 

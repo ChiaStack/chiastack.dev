@@ -17,7 +17,6 @@
     "@chiastack/eslint": "workspace:*",
     "@chiastack/tsconfig": "workspace:*",
     "@chiastack/utils": "workspace:*",
-    "@t3-oss/env-core": "catalog:",
     "eslint": "catalog:eslint",
     "ky": "catalog:",
     "tsdown": "catalog:",
@@ -29,24 +28,11 @@
     "ky": "^1.0.0",
     "zod": "^3.24.0 || ^4.0.0"
   },
-  "peerDependenciesMeta": {
-    "@t3-oss/env-core": {
-      "optional": true
-    }
-  },
   "exports": {
     "./package.json": "./package.json",
     "./captcha": {
       "import": "./dist/captcha/captcha.mjs",
       "types": "./dist/captcha/captcha.d.mts"
-    },
-    "./captcha/env": {
-      "import": "./dist/captcha/env.mjs",
-      "types": "./dist/captcha/env.d.mts"
-    },
-    "./captcha/env.client": {
-      "import": "./dist/captcha/env.client.mjs",
-      "types": "./dist/captcha/env.client.d.mts"
     },
     "./demo": {
       "import": "./dist/demo/demo.mjs",
@@ -61,12 +47,6 @@
     "*": {
       "captcha": [
         "./dist/captcha/captcha.d.mts"
-      ],
-      "captcha/env": [
-        "./dist/captcha/env.d.mts"
-      ],
-      "captcha/env.client": [
-        "./dist/captcha/env.client.d.mts"
       ],
       "demo": [
         "./dist/demo/demo.d.mts"

@@ -14,8 +14,6 @@ type PackageJson = {
 
 const ESEntries = [
   "./src/captcha/captcha.ts",
-  "./src/captcha/env.ts",
-  "./src/captcha/env.client.ts",
   "./src/demo/demo.ts",
   "./src/demo/env.ts",
 ];
