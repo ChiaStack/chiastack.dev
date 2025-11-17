@@ -55,30 +55,6 @@ export async function GET(request: Request) {
 }
 ```
 
-### `resolveEnvImport`
-
-Automatically resolve whether to use `import.meta.env` or `process.env` to read environment variables based on the execution environment.
-
-```typescript
-resolveEnvImport(): Record<string, string | undefined>
-```
-
-**Returns:**
-- `Record<string, string | undefined>`: Environment variables object
-
-**Example:**
-
-```typescript
-import { resolveEnvImport } from '@chiastack/utils/server';
-
-// Automatically select the correct environment variable source
-const env = resolveEnvImport();
-const apiKey = env.API_KEY;
-
-// Uses import.meta.env in Vite environment
-// Uses process.env in Node.js environment
-```
-
 ## Use Cases
 
 - **IP Retrieval**:
@@ -87,13 +63,7 @@ const apiKey = env.API_KEY;
   - Rate limiting
   - Security auditing
 
-- **Environment Variable Resolution**:
-  - Cross-framework compatibility (Vite, Next.js, Node.js)
-  - Unified environment variable access interface
-  - Build tool-agnostic code
-
 ## Notes
 
 - `getClientIP` is primarily used in server-side environments (e.g., Next.js API Routes, Cloudflare Workers)
-- `resolveEnvImport` automatically detects the execution environment, no manual judgment needed
 - IP addresses may be modified by proxy servers or CDNs, adjust priority order based on actual situation

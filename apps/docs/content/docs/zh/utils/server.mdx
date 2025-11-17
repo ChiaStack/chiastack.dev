@@ -55,30 +55,6 @@ export async function GET(request: Request) {
 }
 ```
 
-### `resolveEnvImport`
-
-根據執行環境自動解析應該使用 `import.meta.env` 還是 `process.env` 來讀取環境變數。
-
-```typescript
-resolveEnvImport(): Record<string, string | undefined>
-```
-
-**回傳值：**
-- `Record<string, string | undefined>`: 環境變數物件
-
-**範例：**
-
-```typescript
-import { resolveEnvImport } from '@chiastack/utils/server';
-
-// 自動選擇正確的環境變數來源
-const env = resolveEnvImport();
-const apiKey = env.API_KEY;
-
-// 在 Vite 環境中會使用 import.meta.env
-// 在 Node.js 環境中會使用 process.env
-```
-
 ## 使用場景
 
 - **IP 獲取**：
@@ -87,14 +63,7 @@ const apiKey = env.API_KEY;
   - 速率限制
   - 安全審計
 
-- **環境變數解析**：
-  - 跨框架相容性（Vite、Next.js、Node.js）
-  - 統一的環境變數存取介面
-  - 建置工具無關的程式碼
-
 ## 注意事項
 
 - `getClientIP` 主要用於伺服器端環境（如 Next.js API Routes、Cloudflare Workers）
-- `resolveEnvImport` 會自動偵測執行環境，無需手動判斷
 - IP 地址可能被代理伺服器或 CDN 修改，請根據實際情況調整優先順序
-

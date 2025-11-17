@@ -31,7 +31,14 @@ export default async function Layout({
   return (
     <html lang="en" className={inter.className} suppressHydrationWarning>
       <body className="flex flex-col min-h-screen">
-        <RootProvider i18n={provider(locale)}>{children}</RootProvider>
+        <RootProvider
+          i18n={provider(locale)}
+          theme={{
+            enabled: true,
+            enableSystem: true,
+          }}>
+          {children}
+        </RootProvider>
       </body>
     </html>
   );
