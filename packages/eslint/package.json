@@ -3,6 +3,22 @@
   "private": true,
   "version": "1.1.0",
   "type": "module",
+  "publishConfig": {
+    "access": "public"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Chia1104",
+    "email": "yuyuchia7423@gmail.com",
+    "url": "https://github.com/chia1104"
+  },
+  "keywords": [
+    "eslint",
+    "typescript",
+    "react",
+    "nextjs",
+    "chiastack"
+  ],
   "exports": {
     "./base": {
       "import": "./dist/base.mjs",
