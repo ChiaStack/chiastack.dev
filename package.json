@@ -35,29 +35,30 @@
     "clean:workspaces": "turbo clean --parallel",
     "test": "turbo run test --parallel",
     "test:watch": "turbo run test:watch --parallel",
-    "test:e2e": "turbo run test:e2e"
+    "test:e2e": "turbo run test:e2e",
+    "update-deps:all": "pnpm up --latest --filter '@chiastack/*' --filter docs --filter vite-area"
   },
   "engines": {
     "node": ">=22.*"
   },
   "packageManager": "pnpm@10.22.0",
   "devDependencies": {
-    "@changesets/changelog-github": "^0.4.8",
-    "@changesets/cli": "^2.26.2",
+    "@changesets/changelog-github": "^0.5.1",
+    "@changesets/cli": "^2.29.7",
     "@chiastack/tsconfig": "workspace:*",
     "@manypkg/cli": "^0.25.1",
     "@total-typescript/ts-reset": "0.6.1",
     "@trivago/prettier-plugin-sort-imports": "^6.0.0",
-    "@turbo/gen": "^2.6.0",
+    "@turbo/gen": "^2.6.1",
     "dotenv": "^17.2.3",
     "husky": "^9.1.7",
     "lint-staged": "^16.2.6",
     "prettier": "^3.6.2",
     "prettier-plugin-tailwindcss": "^0.7.1",
     "tsx": "^4.20.6",
-    "turbo": "2.6.0",
+    "turbo": "2.6.1",
     "typescript": "catalog:",
-    "vitest": "^4.0.8"
+    "vitest": "^4.0.10"
   },
   "manypkg": {
     "ignoredRules": [

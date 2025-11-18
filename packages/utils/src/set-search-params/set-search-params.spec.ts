@@ -1,5 +1,6 @@
-import setSearchParams from "./set-search-params";
 import { describe, expect, it } from "vitest";
+
+import { setSearchParams } from "./set-search-params";
 
 describe("setSearchParams", () => {
   it("should return empty string if no params are passed", () => {
