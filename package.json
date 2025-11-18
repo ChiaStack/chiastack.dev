@@ -17,7 +17,7 @@
   ],
   "scripts": {
     "release": "changeset publish",
-    "version": "tsx scripts/version.ts",
+    "version": "changeset version",
     "version:canary": "changeset version --snapshot canary",
     "release:canary": "changeset publish --tag canary",
     "version:beta": "changeset version --snapshot beta",
