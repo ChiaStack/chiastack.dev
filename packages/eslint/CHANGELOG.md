@@ -1,5 +1,11 @@
 # @chiastack/eslint
 
+## 2.0.1
+
+### Patch Changes
+
+- 0f2bd0c: release eslint
+
 ## 1.2.0
 
 ### Minor Changes
