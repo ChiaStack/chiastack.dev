@@ -1,5 +1,16 @@
 # @chiastack/services
 
+## 2.0.0
+
+### Minor Changes
+
+- 3103855: Update meta info
+
+### Patch Changes
+
+- Updated dependencies [3103855]
+  - @chiastack/utils@0.2.0
+
 ## 1.0.0
 
 ### Major Changes
