@@ -15,16 +15,16 @@
     "test:watch": "vitest"
   },
   "devDependencies": {
-    "@chiastack/eslint": "workspace:*",
-    "@chiastack/tsconfig": "workspace:*",
-    "@chiastack/utils": "workspace:*",
+    "@chiastack/eslint": "0.0.1-beta.1",
+    "@chiastack/tsconfig": "0.0.1-beta.1",
+    "@chiastack/utils": "0.0.1-beta.1",
     "eslint": "catalog:eslint",
     "ky": "catalog:",
     "tsdown": "catalog:",
     "zod": "catalog:"
   },
   "peerDependencies": {
-    "@chiastack/utils": "^0.0.1-beta.3"
+    "@chiastack/utils": "0.0.1-beta.1"
   },
   "exports": {
     "./package.json": "./package.json",

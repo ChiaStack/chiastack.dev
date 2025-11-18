@@ -13,7 +13,7 @@
     "format": "prettier --check . --ignore-path ../../.gitignore"
   },
   "devDependencies": {
-    "@chiastack/tsconfig": "workspace:*",
+    "@chiastack/tsconfig": "0.0.1-beta.1",
     "@eslint/compat": "^2.0.0",
     "@eslint/js": "catalog:eslint",
     "@next/eslint-plugin-next": "catalog:next-is",

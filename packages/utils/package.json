@@ -70,8 +70,8 @@
     }
   },
   "devDependencies": {
-    "@chiastack/eslint": "workspace:*",
-    "@chiastack/tsconfig": "workspace:*",
+    "@chiastack/eslint": "0.0.1-beta.3",
+    "@chiastack/tsconfig": "0.0.1-beta.3",
     "dayjs": "catalog:",
     "eslint": "catalog:eslint",
     "tsdown": "catalog:",
