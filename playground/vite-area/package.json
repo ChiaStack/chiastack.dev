@@ -1,0 +1,39 @@
+{
+  "name": "vite-area",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "vite build",
+    "dev": "vite dev --port 4000",
+    "start": "vite start",
+    "type:check": "tsc --noEmit",
+    "lint": "eslint"
+  },
+  "dependencies": {
+    "@tanstack/react-router": "catalog:tanstack",
+    "@tanstack/router-plugin": "catalog:tanstack",
+    "dayjs": "catalog:",
+    "react": "catalog:react-canary",
+    "react-dom": "catalog:react-canary",
+    "zod": "catalog:"
+  },
+  "devDependencies": {
+    "@chiastack/eslint": "workspace:*",
+    "@chiastack/tsconfig": "workspace:*",
+    "@chiastack/utils": "workspace:*",
+    "@tailwindcss/postcss": "catalog:tailwindcss",
+    "@tailwindcss/vite": "catalog:tailwindcss",
+    "@types/node": "catalog:",
+    "@types/react": "catalog:react-is",
+    "@types/react-dom": "catalog:react-is",
+    "@vitejs/plugin-react": "catalog:vite",
+    "babel-plugin-react-compiler": "catalog:react-is",
+    "eslint": "catalog:eslint",
+    "postcss": "^8.5.6",
+    "tailwindcss": "catalog:tailwindcss",
+    "typescript": "catalog:",
+    "vite": "catalog:vite",
+    "web-vitals": "^5.1.0"
+  }
+}

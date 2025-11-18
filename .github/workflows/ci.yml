@@ -1,0 +1,75 @@
+name: CI
+
+on:
+  pull_request:
+    types: [opened, labeled, unlabeled, synchronize]
+
+concurrency:
+  group: pull-${{ github.ref }}-ci
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  pull-requests: write
+
+env:
+  TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+  TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
+
+jobs:
+  lint:
+    name: "lint"
+    timeout-minutes: 15
+    runs-on: ubuntu-latest
+    if: ${{ !contains(github.event.head_commit.message, '[skip ci]') }}
+
+    steps:
+      - name: "🐙️ Check out code"
+        uses: actions/checkout@v5
+
+      - name: "💽️  Setup"
+        id: init
+        uses: ./.github/actions/setup
+
+      - name: "🧹 ES Lint"
+        shell: bash
+        run: |
+          pnpm lint
+
+  type-check:
+    name: "type check"
+    timeout-minutes: 15
+    runs-on: ubuntu-latest
+    if: ${{ !contains(github.event.head_commit.message, '[skip ci]') }}
+
+    steps:
+      - name: "🐙️ Check out code"
+        uses: actions/checkout@v5
+
+      - name: "💽️  Setup"
+        id: init
+        uses: ./.github/actions/setup
+
+      - name: "🧹 Type check"
+        shell: bash
+        run: |
+          pnpm type:check
+
+  test:
+    name: "test"
+    timeout-minutes: 15
+    runs-on: ubuntu-latest
+    if: ${{ !contains(github.event.head_commit.message, '[skip ci]') }}
+
+    steps:
+      - name: "🐙️ Check out code"
+        uses: actions/checkout@v5
+
+      - name: "💽️  Setup"
+        id: init
+        uses: ./.github/actions/setup
+
+      - name: "🧹 Test"
+        shell: bash
+        run: |
+          pnpm test

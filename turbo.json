@@ -4,17 +4,24 @@
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
-      "outputs": ["dist/**", ".next/**", "!.next/cache/**"]
+      "outputs": [
+        "dist/**",
+        ".next/**",
+        "!.next/cache/**",
+        ".cache/tsbuildinfo.json"
+      ]
     },
     "lint": {
-      "dependsOn": ["^build"],
-      "cache": true
+      "dependsOn": ["build"],
+      "cache": true,
+      "outputs": [".cache/.eslintcache"]
     },
     "type:check": {
+      "dependsOn": ["build"],
       "cache": true
     },
     "test": {
-      "dependsOn": ["^build"],
+      "dependsOn": ["build"],
       "outputs": ["coverage/**"],
       "cache": true
     },
@@ -22,6 +29,7 @@
       "outputs": []
     },
     "dev": {
+      "dependsOn": ["^build"],
       "cache": false,
       "persistent": true
     },
@@ -36,11 +44,6 @@
       "dependsOn": ["^build"],
       "outputs": ["coverage/**", "playwright-report/**"],
       "cache": true
-    },
-    "next-sitemap": {
-      "dependsOn": ["^build"],
-      "outputs": ["public/**"],
-      "cache": false
     }
   },
   "globalEnv": ["HOST", "PORT", "NODE_ENV", "ANALYZE", "CI"]

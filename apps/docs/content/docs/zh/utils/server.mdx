@@ -1,0 +1,69 @@
+---
+title: Server
+description: 伺服器端工具
+---
+
+`server` 模組提供了在伺服器端環境中常用的工具函數，包括 IP 地址獲取和環境變數解析。
+
+## 安裝
+
+```bash
+npm install @chiastack/utils
+```
+
+## 導入
+
+```typescript
+import { getClientIP, resolveEnvImport } from '@chiastack/utils/server';
+```
+
+## API
+
+### `getClientIP`
+
+從 Request 物件中獲取客戶端的 IP 地址。會依序檢查以下標頭：
+1. `CF-Connecting-IP` (Cloudflare)
+2. `X-Forwarded-For` (第一個 IP)
+3. `X-Real-IP`
+4. 如果都沒有，則返回預設值
+
+```typescript
+getClientIP(request: Request, fallback?: string): string
+```
+
+**參數：**
+- `request`: Request 物件
+- `fallback` (可選): 當無法獲取 IP 時的預設值，預設為 `"anonymous"`
+
+**回傳值：**
+- `string`: 客戶端的 IP 地址
+
+**範例：**
+
+```typescript
+import { getClientIP } from '@chiastack/utils/server';
+
+// 在 Next.js API Route 中使用
+export async function GET(request: Request) {
+  const clientIP = getClientIP(request);
+  console.log('客戶端 IP:', clientIP);
+  
+  // 使用自訂預設值
+  const ip = getClientIP(request, '0.0.0.0');
+  
+  return Response.json({ ip: clientIP });
+}
+```
+
+## 使用場景
+
+- **IP 獲取**：
+  - 記錄使用者 IP
+  - 地理位置分析
+  - 速率限制
+  - 安全審計
+
+## 注意事項
+
+- `getClientIP` 主要用於伺服器端環境（如 Next.js API Routes、Cloudflare Workers）
+- IP 地址可能被代理伺服器或 CDN 修改，請根據實際情況調整優先順序

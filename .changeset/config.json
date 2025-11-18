@@ -1,13 +1,8 @@
 {
   "$schema": "https://unpkg.com/@changesets/config@2.29.7/schema.json",
-  "changelog": [
-    "@changesets/changelog-github",
-    {
-      "repo": "chia1104/chiastack.dev"
-    }
-  ],
+  "changelog": "@changesets/cli/changelog",
   "commit": false,
-  "fixed": [["@chiastack/ui", "@chiastack/utils"]],
+  "fixed": [],
   "linked": [],
   "access": "public",
   "baseBranch": "main",
@@ -15,5 +10,5 @@
   "___experimentalUnsafeOptions_WILL_CHANGE_IN_PATCH": {
     "onlyUpdatePeerDependentsWhenOutOfRange": true
   },
-  "ignore": ["docs", "@chiastack/create-app", "react-play", "next-app-play"]
+  "ignore": ["docs", "vite-area", "@chiastack/ui"]
 }

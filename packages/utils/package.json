@@ -2,33 +2,83 @@
   "$schema": "https://json.schemastore.org/package",
   "name": "@chiastack/utils",
   "version": "0.0.1-beta.3",
+  "type": "module",
   "publishConfig": {
     "access": "public"
   },
-  "types": "./dist/index.d.mts",
   "scripts": {
     "build": "tsdown",
-    "dev": "tsdown --watch",
     "clean": "git clean -xdf .turbo node_modules dist",
     "lint": "eslint",
     "type:check": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest"
   },
+  "main": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
   "exports": {
+    "./package.json": "./package.json",
     ".": {
-      "require": "./dist/index.js",
-      "import": "./dist/index.mjs"
+      "import": "./dist/index.mjs",
+      "types": "./dist/index.d.mts"
     },
     "./set-search-params": {
-      "require": "./dist/set-search-params/index.js",
-      "import": "./dist/set-search-params/index.mjs"
+      "import": "./dist/set-search-params/set-search-params.mjs",
+      "types": "./dist/set-search-params/set-search-params.d.mts"
+    },
+    "./day": {
+      "import": "./dist/day/day.mjs",
+      "types": "./dist/day/day.d.mts"
+    },
+    "./try-catch": {
+      "import": "./dist/try-catch/try-catch.mjs",
+      "types": "./dist/try-catch/try-catch.d.mts"
+    },
+    "./is": {
+      "import": "./dist/is/is.mjs",
+      "types": "./dist/is/is.d.mts"
+    },
+    "./delay": {
+      "import": "./dist/delay/delay.mjs",
+      "types": "./dist/delay/delay.d.mts"
+    },
+    "./server": {
+      "import": "./dist/server/server.mjs",
+      "types": "./dist/server/server.d.mts"
+    }
+  },
+  "typesVersions": {
+    "*": {
+      "set-search-params": [
+        "./dist/set-search-params/set-search-params.d.mts"
+      ],
+      "day": [
+        "./dist/day/day.d.mts"
+      ],
+      "try-catch": [
+        "./dist/try-catch/try-catch.d.mts"
+      ],
+      "is": [
+        "./dist/is/is.d.mts"
+      ],
+      "delay": [
+        "./dist/delay/delay.d.mts"
+      ],
+      "server": [
+        "./dist/server/server.d.mts"
+      ]
     }
   },
   "devDependencies": {
     "@chiastack/eslint": "workspace:*",
     "@chiastack/tsconfig": "workspace:*",
+    "dayjs": "catalog:",
     "eslint": "catalog:eslint",
-    "tsdown": "catalog:"
+    "tsdown": "catalog:",
+    "zod": "catalog:"
+  },
+  "peerDependencies": {
+    "dayjs": "^1.11.19",
+    "zod": "^3.24.0 || ^4.0.0"
   }
 }

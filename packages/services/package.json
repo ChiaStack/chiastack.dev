@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json.schemastore.org/package",
+  "name": "@chiastack/services",
+  "version": "0.0.1-beta.1",
+  "type": "module",
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsdown",
+    "clean": "git clean -xdf .turbo node_modules dist",
+    "lint": "eslint",
+    "type:check": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "devDependencies": {
+    "@chiastack/eslint": "workspace:*",
+    "@chiastack/tsconfig": "workspace:*",
+    "@chiastack/utils": "workspace:*",
+    "eslint": "catalog:eslint",
+    "ky": "catalog:",
+    "tsdown": "catalog:",
+    "zod": "catalog:"
+  },
+  "peerDependencies": {
+    "@chiastack/utils": "^0.0.1-beta.3"
+  },
+  "exports": {
+    "./package.json": "./package.json",
+    "./captcha": {
+      "import": "./dist/captcha/captcha.mjs",
+      "types": "./dist/captcha/captcha.d.mts"
+    },
+    "./demo": {
+      "import": "./dist/demo/demo.mjs",
+      "types": "./dist/demo/demo.d.mts"
+    },
+    "./demo/env": {
+      "import": "./dist/demo/env.mjs",
+      "types": "./dist/demo/env.d.mts"
+    }
+  },
+  "typesVersions": {
+    "*": {
+      "captcha": [
+        "./dist/captcha/captcha.d.mts"
+      ],
+      "demo": [
+        "./dist/demo/demo.d.mts"
+      ],
+      "demo/env": [
+        "./dist/demo/env.d.mts"
+      ]
+    }
+  }
+}

@@ -1,20 +1,14 @@
 "🎨 package: ui":
   - any: ["packages/ui/**"]
 
-"✏️ package: ui-utils":
-  - any: ["packages/ui-utils/**"]
-
 "🔨 package: utils":
   - any: ["packages/utils/**"]
-
-"🔧 package: tailwind-config":
-  - any: ["packages/tailwind-config/**"]
 
 "🧰 package: tsconfig":
   - any: ["packages/tsconfig/**"]
 
-"ui-package":
-  - any: ["packages/**"]
+"🧪 package: services":
+  - any: ["packages/services/**"]
 
 "🚀 docs":
   - any: ["apps/docs/**"]

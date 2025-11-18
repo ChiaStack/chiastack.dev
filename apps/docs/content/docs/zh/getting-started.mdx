@@ -1,0 +1,77 @@
+---
+title: Getting Started
+description: Get started with Chia Stack
+---
+
+This guide will help you quickly get started with Chia Stack packages.
+
+## Installation
+
+Each package in Chia Stack can be installed and used independently.
+
+### Utils
+
+```bash
+npm install @chiastack/utils
+# or
+pnpm add @chiastack/utils
+# or
+yarn add @chiastack/utils
+```
+
+### Services
+
+```bash
+npm install @chiastack/services
+# or
+pnpm add @chiastack/services
+# or
+yarn add @chiastack/services
+```
+
+### UI
+
+```bash
+npm install @chiastack/ui
+# or
+pnpm add @chiastack/ui
+# or
+yarn add @chiastack/ui
+```
+
+## Usage Examples
+
+### Utils Example
+
+```typescript
+import { delay, tryCatch } from '@chiastack/utils';
+
+// Delay execution
+await delay(1000); // Wait 1 second
+
+// Safe error handling
+const result = await tryCatch(fetch('/api/data'));
+if (result.error) {
+  console.error(result.error);
+} else {
+  console.log(result.data);
+}
+```
+
+### Services Example
+
+```typescript
+import { captchaSiteverify } from '@chiastack/services/captcha';
+
+// Verify CAPTCHA
+const response = await captchaSiteverify(request, {
+  provider: 'cloudflare-turnstile',
+  captchaSecretKey: process.env.CAPTCHA_SECRET_KEY!,
+});
+```
+
+## Next Steps
+
+- Check out the [Utils documentation](/docs/en/utils) to learn about all available utility functions
+- Check out the [Services documentation](/docs/en/services) to learn about available service integrations
+- Check out the [UI documentation](/docs/en/ui) to learn about available components

@@ -2,7 +2,9 @@ interface Options {
   baseUrl?: string;
 }
 
-const setSearchParams = <T extends Partial<Record<string, string | null>>>(
+export const setSearchParams = <
+  T extends Partial<Record<string, string | null>>,
+>(
   searchParams?: T,
   opts?: Options
 ) => {
@@ -23,5 +25,3 @@ const setSearchParams = <T extends Partial<Record<string, string | null>>>(
       .join("&")
   );
 };
-
-export default setSearchParams;

@@ -15,28 +15,20 @@ jobs:
   release:
     name: Release
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      id-token: write
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v5
 
-      - uses: pnpm/action-setup@v2.4.0
-        with:
-          version: 8
-
-      - name: Install Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 18
-          cache: 'pnpm'
-
-      - name: Install Dependencies
-        run: pnpm i
+      - name: "💽️  Setup"
+        id: dash-init
+        uses: ./.github/actions/setup
 
       - name: Build
         run: pnpm build
-
-      - name: Type Check
-        run: pnpm run type:check
 
       - name: Create Release Pull Request or Publish to npm
         uses: changesets/action@v1
@@ -51,9 +43,9 @@ jobs:
       - name: Create @beta release
         if: steps.changesets.outputs.published != 'true'
         run: |
-            git checkout main
-            pnpm version:beta
-            pnpm release:beta
+          git checkout main
+          pnpm version:beta
+          pnpm release:beta
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

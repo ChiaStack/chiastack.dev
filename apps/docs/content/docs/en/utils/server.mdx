@@ -1,0 +1,69 @@
+---
+title: Server
+description: Server-side utilities
+---
+
+The `server` module provides utility functions commonly used in server-side environments, including IP address retrieval and environment variable parsing.
+
+## Installation
+
+```bash
+npm install @chiastack/utils
+```
+
+## Import
+
+```typescript
+import { getClientIP, resolveEnvImport } from '@chiastack/utils/server';
+```
+
+## API
+
+### `getClientIP`
+
+Get the client's IP address from a Request object. Checks the following headers in order:
+1. `CF-Connecting-IP` (Cloudflare)
+2. `X-Forwarded-For` (first IP)
+3. `X-Real-IP`
+4. Returns default value if none are found
+
+```typescript
+getClientIP(request: Request, fallback?: string): string
+```
+
+**Parameters:**
+- `request`: Request object
+- `fallback` (optional): Default value when IP cannot be retrieved, defaults to `"anonymous"`
+
+**Returns:**
+- `string`: Client IP address
+
+**Example:**
+
+```typescript
+import { getClientIP } from '@chiastack/utils/server';
+
+// Usage in Next.js API Route
+export async function GET(request: Request) {
+  const clientIP = getClientIP(request);
+  console.log('Client IP:', clientIP);
+  
+  // Use custom default value
+  const ip = getClientIP(request, '0.0.0.0');
+  
+  return Response.json({ ip: clientIP });
+}
+```
+
+## Use Cases
+
+- **IP Retrieval**:
+  - Log user IPs
+  - Geolocation analysis
+  - Rate limiting
+  - Security auditing
+
+## Notes
+
+- `getClientIP` is primarily used in server-side environments (e.g., Next.js API Routes, Cloudflare Workers)
+- IP addresses may be modified by proxy servers or CDNs, adjust priority order based on actual situation

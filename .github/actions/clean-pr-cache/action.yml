@@ -1,0 +1,44 @@
+name: "🧹 Clean PR Cache"
+description: "Clean up GitHub Actions caches for a specific PR branch"
+
+inputs:
+  REPO:
+    description: "Repository name (e.g., owner/repo)"
+    required: true
+  BRANCH:
+    description: "Branch reference (e.g., refs/pull/123/merge)"
+    required: true
+  GH_TOKEN:
+    description: "GitHub token for authentication"
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: "🧹 Cleanup caches"
+      shell: bash
+      run: |
+        gh extension install actions/gh-actions-cache
+        
+        REPO=${{ inputs.REPO }}
+        BRANCH=${{ inputs.BRANCH }}
+        
+        echo "Fetching list of cache keys..."
+        cacheKeysForPR=$(gh actions-cache list -R $REPO -B $BRANCH -L 100 | cut -f 1)
+        
+        if [ -z "$cacheKeysForPR" ]; then
+          echo "No cache keys found for this branch"
+          exit 0
+        fi
+        
+        ## Setting this to not fail the workflow while deleting cache keys.
+        set +e
+        echo "Deleting caches..."
+        for cacheKey in $cacheKeysForPR
+        do
+            gh actions-cache delete $cacheKey -R $REPO -B $BRANCH --confirm
+        done
+        echo "Done"
+      env:
+        GH_TOKEN: ${{ inputs.GH_TOKEN }}
+

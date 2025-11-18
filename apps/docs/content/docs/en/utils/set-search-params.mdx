@@ -1,0 +1,103 @@
+---
+title: Set Search Params
+description: URL query parameter handling utility
+---
+
+The `set-search-params` module provides a simple function to build URL query strings, automatically handling encoding and filtering empty values.
+
+## Installation
+
+```bash
+npm install @chiastack/utils
+```
+
+## Import
+
+```typescript
+import { setSearchParams } from '@chiastack/utils/set-search-params';
+```
+
+## API
+
+### `setSearchParams`
+
+Convert an object to a URL query string.
+
+```typescript
+setSearchParams<T extends Partial<Record<string, string | null>>>(
+  searchParams?: T,
+  opts?: Options
+): string
+```
+
+**Parameters:**
+- `searchParams` (optional): Object containing query parameters
+- `opts` (optional): Options object
+  - `baseUrl` (optional): Base URL, automatically handles trailing slashes and question marks
+
+**Returns:**
+- `string`: Built query string (includes prefix `?` if `baseUrl` is provided)
+
+**Example:**
+
+```typescript
+import { setSearchParams } from '@chiastack/utils/set-search-params';
+
+// Basic usage
+const query = setSearchParams({
+  name: 'John',
+  age: '30',
+  city: 'Taipei'
+});
+// Result: "name=John&age=30&city=Taipei"
+
+// Filter null values
+const query2 = setSearchParams({
+  name: 'John',
+  age: null, // Will be filtered
+  city: 'Taipei'
+});
+// Result: "name=John&city=Taipei"
+
+// Use with baseUrl
+const url = setSearchParams(
+  { page: '1', limit: '10' },
+  { baseUrl: 'https://api.example.com/users' }
+);
+// Result: "https://api.example.com/users?page=1&limit=10"
+
+// baseUrl automatically handles slashes and question marks
+const url2 = setSearchParams(
+  { q: 'search' },
+  { baseUrl: 'https://api.example.com/search/' }
+);
+// Result: "https://api.example.com/search?q=search"
+
+const url3 = setSearchParams(
+  { q: 'search' },
+  { baseUrl: 'https://api.example.com/search?' }
+);
+// Result: "https://api.example.com/search?q=search"
+```
+
+## Features
+
+- **Auto Encoding**: All parameter values are automatically URL encoded
+- **Filter Empty Values**: `null` values are automatically filtered
+- **Smart Handling**: Automatically handles trailing slashes and question marks in `baseUrl`
+- **Type Safe**: Complete TypeScript type support
+
+## Use Cases
+
+- Building API request URLs
+- Dynamically generating query strings
+- Form data serialization
+- Pagination and filter parameters
+- Third-party API integration
+
+## Notes
+
+- All parameter values will be converted to strings and URL encoded
+- `null` values will be filtered and will not appear in the result
+- If `baseUrl` ends with a slash, it will be removed
+- If `baseUrl` ends with a question mark, it will be preserved

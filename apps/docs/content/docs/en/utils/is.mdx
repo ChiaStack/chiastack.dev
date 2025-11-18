@@ -1,0 +1,224 @@
+---
+title: Is
+description: Type checking utilities
+---
+
+The `is` module provides a series of type guard functions for runtime type checking of values.
+
+## Installation
+
+```bash
+npm install @chiastack/utils
+```
+
+## Import
+
+```typescript
+import {
+  isNumber,
+  isPositiveNumber,
+  isNegativeNumber,
+  isString,
+  isURL,
+  isUrl,
+  isURLInstance,
+  isAbortError,
+} from '@chiastack/utils/is';
+```
+
+## API
+
+### `isNumber`
+
+Check if a value is a number.
+
+```typescript
+isNumber(value: unknown): value is number
+```
+
+**Example:**
+
+```typescript
+import { isNumber } from '@chiastack/utils/is';
+
+if (isNumber(value)) {
+  // TypeScript knows value is of type number
+  console.log(value + 1);
+}
+```
+
+### `isPositiveNumber`
+
+Check if a value is a positive number.
+
+```typescript
+isPositiveNumber(value: unknown): value is number
+```
+
+**Example:**
+
+```typescript
+import { isPositiveNumber } from '@chiastack/utils/is';
+
+if (isPositiveNumber(value)) {
+  // value is a positive number
+  console.log(Math.sqrt(value));
+}
+```
+
+### `isNegativeNumber`
+
+Check if a value is a negative number.
+
+```typescript
+isNegativeNumber(value: unknown): value is number
+```
+
+**Example:**
+
+```typescript
+import { isNegativeNumber } from '@chiastack/utils/is';
+
+if (isNegativeNumber(value)) {
+  // value is a negative number
+  console.log(Math.abs(value));
+}
+```
+
+### `isString`
+
+Check if a value is a string.
+
+```typescript
+isString(value: unknown): value is string
+```
+
+**Example:**
+
+```typescript
+import { isString } from '@chiastack/utils/is';
+
+if (isString(value)) {
+  // TypeScript knows value is of type string
+  console.log(value.toUpperCase());
+}
+```
+
+### `isURL`
+
+Check if a value is a valid URL string or URL instance.
+
+```typescript
+isURL(value: unknown): value is URL
+```
+
+**Example:**
+
+```typescript
+import { isURL } from '@chiastack/utils/is';
+
+if (isURL(value)) {
+  // value is a URL instance
+  console.log(value.hostname);
+}
+```
+
+### `isUrl`
+
+Check if a value is a valid URL, optionally checking the protocol.
+
+```typescript
+isUrl<T, TStrict extends boolean = false>(
+  url: T,
+  options?: IsUrlOptions<TStrict>
+): boolean
+```
+
+**Parameters:**
+- `url`: Value to check
+- `options` (optional):
+  - `allowedProtocols`: Array of allowed protocols, defaults to `["http", "https"]`
+  - `strict`: Whether to enforce checking as URL instance
+
+**Example:**
+
+```typescript
+import { isUrl } from '@chiastack/utils/is';
+
+// Basic check
+isUrl('https://example.com'); // true
+isUrl('invalid-url'); // false
+
+// Check protocol
+isUrl('ftp://example.com', {
+  allowedProtocols: ['http', 'https']
+}); // false
+
+isUrl('https://example.com', {
+  allowedProtocols: ['http', 'https']
+}); // true
+
+// Strict mode (must be URL instance)
+const url = new URL('https://example.com');
+isUrl(url, { strict: true }); // true
+isUrl('https://example.com', { strict: true }); // false
+```
+
+### `isURLInstance`
+
+Check if a value is a URL instance.
+
+```typescript
+isURLInstance(url: unknown): url is URL
+```
+
+**Example:**
+
+```typescript
+import { isURLInstance } from '@chiastack/utils/is';
+
+const url = new URL('https://example.com');
+if (isURLInstance(url)) {
+  console.log(url.hostname);
+}
+```
+
+### `isAbortError`
+
+Check if an error is an abort error (AbortError or TimeoutError).
+
+```typescript
+isAbortError(error: unknown): error is DOMException
+```
+
+**Example:**
+
+```typescript
+import { isAbortError } from '@chiastack/utils/is';
+
+try {
+  await fetch('/api/data', { signal: abortController.signal });
+} catch (error) {
+  if (isAbortError(error)) {
+    console.log('Request aborted');
+  } else {
+    console.error('Other error:', error);
+  }
+}
+```
+
+## Dependencies
+
+This module requires `zod` as a peer dependency:
+
+```bash
+npm install zod
+```
+
+## Use Cases
+
+- Form validation
+- API response validation
+- Type-safe data processing
+- Runtime type checking
+- Type determination in error handling

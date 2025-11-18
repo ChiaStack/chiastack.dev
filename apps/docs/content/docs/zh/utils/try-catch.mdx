@@ -1,0 +1,108 @@
+---
+title: Try Catch
+description: 安全的錯誤處理工具
+---
+
+`try-catch` 模組提供了一個類型安全的錯誤處理函數，讓你可以優雅地處理異步操作中的錯誤，而不需要使用傳統的 try-catch 區塊。
+
+## 安裝
+
+```bash
+npm install @chiastack/utils
+```
+
+## 導入
+
+```typescript
+import { tryCatch } from '@chiastack/utils/try-catch';
+```
+
+## API
+
+### `tryCatch`
+
+執行一個 Promise 或同步值，並返回一個包含 `data` 和 `error` 的結果物件。
+
+```typescript
+tryCatch<T, E = Error>(promise: Promise<T> | T): Promise<TryCatchResult<T, E>>
+```
+
+**參數：**
+- `promise`: 要執行的 Promise 或同步值
+
+**回傳值：**
+- `Promise<TryCatchResult<T, E>>`: 包含以下結構的結果物件：
+  - `{ data: T, error: null }` - 成功時
+  - `{ data: null, error: E }` - 失敗時
+
+**範例：**
+
+```typescript
+import { tryCatch } from '@chiastack/utils/try-catch';
+
+// 處理異步操作
+const result = await tryCatch(fetch('/api/data'));
+
+if (result.error) {
+  console.error('錯誤:', result.error);
+  // result.data 在這裡是 null
+} else {
+  console.log('資料:', result.data);
+  // result.error 在這裡是 null
+}
+
+// 處理同步值
+const syncResult = await tryCatch(JSON.parse('{"valid": true}'));
+if (syncResult.error) {
+  console.error('解析失敗:', syncResult.error);
+} else {
+  console.log('解析成功:', syncResult.data);
+}
+
+// 自訂錯誤類型
+interface CustomError {
+  code: string;
+  message: string;
+}
+
+const customResult = await tryCatch<Data, CustomError>(
+  fetchData()
+);
+
+if (customResult.error) {
+  // customResult.error 的類型是 CustomError
+  console.error(customResult.error.code);
+}
+```
+
+## 類型定義
+
+```typescript
+interface TryCatchSuccess<T> {
+  data: T;
+  error: null;
+}
+
+interface TryCatchFailure<E> {
+  data: null;
+  error: E;
+}
+
+type TryCatchResult<T, E = Error> = TryCatchSuccess<T> | TryCatchFailure<E>;
+```
+
+## 優勢
+
+- **類型安全**：TypeScript 會根據結果自動推斷類型
+- **無需 try-catch**：避免巢狀的錯誤處理程式碼
+- **函數式風格**：更符合函數式程式設計的風格
+- **易於組合**：可以輕鬆與其他工具函數組合使用
+
+## 使用場景
+
+- API 請求錯誤處理
+- 檔案讀寫操作
+- 資料庫查詢
+- 第三方服務整合
+- 任何需要優雅處理錯誤的場景
+

@@ -1,13 +1,13 @@
 {
   "name": "@chiastack/tsconfig",
-  "version": "0.0.1-beta.2",
+  "version": "0.0.1-beta.3",
   "publishConfig": {
     "access": "public"
   },
   "files": [
     "base.json",
-    "nextjs.json",
     "nestjs.json",
-    "react.json"
+    "react.json",
+    "compiled-package.json"
   ]
 }
