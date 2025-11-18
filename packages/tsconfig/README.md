@@ -113,10 +113,6 @@ The following directories are excluded by default:
 - `.expo`
 - `.output`
 
-## Version
-
-Current version: `0.0.1-beta.3`
-
 ## License
 
 Uses the same license as the Chiastack monorepo.
