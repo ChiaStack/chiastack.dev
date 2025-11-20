@@ -2,13 +2,10 @@
   "$schema": "https://unpkg.com/@changesets/config@2.29.7/schema.json",
   "changelog": "@changesets/cli/changelog",
   "commit": false,
-  "fixed": [["@chiastack/*"]],
+  "fixed": [],
   "linked": [],
   "access": "public",
   "baseBranch": "main",
   "updateInternalDependencies": "patch",
-  "___experimentalUnsafeOptions_WILL_CHANGE_IN_PATCH": {
-    "onlyUpdatePeerDependentsWhenOutOfRange": true
-  },
   "ignore": ["docs", "vite-area", "@chiastack/ui"]
 }
