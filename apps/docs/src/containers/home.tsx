@@ -3,6 +3,7 @@
 import type { RefObject } from "react";
 import { useRef } from "react";
 
+import { Leva } from "leva";
 import { useTheme } from "next-themes";
 import Link from "next/link";
 import { useHover } from "usehooks-ts";
@@ -16,8 +17,9 @@ export const Home = () => {
   const { resolvedTheme } = useTheme();
 
   return (
-    <main className="flex flex-col h-[calc(100vh-64px)] justify-between relative">
+    <section className="flex flex-col h-[calc(90vh-64px)] justify-between relative">
       <GL hovering={isHovered} isDark={resolvedTheme === "dark"} />
+      <Leva hidden />
 
       <div className="pb-16 mt-auto text-center relative">
         <h1 className="text-5xl sm:text-6xl md:text-7xl font-sentient">
@@ -41,6 +43,6 @@ export const Home = () => {
           V0
         </Link>
       </span>
-    </main>
+    </section>
   );
 };
