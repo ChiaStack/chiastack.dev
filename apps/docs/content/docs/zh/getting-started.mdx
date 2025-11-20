@@ -1,13 +1,13 @@
 ---
-title: Getting Started
-description: Get started with Chia Stack
+title: 快速開始
+description: 開始使用 Chia Stack
 ---
 
-This guide will help you quickly get started with Chia Stack packages.
+本指南將幫助您快速開始使用 Chia Stack 套件。
 
-## Installation
+## 安裝
 
-Each package in Chia Stack can be installed and used independently.
+Chia Stack 中的每個套件都可以獨立安裝和使用。
 
 ### Utils
 
@@ -39,17 +39,17 @@ pnpm add @chiastack/ui
 yarn add @chiastack/ui
 ```
 
-## Usage Examples
+## 使用範例
 
-### Utils Example
+### Utils 範例
 
 ```typescript
 import { delay, tryCatch } from '@chiastack/utils';
 
-// Delay execution
-await delay(1000); // Wait 1 second
+// 延遲執行
+await delay(1000); // 等待 1 秒
 
-// Safe error handling
+// 安全的錯誤處理
 const result = await tryCatch(fetch('/api/data'));
 if (result.error) {
   console.error(result.error);
@@ -58,20 +58,20 @@ if (result.error) {
 }
 ```
 
-### Services Example
+### Services 範例
 
 ```typescript
 import { captchaSiteverify } from '@chiastack/services/captcha';
 
-// Verify CAPTCHA
+// 驗證 CAPTCHA
 const response = await captchaSiteverify(request, {
   provider: 'cloudflare-turnstile',
   captchaSecretKey: process.env.CAPTCHA_SECRET_KEY!,
 });
 ```
 
-## Next Steps
+## 下一步
 
-- Check out the [Utils documentation](/docs/en/utils) to learn about all available utility functions
-- Check out the [Services documentation](/docs/en/services) to learn about available service integrations
-- Check out the [UI documentation](/docs/en/ui) to learn about available components
+- 查看 [Utils 文件](/docs/zh/utils) 了解所有可用的工具函式
+- 查看 [Services 文件](/docs/zh/services) 了解可用的服務整合
+- 查看 [UI 文件](/docs/zh/ui) 了解可用的元件

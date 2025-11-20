@@ -1,40 +1,41 @@
 ---
 title: Utils
-description: Practical utility functions collection
+description: 實用的工具函式集合
 ---
 
-`@chiastack/utils` provides a series of practical utility functions covering date handling, error handling, type checking, delay execution, and more.
+`@chiastack/utils` 提供了一系列實用的工具函式，涵蓋日期處理、錯誤處理、型別檢查、延遲執行等功能。
 
-## Installation
+## 安裝
 
 ```bash
 npm install @chiastack/utils
 ```
 
-## Modules
+## 模組
 
 <Cards>
-  <Card title="Day" href="/docs/en/utils/day" description="Date and time handling" />
-  <Card title="Delay" href="/docs/en/utils/delay" description="Delay execution function" />
-  <Card title="Try Catch" href="/docs/en/utils/try-catch" description="Safe error handling" />
-  <Card title="Is" href="/docs/en/utils/is" description="Type checking utilities" />
-  <Card title="Server" href="/docs/en/utils/server" description="Server-side utilities" />
-  <Card title="Set Search Params" href="/docs/en/utils/set-search-params" description="URL query parameter handling" />
+  <Card title="Day" href="/docs/zh/utils/day" description="日期和時間處理" />
+  <Card title="Delay" href="/docs/zh/utils/delay" description="延遲執行函數" />
+  <Card title="Try Catch" href="/docs/zh/utils/try-catch" description="安全的錯誤處理" />
+  <Card title="Is" href="/docs/zh/utils/is" description="型別檢查工具" />
+  <Card title="Server" href="/docs/zh/utils/server" description="伺服器端工具" />
+  <Card title="Set Search Params" href="/docs/zh/utils/set-search-params" description="URL 查詢參數處理" />
 </Cards>
 
-## Basic Usage
+## 基本用法
 
 ```typescript
 import { delay, tryCatch, isNumber } from '@chiastack/utils';
 
-// Delay execution
+// 延遲執行
 await delay(1000);
 
-// Safe error handling
+// 安全的錯誤處理
 const result = await tryCatch(fetch('/api/data'));
 
-// Type checking
+// 型別檢查
 if (isNumber(value)) {
   console.log(value + 1);
 }
 ```
+
