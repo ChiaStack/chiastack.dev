@@ -21,11 +21,11 @@ jobs:
       id-token: write
 
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
 
       - name: "💽️  Setup"
         id: dash-init
-        uses: ./.github/actions/setup
+        uses: ./.github/actions/setup-node-with-pnpm
 
       - name: Build
         run: pnpm build
