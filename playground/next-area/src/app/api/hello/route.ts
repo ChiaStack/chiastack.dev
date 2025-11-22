@@ -29,7 +29,7 @@ export async function POST(request: NextRequest) {
       );
     }
     const body = schema.parse(await request.json());
-    return new Response(`Hello ${body.name}`);
+    return Response.json({ message: `Hello ${body.name}` });
   } catch (error) {
     if (error instanceof z.ZodError) {
       return new Response("Invalid request", { status: 400 });
