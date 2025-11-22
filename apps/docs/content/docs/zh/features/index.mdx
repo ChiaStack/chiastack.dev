@@ -1,0 +1,82 @@
+---
+title: Features
+description: 基於 Zustand 的功能模組集合
+---
+
+`@chiastack/features` 提供了一系列基於 Zustand 的狀態管理功能模組，包含聊天、待辦事項、井字遊戲等功能，以及實用的工具函式。
+
+## 安裝
+
+```bash
+npm install @chiastack/features
+# or
+pnpm add @chiastack/features
+# or
+yarn add @chiastack/utils
+```
+
+## 依賴需求
+
+`@chiastack/features` 需要以下 peer dependencies：
+
+- `react` >= 18.3.0
+- `react-dom` >= 18.3.0
+- `zustand` >= 5.0.0
+- `zod` >= 3.24.0
+- `@chiastack/utils` >= 2.0.2
+
+## 模組
+
+<Cards>
+  <Card title="Chat" href="/docs/zh/features/chat" description="聊天功能狀態管理" />
+  <Card title="Todo" href="/docs/zh/features/todo" description="待辦事項管理" />
+  <Card title="TicTacToe" href="/docs/zh/features/tic-tac-toe" description="井字遊戲狀態管理" />
+  <Card title="Utils" href="/docs/zh/features/utils" description="實用工具函式" />
+</Cards>
+
+## 基本概念
+
+所有功能模組都基於 Zustand 狀態管理庫，並提供以下特性：
+
+- **TypeScript 支援**：完整的型別定義
+- **React Context 整合**：透過 Provider 和 Hook 使用
+- **DevTools 支援**：內建 Redux DevTools 整合
+- **模組化設計**：每個功能都是獨立的模組
+
+## 使用範例
+
+### Todo Store
+
+```typescript
+import { TodoStoreProvider, useTodoStore } from '@chiastack/features/todo/store';
+
+function App() {
+  return (
+    <TodoStoreProvider>
+      <TodoList />
+    </TodoStoreProvider>
+  );
+}
+
+function TodoList() {
+  const todos = useTodoStore((state) => state.items);
+  const addTodo = useTodoStore((state) => state.addTodo);
+  
+  return (
+    <div>
+      {todos.map((todo) => (
+        <div key={todo.id}>{todo.text}</div>
+      ))}
+      <button onClick={() => addTodo('新任務')}>新增</button>
+    </div>
+  );
+}
+```
+
+## 下一步
+
+- 查看 [Chat 文件](/docs/zh/features/chat) 了解聊天功能的使用方式
+- 查看 [Todo 文件](/docs/zh/features/todo) 了解待辦事項管理
+- 查看 [TicTacToe 文件](/docs/zh/features/tic-tac-toe) 了解井字遊戲功能
+- 查看 [Utils 文件](/docs/zh/features/utils) 了解可用的工具函式
+

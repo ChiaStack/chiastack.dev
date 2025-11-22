@@ -1,0 +1,306 @@
+---
+title: TicTacToe
+description: Tic-tac-toe game state management
+---
+
+`@chiastack/features/tic-tac-toe` provides a complete tic-tac-toe game state management solution with support for customizable board sizes.
+
+## Installation
+
+```bash
+npm install @chiastack/features
+```
+
+## Import
+
+```typescript
+import {
+  TicTacToeStoreProvider,
+  useTicTacToeStore,
+} from '@chiastack/features/tic-tac-toe/store';
+```
+
+## Basic Usage
+
+### 1. Setup Provider
+
+First, wrap your application root or the area where you need to use it with `TicTacToeStoreProvider`:
+
+```typescript
+import { TicTacToeStoreProvider } from '@chiastack/features/tic-tac-toe/store';
+
+function App() {
+  return (
+    <TicTacToeStoreProvider>
+      <GameBoard />
+    </TicTacToeStoreProvider>
+  );
+}
+```
+
+### 2. Use Store
+
+Use the `useTicTacToeStore` Hook in your components to access and manipulate game state:
+
+```typescript
+import { useTicTacToeStore } from '@chiastack/features/tic-tac-toe/store';
+
+function GameBoard() {
+  const board = useTicTacToeStore((state) => state.board);
+  const currentPlayer = useTicTacToeStore((state) => state.currentPlayer);
+  const winner = useTicTacToeStore((state) => state.winner);
+  const isDraw = useTicTacToeStore((state) => state.isDraw);
+  const makeMove = useTicTacToeStore((state) => state.makeMove);
+  const resetGame = useTicTacToeStore((state) => state.resetGame);
+
+  return (
+    <div>
+      <div>Current Player: {currentPlayer}</div>
+      {winner && <div>Winner: {winner}</div>}
+      {isDraw && <div>Draw!</div>}
+      
+      <div style={{ display: 'grid', gridTemplateColumns: `repeat(${Math.sqrt(board.length)}, 1fr)` }}>
+        {board.map((cell, index) => (
+          <button
+            key={index}
+            onClick={() => makeMove(index)}
+            disabled={cell !== null || winner !== null || isDraw}
+          >
+            {cell || '-'}
+          </button>
+        ))}
+      </div>
+      
+      <button onClick={resetGame}>Reset</button>
+    </div>
+  );
+}
+```
+
+## API Reference
+
+### TicTacToeStoreProvider
+
+Provides the Context Provider for TicTacToe Store.
+
+#### Props
+
+```typescript
+interface TicTacToeStoreProviderProps {
+  children: React.ReactNode;
+  initialState?: Partial<InitialState>;
+}
+```
+
+- `children`: React child components
+- `initialState`: Optional initial state to override defaults
+
+#### Example
+
+```typescript
+<TicTacToeStoreProvider initialState={{ size: 4 }}>
+  <YourComponent />
+</TicTacToeStoreProvider>
+```
+
+### useTicTacToeStore
+
+Hook for accessing and manipulating the TicTacToe Store.
+
+#### Syntax
+
+```typescript
+const value = useTicTacToeStore<T>(selector, name?);
+```
+
+- `selector`: Selector function to pick needed data from the store
+- `name`: Optional error message name (defaults to "useTicTacToeStore")
+
+### State
+
+```typescript
+interface InitialState {
+  size: number;              // Board size (default 3, meaning 3x3)
+  board: Board;              // Board state
+  currentPlayer: Player;     // Current player ('X' or 'O')
+  winner: Player | null;     // Winner ('X', 'O', or null)
+  isFull: boolean;          // Whether the board is full
+  isDraw: boolean;          // Whether it's a draw
+  winPatterns: number[][];   // Win patterns (internal use)
+}
+
+type Player = 'X' | 'O' | null;
+type Board = Player[];
+```
+
+### Actions
+
+#### makeMove
+
+Make a move at the specified position.
+
+```typescript
+makeMove: (index: number) => void;
+```
+
+**Parameters:**
+- `index`: Board position index (0 to size² - 1)
+
+**Behavior:**
+- Does nothing if the position is already occupied, game has ended, or it's a draw
+- Automatically switches players after making a move
+- Automatically checks for winner or draw
+
+**Example:**
+
+```typescript
+makeMove(0);  // Make a move at top-left corner
+```
+
+#### resetGame
+
+Reset the game to initial state.
+
+```typescript
+resetGame: () => void;
+```
+
+**Behavior:**
+- Clears the board
+- Resets current player to 'X'
+- Clears winner and draw status
+- Maintains current board size
+
+**Example:**
+
+```typescript
+resetGame();
+```
+
+#### changeSize
+
+Change the board size and reset the game.
+
+```typescript
+changeSize: (newSize: number) => void;
+```
+
+**Parameters:**
+- `newSize`: New board size (e.g., 3 for 3x3, 4 for 4x4)
+
+**Behavior:**
+- Changes board size
+- Resets game to initial state
+- Recalculates win patterns
+
+**Example:**
+
+```typescript
+changeSize(4);  // Change to 4x4 board
+```
+
+## Complete Example
+
+```typescript
+import { TicTacToeStoreProvider, useTicTacToeStore } from '@chiastack/features/tic-tac-toe/store';
+
+function App() {
+  return (
+    <TicTacToeStoreProvider>
+      <TicTacToeGame />
+    </TicTacToeStoreProvider>
+  );
+}
+
+function TicTacToeGame() {
+  const board = useTicTacToeStore((state) => state.board);
+  const currentPlayer = useTicTacToeStore((state) => state.currentPlayer);
+  const winner = useTicTacToeStore((state) => state.winner);
+  const isDraw = useTicTacToeStore((state) => state.isDraw);
+  const size = useTicTacToeStore((state) => state.size);
+  const makeMove = useTicTacToeStore((state) => state.makeMove);
+  const resetGame = useTicTacToeStore((state) => state.resetGame);
+  const changeSize = useTicTacToeStore((state) => state.changeSize);
+
+  const gameOver = winner !== null || isDraw;
+  const canMakeMove = !gameOver;
+
+  return (
+    <div>
+      <h1>Tic-Tac-Toe</h1>
+      
+      <div>
+        <label>
+          Board Size:
+          <select
+            value={size}
+            onChange={(e) => changeSize(Number(e.target.value))}
+            disabled={!gameOver}
+          >
+            <option value={3}>3x3</option>
+            <option value={4}>4x4</option>
+            <option value={5}>5x5</option>
+          </select>
+        </label>
+      </div>
+
+      <div>
+        {gameOver ? (
+          winner ? (
+            <div>🎉 Player {winner} wins!</div>
+          ) : (
+            <div>🤝 It's a draw!</div>
+          )
+        ) : (
+          <div>Current Player: {currentPlayer}</div>
+        )}
+      </div>
+
+      <div
+        style={{
+          display: 'grid',
+          gridTemplateColumns: `repeat(${size}, 80px)`,
+          gap: '4px',
+          margin: '20px 0',
+        }}
+      >
+        {board.map((cell, index) => (
+          <button
+            key={index}
+            onClick={() => makeMove(index)}
+            disabled={!canMakeMove || cell !== null}
+            style={{
+              width: '80px',
+              height: '80px',
+              fontSize: '24px',
+              cursor: canMakeMove && cell === null ? 'pointer' : 'not-allowed',
+            }}
+          >
+            {cell || ''}
+          </button>
+        ))}
+      </div>
+
+      {gameOver && (
+        <button onClick={resetGame}>Play Again</button>
+      )}
+    </div>
+  );
+}
+```
+
+## Game Rules
+
+- The game is played by two players taking turns, with player 'X' going first
+- Players take turns placing their mark (X or O) on empty positions
+- A player wins when they form a line horizontally, vertically, or diagonally
+- The game is a draw when the board is full and no one has won
+- Supports customizable board sizes (3x3, 4x4, 5x5, etc.)
+
+## Notes
+
+- `useTicTacToeStore` must be used within `TicTacToeStoreProvider`, otherwise it will throw an error
+- The store uses Zustand's DevTools integration, which can be debugged with Redux DevTools in development
+- The game automatically resets when board size is changed
+- Win patterns are automatically calculated based on board size
+

@@ -1,0 +1,308 @@
+---
+title: Todo
+description: Todo management feature
+---
+
+`@chiastack/features/todo` provides a complete todo management state management solution built on Zustand.
+
+## Installation
+
+```bash
+npm install @chiastack/features
+```
+
+## Import
+
+```typescript
+import { TodoStoreProvider, useTodoStore } from '@chiastack/features/todo/store';
+```
+
+## Basic Usage
+
+### 1. Setup Provider
+
+First, wrap your application root or the area where you need to use it with `TodoStoreProvider`:
+
+```typescript
+import { TodoStoreProvider } from '@chiastack/features/todo/store';
+
+function App() {
+  return (
+    <TodoStoreProvider>
+      <YourComponent />
+    </TodoStoreProvider>
+  );
+}
+```
+
+### 2. Use Store
+
+Use the `useTodoStore` Hook in your components to access and manipulate todos:
+
+```typescript
+import { useTodoStore } from '@chiastack/features/todo/store';
+
+function TodoList() {
+  // Get todo list
+  const todos = useTodoStore((state) => state.items);
+  
+  // Get action methods
+  const addTodo = useTodoStore((state) => state.addTodo);
+  const removeTodo = useTodoStore((state) => state.removeTodo);
+  const toggleTodo = useTodoStore((state) => state.toggleTodo);
+  const updateTodo = useTodoStore((state) => state.updateTodo);
+  const clearTodos = useTodoStore((state) => state.clearTodos);
+  const resetTodos = useTodoStore((state) => state.resetTodos);
+
+  return (
+    <div>
+      <h1>Todos</h1>
+      {todos.map((todo) => (
+        <div key={todo.id}>
+          <input
+            type="checkbox"
+            checked={todo.completed}
+            onChange={() => toggleTodo(todo.id)}
+          />
+          <span>{todo.text}</span>
+          <button onClick={() => removeTodo(todo.id)}>Delete</button>
+        </div>
+      ))}
+      <button onClick={() => addTodo('New Task')}>Add Task</button>
+      <button onClick={clearTodos}>Clear All</button>
+    </div>
+  );
+}
+```
+
+## API Reference
+
+### TodoStoreProvider
+
+Provides the Context Provider for Todo Store.
+
+#### Props
+
+```typescript
+interface TodoStoreProviderProps {
+  children: React.ReactNode;
+  initialState?: Partial<InitialState>;
+}
+```
+
+- `children`: React child components
+- `initialState`: Optional initial state to override defaults
+
+#### Example
+
+```typescript
+<TodoStoreProvider initialState={{ items: [{ id: '1', text: 'Initial Task', completed: false }] }}>
+  <YourComponent />
+</TodoStoreProvider>
+```
+
+### useTodoStore
+
+Hook for accessing and manipulating the Todo Store.
+
+#### Syntax
+
+```typescript
+const value = useTodoStore<T>(selector, name?);
+```
+
+- `selector`: Selector function to pick needed data from the store
+- `name`: Optional error message name (defaults to "useTodoStore")
+
+#### Example
+
+```typescript
+// Get all todos
+const todos = useTodoStore((state) => state.items);
+
+// Get completed count
+const completedCount = useTodoStore((state) => 
+  state.items.filter((item) => item.completed).length
+);
+
+// Get action methods
+const addTodo = useTodoStore((state) => state.addTodo);
+```
+
+### State
+
+```typescript
+interface InitialState {
+  items: Todo[];
+}
+
+interface Todo {
+  id: string;
+  text: string;
+  completed: boolean;
+}
+```
+
+### Actions
+
+#### addTodo
+
+Add a new todo item.
+
+```typescript
+addTodo: (text: string) => void;
+```
+
+**Example:**
+
+```typescript
+addTodo('Complete documentation');
+```
+
+#### removeTodo
+
+Remove the specified todo item.
+
+```typescript
+removeTodo: (id: string) => void;
+```
+
+**Example:**
+
+```typescript
+removeTodo('todo-id-123');
+```
+
+#### toggleTodo
+
+Toggle the completion status of a todo item.
+
+```typescript
+toggleTodo: (id: string) => void;
+```
+
+**Example:**
+
+```typescript
+toggleTodo('todo-id-123');
+```
+
+#### updateTodo
+
+Update the text content of a todo item.
+
+```typescript
+updateTodo: (id: string, text: string) => void;
+```
+
+**Example:**
+
+```typescript
+updateTodo('todo-id-123', 'Updated task content');
+```
+
+#### clearTodos
+
+Clear all todo items.
+
+```typescript
+clearTodos: () => void;
+```
+
+**Example:**
+
+```typescript
+clearTodos();
+```
+
+#### resetTodos
+
+Reset the todo list to the specified items.
+
+```typescript
+resetTodos: (items: Todo[]) => void;
+```
+
+**Example:**
+
+```typescript
+resetTodos([
+  { id: '1', text: 'Task One', completed: false },
+  { id: '2', text: 'Task Two', completed: true },
+]);
+```
+
+## Complete Example
+
+```typescript
+import { useState } from 'react';
+import { TodoStoreProvider, useTodoStore } from '@chiastack/features/todo/store';
+
+function App() {
+  return (
+    <TodoStoreProvider>
+      <TodoApp />
+    </TodoStoreProvider>
+  );
+}
+
+function TodoApp() {
+  const [input, setInput] = useState('');
+  
+  const todos = useTodoStore((state) => state.items);
+  const addTodo = useTodoStore((state) => state.addTodo);
+  const removeTodo = useTodoStore((state) => state.removeTodo);
+  const toggleTodo = useTodoStore((state) => state.toggleTodo);
+  const clearTodos = useTodoStore((state) => state.clearTodos);
+
+  const handleAdd = () => {
+    if (input.trim()) {
+      addTodo(input);
+      setInput('');
+    }
+  };
+
+  const completedCount = todos.filter((todo) => todo.completed).length;
+  const totalCount = todos.length;
+
+  return (
+    <div>
+      <h1>Todos ({completedCount}/{totalCount})</h1>
+      
+      <div>
+        <input
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          onKeyPress={(e) => e.key === 'Enter' && handleAdd()}
+          placeholder="Enter new task..."
+        />
+        <button onClick={handleAdd}>Add</button>
+        <button onClick={clearTodos}>Clear All</button>
+      </div>
+
+      <ul>
+        {todos.map((todo) => (
+          <li key={todo.id}>
+            <input
+              type="checkbox"
+              checked={todo.completed}
+              onChange={() => toggleTodo(todo.id)}
+            />
+            <span style={{ textDecoration: todo.completed ? 'line-through' : 'none' }}>
+              {todo.text}
+            </span>
+            <button onClick={() => removeTodo(todo.id)}>Delete</button>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+```
+
+## Notes
+
+- `useTodoStore` must be used within `TodoStoreProvider`, otherwise it will throw an error
+- The store uses Zustand's DevTools integration, which can be debugged with Redux DevTools in development
+- Each todo item automatically gets a unique ID (using nanoid)
+

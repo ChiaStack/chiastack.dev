@@ -1,0 +1,82 @@
+---
+title: Features
+description: Collection of Zustand-based feature modules
+---
+
+`@chiastack/features` provides a series of Zustand-based state management feature modules, including chat, todo, tic-tac-toe, and other features, along with practical utility functions.
+
+## Installation
+
+```bash
+npm install @chiastack/features
+# or
+pnpm add @chiastack/features
+# or
+yarn add @chiastack/features
+```
+
+## Peer Dependencies
+
+`@chiastack/features` requires the following peer dependencies:
+
+- `react` >= 18.3.0
+- `react-dom` >= 18.3.0
+- `zustand` >= 5.0.0
+- `zod` >= 3.24.0
+- `@chiastack/utils` >= 2.0.2
+
+## Modules
+
+<Cards>
+  <Card title="Chat" href="/docs/features/chat" description="Chat feature state management" />
+  <Card title="Todo" href="/docs/features/todo" description="Todo management" />
+  <Card title="TicTacToe" href="/docs/features/tic-tac-toe" description="Tic-tac-toe game state management" />
+  <Card title="Utils" href="/docs/features/utils" description="Utility functions" />
+</Cards>
+
+## Basic Concepts
+
+All feature modules are built on top of Zustand state management library and provide the following features:
+
+- **TypeScript Support**: Complete type definitions
+- **React Context Integration**: Use via Provider and Hook
+- **DevTools Support**: Built-in Redux DevTools integration
+- **Modular Design**: Each feature is an independent module
+
+## Usage Example
+
+### Todo Store
+
+```typescript
+import { TodoStoreProvider, useTodoStore } from '@chiastack/features/todo/store';
+
+function App() {
+  return (
+    <TodoStoreProvider>
+      <TodoList />
+    </TodoStoreProvider>
+  );
+}
+
+function TodoList() {
+  const todos = useTodoStore((state) => state.items);
+  const addTodo = useTodoStore((state) => state.addTodo);
+  
+  return (
+    <div>
+      {todos.map((todo) => (
+        <div key={todo.id}>{todo.text}</div>
+      ))}
+      <button onClick={() => addTodo('New Task')}>Add</button>
+    </div>
+  );
+}
+```
+
+## Next Steps
+
+- Check out [Chat documentation](/docs/features/chat) to learn about chat functionality
+- Check out [Todo documentation](/docs/features/todo) to learn about todo management
+- Check out [TicTacToe documentation](/docs/features/tic-tac-toe) to learn about tic-tac-toe functionality
+- Check out [Utils documentation](/docs/features/utils) to learn about available utility functions
+

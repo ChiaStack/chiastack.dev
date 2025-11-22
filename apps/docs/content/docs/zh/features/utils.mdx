@@ -1,0 +1,297 @@
+---
+title: Utils
+description: 實用工具函式
+---
+
+`@chiastack/features/utils` 提供了一系列實用的工具函式，用於支援功能模組的開發和使用。
+
+## 安裝
+
+```bash
+npm install @chiastack/features
+```
+
+## 模組
+
+### UUID
+
+提供 UUID 和 NanoID 生成功能。
+
+#### 匯入
+
+```typescript
+import { nanoid, uuid, createNanoId } from '@chiastack/features/utils/uuid';
+```
+
+#### API
+
+**nanoid**
+
+生成一個短 ID（預設 8 個字元）。
+
+```typescript
+const id = nanoid(); // 例如: "a1b2c3d4"
+```
+
+**uuid**
+
+生成一個標準 UUID v4。
+
+```typescript
+import { uuid } from '@chiastack/features/utils/uuid';
+
+const id = uuid(); // 例如: "550e8400-e29b-41d4-a716-446655440000"
+```
+
+**createNanoId**
+
+建立一個自訂長度的 NanoID 生成器。
+
+```typescript
+import { createNanoId } from '@chiastack/features/utils/uuid';
+
+const customId = createNanoId(16); // 建立 16 字元的 ID 生成器
+const id = customId(); // 生成 16 字元的 ID
+```
+
+#### 範例
+
+```typescript
+import { nanoid, uuid } from '@chiastack/features/utils/uuid';
+
+// 使用 nanoid 生成短 ID（適合用於 UI 元件 key）
+const todoId = nanoid();
+
+// 使用 uuid 生成標準 UUID（適合用於資料庫主鍵）
+const userId = uuid();
+```
+
+### Logger
+
+提供條件式日誌記錄功能，支援在開發環境中透過 URL 參數控制日誌輸出。
+
+#### 匯入
+
+```typescript
+import { logger, log, error, warn, info, debug } from '@chiastack/features/utils/logger';
+```
+
+#### API
+
+**logger**
+
+通用的日誌記錄函式。
+
+```typescript
+logger(message?, options?);
+```
+
+**參數：**
+- `message`: 要記錄的訊息（可以是任何型別或陣列）
+- `options`: 選項物件
+  - `type`: 日誌類型（'log' | 'error' | 'warn' | 'info' | 'debug'，預設為 'log'）
+  - `enabled`: 是否啟用日誌（預設為檢查 URL 參數 `?debug=true`）
+
+**便捷函式：**
+
+- `log()`: 記錄一般日誌
+- `error()`: 記錄錯誤
+- `warn()`: 記錄警告
+- `info()`: 記錄資訊
+- `debug()`: 記錄除錯資訊
+
+#### 範例
+
+```typescript
+import { log, error, warn, info, debug } from '@chiastack/features/utils/logger';
+
+// 基本使用（只有在 URL 包含 ?debug=true 時才會輸出）
+log('這是一般日誌');
+error('這是錯誤');
+warn('這是警告');
+info('這是資訊');
+debug('這是除錯資訊');
+
+// 強制啟用日誌
+log('強制輸出', { enabled: true });
+
+// 記錄陣列
+log(['項目 1', '項目 2', '項目 3']);
+
+// 記錄物件
+log({ key: 'value', count: 42 });
+```
+
+**使用場景：**
+
+在開發時，可以在瀏覽器網址列加上 `?debug=true` 來啟用日誌輸出：
+
+```
+http://localhost:3000?debug=true
+```
+
+### Stream
+
+提供串流資料處理功能，用於處理 Server-Sent Events (SSE) 或其他串流回應。
+
+#### 匯入
+
+```typescript
+import { fetchStream } from '@chiastack/features/utils/stream';
+```
+
+#### API
+
+**fetchStream**
+
+從指定的 URL 獲取串流回應。
+
+```typescript
+fetchStream<T>(input, payload, init?);
+```
+
+**參數：**
+- `input`: 請求 URL 或 Request 物件
+- `payload`: POST 請求的資料載荷
+- `init`: 可選的請求初始化選項
+  - `searchParams`: URL 查詢參數物件
+  - 其他標準 `RequestInit` 選項
+
+**返回值：**
+
+返回一個可迭代的物件，包含：
+- `[Symbol.asyncIterator]`: 非同步迭代器
+- `stream`: 原始 ReadableStream
+
+#### 範例
+
+```typescript
+import { fetchStream } from '@chiastack/features/utils/stream';
+
+// 基本使用
+const stream = await fetchStream('/api/chat/stream', {
+  message: 'Hello',
+  threadId: 'thread-123',
+});
+
+// 迭代串流資料
+for await (const chunk of stream) {
+  console.log('收到資料:', chunk);
+  // 處理每個資料塊
+}
+
+// 使用查詢參數
+const streamWithParams = await fetchStream(
+  '/api/chat/stream',
+  { message: 'Hello' },
+  {
+    searchParams: {
+      format: 'json',
+      version: 'v1',
+    },
+  }
+);
+
+for await (const chunk of streamWithParams) {
+  console.log(chunk);
+}
+```
+
+**錯誤處理：**
+
+```typescript
+try {
+  const stream = await fetchStream('/api/stream', { data: 'test' });
+  
+  for await (const chunk of stream) {
+    // 處理資料
+  }
+} catch (err) {
+  console.error('串流請求失敗:', err);
+}
+```
+
+### StoreDebug
+
+提供 Store 除錯功能（進階使用）。
+
+#### 匯入
+
+```typescript
+import { storeDebug } from '@chiastack/features/utils/storeDebug';
+```
+
+### Middleware
+
+提供 Zustand middleware 功能。
+
+#### 匯入
+
+```typescript
+import { createDevtools } from '@chiastack/features/utils/middleware/create-devtools';
+```
+
+#### createDevtools
+
+建立 Redux DevTools middleware。
+
+```typescript
+createDevtools(name, options?);
+```
+
+**參數：**
+- `name`: Store 名稱（用於 DevTools 顯示）
+- `options`: 選項物件
+  - `enabled`: 是否啟用 DevTools
+
+**範例：**
+
+```typescript
+import { createDevtools } from '@chiastack/features/utils/middleware/create-devtools';
+import { createStore } from 'zustand/vanilla';
+
+const devtools = createDevtools('MyStore', { enabled: true });
+
+const store = createStore(
+  devtools((set) => ({
+    count: 0,
+    increment: () => set((state) => ({ count: state.count + 1 })),
+  }))
+);
+```
+
+## 完整範例
+
+```typescript
+import { nanoid } from '@chiastack/features/utils/uuid';
+import { log, error } from '@chiastack/features/utils/logger';
+import { fetchStream } from '@chiastack/features/utils/stream';
+
+// 生成 ID
+const todoId = nanoid();
+log('生成的 ID:', todoId);
+
+// 處理串流
+async function handleStream() {
+  try {
+    const stream = await fetchStream('/api/data/stream', {
+      action: 'fetch',
+    });
+
+    for await (const chunk of stream) {
+      log('收到資料:', chunk);
+      // 處理資料
+    }
+  } catch (err) {
+    error('串流處理失敗:', err);
+  }
+}
+```
+
+## 注意事項
+
+- `logger` 函式預設只在開發環境且 URL 包含 `?debug=true` 時輸出
+- `fetchStream` 使用 POST 方法發送請求，除非在 `init` 中指定其他方法
+- `nanoid` 使用非安全的自訂字母表，適合用於 UI 場景
+- `uuid` 使用標準 UUID v4 格式，適合用於資料庫或 API
+

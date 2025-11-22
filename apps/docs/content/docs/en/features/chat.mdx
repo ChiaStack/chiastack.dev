@@ -1,0 +1,314 @@
+---
+title: Chat
+description: Chat feature state management
+---
+
+`@chiastack/features/chat` provides a feature-complete chat state management solution with support for message management, streaming, multi-threading, and more.
+
+## Installation
+
+```bash
+npm install @chiastack/features
+```
+
+## Import
+
+```typescript
+import { defineChatStore } from '@chiastack/features/chat/store';
+import type { MessageItem } from '@chiastack/features/chat/types';
+import { MessageRole } from '@chiastack/features/chat/enums';
+```
+
+## Basic Concepts
+
+Chat Store is a generic state management solution that allows you to customize:
+
+- **MessageItem**: The type of message items
+- **TStreamRequestDTO**: The type of stream request data transfer objects
+- **TContext**: The type of context data
+
+## Basic Usage
+
+### 1. Define Chat Store
+
+First, use `defineChatStore` to define your chat store:
+
+```typescript
+import { defineChatStore } from '@chiastack/features/chat/store';
+import type { MessageItem } from '@chiastack/features/chat/types';
+
+// Define message processor
+const messageProcessor = async (message: MessageItem) => {
+  // Logic to process messages
+  console.log('Processing message:', message);
+};
+
+// Define store
+const { ChatStoreProvider, useChatStore } = defineChatStore({
+  messageProcessor,
+  enableDevtools: true, // Enable DevTools in development
+});
+```
+
+### 2. Use Provider
+
+Use `ChatStoreProvider` in your application:
+
+```typescript
+function App() {
+  return (
+    <ChatStoreProvider>
+      <ChatInterface />
+    </ChatStoreProvider>
+  );
+}
+```
+
+### 3. Use Store
+
+Use the `useChatStore` Hook in your components:
+
+```typescript
+function ChatInterface() {
+  const messages = useChatStore((state) => state.messages);
+  const sendMessage = useChatStore((state) => state.sendMessage);
+  const status = useChatStore((state) => state.status);
+
+  return (
+    <div>
+      <div>
+        {messages.map((message) => (
+          <div key={message.id}>
+            <strong>{message.role}:</strong> {message.content}
+          </div>
+        ))}
+      </div>
+      <button onClick={() => sendMessage('Hello!')}>Send Message</button>
+      <div>Status: {status}</div>
+    </div>
+  );
+}
+```
+
+## API Reference
+
+### defineChatStore
+
+Function to define and create a Chat Store.
+
+#### Syntax
+
+```typescript
+defineChatStore<TMessageItem, TStreamRequestDTO, TContext>({
+  initState?: Partial<ChatState>,
+  messageProcessor: (message: TMessageItem) => Promise<void>,
+  enableDevtools?: boolean,
+})
+```
+
+#### Parameters
+
+- `initState`: Optional initial state
+- `messageProcessor`: Message processor function to handle received messages
+- `enableDevtools`: Whether to enable Redux DevTools (defaults to false)
+
+#### Return Value
+
+Returns an object containing:
+- `ChatStoreProvider`: React Context Provider
+- `useChatStore`: Hook for accessing the store
+- `ChatStoreContext`: Store Context (advanced use)
+- `creator`: Store creator function (advanced use)
+
+### useChatStore
+
+Hook for accessing and manipulating the Chat Store.
+
+#### Syntax
+
+```typescript
+const value = useChatStore<T>(selector, name?);
+```
+
+### MessageItem
+
+Basic type definition for message items:
+
+```typescript
+interface MessageItem {
+  id: string;
+  content: string | null;
+  rawContent?: string | null;
+  createdAt: Date;
+  error: any | null;
+  parentId: string | null;
+  reasoning?: ModelReasoning | null;
+  role: MessageRole;
+  threadId: string;
+  toolCalls?: ToolCall[];
+  context?: unknown;
+}
+```
+
+### MessageRole
+
+Message role enumeration:
+
+```typescript
+enum MessageRole {
+  USER = 'user',
+  ASSISTANT = 'assistant',
+  SYSTEM = 'system',
+}
+```
+
+## Advanced Usage
+
+### Custom MessageItem
+
+You can extend the `MessageItem` type to fit your needs:
+
+```typescript
+import type { MessageItem } from '@chiastack/features/chat/types';
+
+interface CustomMessageItem extends MessageItem {
+  customField?: string;
+  metadata?: Record<string, unknown>;
+}
+
+const { ChatStoreProvider, useChatStore } = defineChatStore<CustomMessageItem>({
+  messageProcessor: async (message: CustomMessageItem) => {
+    // Use custom fields
+    if (message.customField) {
+      console.log('Custom field:', message.customField);
+    }
+  },
+});
+```
+
+### Stream Processing
+
+Chat Store supports stream message processing. You can use the `fetchStream` utility function:
+
+```typescript
+import { fetchStream } from '@chiastack/features/utils/stream';
+
+const stream = await fetchStream('/api/chat/stream', {
+  message: 'Hello',
+  threadId: 'thread-123',
+});
+
+for await (const chunk of stream) {
+  // Process stream data
+  console.log('Received data:', chunk);
+}
+```
+
+### Multi-threading Support
+
+Chat Store supports multi-threading functionality, allowing you to create different threads for different conversations:
+
+```typescript
+const messages = useChatStore((state) => 
+  state.messages.filter((msg) => msg.threadId === 'thread-123')
+);
+```
+
+## Utility Functions
+
+### DEFAULT_THREAD_ID
+
+Default thread ID:
+
+```typescript
+import { DEFAULT_THREAD_ID } from '@chiastack/features/chat/utils';
+
+const threadId = DEFAULT_THREAD_ID; // 'inbox'
+```
+
+## Complete Example
+
+```typescript
+import { defineChatStore } from '@chiastack/features/chat/store';
+import type { MessageItem } from '@chiastack/features/chat/types';
+import { MessageRole } from '@chiastack/features/chat/enums';
+import { useState } from 'react';
+
+// Define store
+const { ChatStoreProvider, useChatStore } = defineChatStore({
+  messageProcessor: async (message: MessageItem) => {
+    // Simulate API call
+    const response = await fetch('/api/chat', {
+      method: 'POST',
+      body: JSON.stringify({ message: message.content }),
+    });
+    const data = await response.json();
+    
+    // Process response
+    console.log('Received response:', data);
+  },
+  enableDevtools: process.env.NODE_ENV === 'development',
+});
+
+function App() {
+  return (
+    <ChatStoreProvider>
+      <ChatApp />
+    </ChatStoreProvider>
+  );
+}
+
+function ChatApp() {
+  const [input, setInput] = useState('');
+  
+  const messages = useChatStore((state) => state.messages);
+  const sendMessage = useChatStore((state) => state.sendMessage);
+  const status = useChatStore((state) => state.status);
+
+  const handleSend = () => {
+    if (input.trim()) {
+      sendMessage(input);
+      setInput('');
+    }
+  };
+
+  return (
+    <div>
+      <h1>Chat Interface</h1>
+      
+      <div>
+        {messages.map((message) => (
+          <div key={message.id}>
+            <strong>{message.role}:</strong> {message.content}
+            <small>{new Date(message.createdAt).toLocaleTimeString()}</small>
+          </div>
+        ))}
+      </div>
+
+      <div>
+        <input
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          onKeyPress={(e) => e.key === 'Enter' && handleSend()}
+          placeholder="Enter message..."
+          disabled={status === 'loading'}
+        />
+        <button onClick={handleSend} disabled={status === 'loading'}>
+          Send
+        </button>
+      </div>
+
+      {status === 'loading' && <div>Processing...</div>}
+    </div>
+  );
+}
+```
+
+## Notes
+
+- `useChatStore` must be used within `ChatStoreProvider`, otherwise it will throw an error
+- `messageProcessor` is required and is used to process received messages
+- The store uses Zustand's DevTools integration, which can be debugged with Redux DevTools in development
+- Messages automatically get unique IDs and timestamps
+- Supports error handling and retry mechanisms
+

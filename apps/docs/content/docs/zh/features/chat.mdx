@@ -1,0 +1,314 @@
+---
+title: Chat
+description: 聊天功能狀態管理
+---
+
+`@chiastack/features/chat` 提供了一個功能完整的聊天狀態管理解決方案，支援訊息管理、串流處理、多執行緒等功能。
+
+## 安裝
+
+```bash
+npm install @chiastack/features
+```
+
+## 匯入
+
+```typescript
+import { defineChatStore } from '@chiastack/features/chat/store';
+import type { MessageItem } from '@chiastack/features/chat/types';
+import { MessageRole } from '@chiastack/features/chat/enums';
+```
+
+## 基本概念
+
+Chat Store 是一個泛型狀態管理解決方案，允許你自訂：
+
+- **MessageItem**: 訊息項目的型別
+- **TStreamRequestDTO**: 串流請求的資料傳輸物件型別
+- **TContext**: 上下文資料型別
+
+## 基本使用
+
+### 1. 定義 Chat Store
+
+首先，使用 `defineChatStore` 定義你的聊天 Store：
+
+```typescript
+import { defineChatStore } from '@chiastack/features/chat/store';
+import type { MessageItem } from '@chiastack/features/chat/types';
+
+// 定義訊息處理器
+const messageProcessor = async (message: MessageItem) => {
+  // 處理訊息的邏輯
+  console.log('處理訊息:', message);
+};
+
+// 定義 Store
+const { ChatStoreProvider, useChatStore } = defineChatStore({
+  messageProcessor,
+  enableDevtools: true, // 開發時啟用 DevTools
+});
+```
+
+### 2. 使用 Provider
+
+在應用程式中使用 `ChatStoreProvider`：
+
+```typescript
+function App() {
+  return (
+    <ChatStoreProvider>
+      <ChatInterface />
+    </ChatStoreProvider>
+  );
+}
+```
+
+### 3. 使用 Store
+
+在元件中使用 `useChatStore` Hook：
+
+```typescript
+function ChatInterface() {
+  const messages = useChatStore((state) => state.messages);
+  const sendMessage = useChatStore((state) => state.sendMessage);
+  const status = useChatStore((state) => state.status);
+
+  return (
+    <div>
+      <div>
+        {messages.map((message) => (
+          <div key={message.id}>
+            <strong>{message.role}:</strong> {message.content}
+          </div>
+        ))}
+      </div>
+      <button onClick={() => sendMessage('Hello!')}>發送訊息</button>
+      <div>狀態: {status}</div>
+    </div>
+  );
+}
+```
+
+## API 參考
+
+### defineChatStore
+
+定義並建立 Chat Store 的函式。
+
+#### 語法
+
+```typescript
+defineChatStore<TMessageItem, TStreamRequestDTO, TContext>({
+  initState?: Partial<ChatState>,
+  messageProcessor: (message: TMessageItem) => Promise<void>,
+  enableDevtools?: boolean,
+})
+```
+
+#### 參數
+
+- `initState`: 可選的初始狀態
+- `messageProcessor`: 訊息處理器函式，用於處理收到的訊息
+- `enableDevtools`: 是否啟用 Redux DevTools（預設為 false）
+
+#### 返回值
+
+返回一個物件，包含：
+- `ChatStoreProvider`: React Context Provider
+- `useChatStore`: 用於存取 Store 的 Hook
+- `ChatStoreContext`: Store Context（進階使用）
+- `creator`: Store 建立函式（進階使用）
+
+### useChatStore
+
+用於存取和操作 Chat Store 的 Hook。
+
+#### 語法
+
+```typescript
+const value = useChatStore<T>(selector, name?);
+```
+
+### MessageItem
+
+訊息項目的基本型別定義：
+
+```typescript
+interface MessageItem {
+  id: string;
+  content: string | null;
+  rawContent?: string | null;
+  createdAt: Date;
+  error: any | null;
+  parentId: string | null;
+  reasoning?: ModelReasoning | null;
+  role: MessageRole;
+  threadId: string;
+  toolCalls?: ToolCall[];
+  context?: unknown;
+}
+```
+
+### MessageRole
+
+訊息角色枚舉：
+
+```typescript
+enum MessageRole {
+  USER = 'user',
+  ASSISTANT = 'assistant',
+  SYSTEM = 'system',
+}
+```
+
+## 進階使用
+
+### 自訂 MessageItem
+
+你可以擴展 `MessageItem` 型別以符合你的需求：
+
+```typescript
+import type { MessageItem } from '@chiastack/features/chat/types';
+
+interface CustomMessageItem extends MessageItem {
+  customField?: string;
+  metadata?: Record<string, unknown>;
+}
+
+const { ChatStoreProvider, useChatStore } = defineChatStore<CustomMessageItem>({
+  messageProcessor: async (message: CustomMessageItem) => {
+    // 使用自訂欄位
+    if (message.customField) {
+      console.log('自訂欄位:', message.customField);
+    }
+  },
+});
+```
+
+### 串流處理
+
+Chat Store 支援串流訊息的處理。你可以使用 `fetchStream` 工具函式：
+
+```typescript
+import { fetchStream } from '@chiastack/features/utils/stream';
+
+const stream = await fetchStream('/api/chat/stream', {
+  message: 'Hello',
+  threadId: 'thread-123',
+});
+
+for await (const chunk of stream) {
+  // 處理串流資料
+  console.log('收到資料:', chunk);
+}
+```
+
+### 多執行緒支援
+
+Chat Store 支援多執行緒（thread）功能，可以為不同的對話建立不同的執行緒：
+
+```typescript
+const messages = useChatStore((state) => 
+  state.messages.filter((msg) => msg.threadId === 'thread-123')
+);
+```
+
+## 工具函式
+
+### DEFAULT_THREAD_ID
+
+預設的執行緒 ID：
+
+```typescript
+import { DEFAULT_THREAD_ID } from '@chiastack/features/chat/utils';
+
+const threadId = DEFAULT_THREAD_ID; // 'inbox'
+```
+
+## 完整範例
+
+```typescript
+import { defineChatStore } from '@chiastack/features/chat/store';
+import type { MessageItem } from '@chiastack/features/chat/types';
+import { MessageRole } from '@chiastack/features/chat/enums';
+import { useState } from 'react';
+
+// 定義 Store
+const { ChatStoreProvider, useChatStore } = defineChatStore({
+  messageProcessor: async (message: MessageItem) => {
+    // 模擬 API 呼叫
+    const response = await fetch('/api/chat', {
+      method: 'POST',
+      body: JSON.stringify({ message: message.content }),
+    });
+    const data = await response.json();
+    
+    // 處理回應
+    console.log('收到回應:', data);
+  },
+  enableDevtools: process.env.NODE_ENV === 'development',
+});
+
+function App() {
+  return (
+    <ChatStoreProvider>
+      <ChatApp />
+    </ChatStoreProvider>
+  );
+}
+
+function ChatApp() {
+  const [input, setInput] = useState('');
+  
+  const messages = useChatStore((state) => state.messages);
+  const sendMessage = useChatStore((state) => state.sendMessage);
+  const status = useChatStore((state) => state.status);
+
+  const handleSend = () => {
+    if (input.trim()) {
+      sendMessage(input);
+      setInput('');
+    }
+  };
+
+  return (
+    <div>
+      <h1>聊天介面</h1>
+      
+      <div>
+        {messages.map((message) => (
+          <div key={message.id}>
+            <strong>{message.role}:</strong> {message.content}
+            <small>{new Date(message.createdAt).toLocaleTimeString()}</small>
+          </div>
+        ))}
+      </div>
+
+      <div>
+        <input
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          onKeyPress={(e) => e.key === 'Enter' && handleSend()}
+          placeholder="輸入訊息..."
+          disabled={status === 'loading'}
+        />
+        <button onClick={handleSend} disabled={status === 'loading'}>
+          發送
+        </button>
+      </div>
+
+      {status === 'loading' && <div>處理中...</div>}
+    </div>
+  );
+}
+```
+
+## 注意事項
+
+- `useChatStore` 必須在 `ChatStoreProvider` 內部使用，否則會拋出錯誤
+- `messageProcessor` 是必需的，用於處理收到的訊息
+- Store 使用 Zustand 的 DevTools 整合，可以在開發時使用 Redux DevTools 進行除錯
+- 訊息會自動分配唯一的 ID 和時間戳記
+- 支援錯誤處理和重試機制
+
