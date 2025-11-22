@@ -1,7 +1,7 @@
 {
   "$schema": "https://json.schemastore.org/package",
   "name": "@chiastack/services",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "type": "module",
   "publishConfig": {
     "access": "public"
@@ -32,7 +32,7 @@
     "zod": "catalog:"
   },
   "peerDependencies": {
-    "@chiastack/utils": "^2.0.2"
+    "@chiastack/utils": "^2.0.3"
   },
   "exports": {
     "./package.json": "./package.json",

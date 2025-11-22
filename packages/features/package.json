@@ -1,7 +1,7 @@
 {
   "$schema": "https://json.schemastore.org/package",
   "name": "@chiastack/features",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "type": "module",
   "publishConfig": {
     "access": "public"
@@ -46,7 +46,7 @@
     "zustand": "^5.0.8"
   },
   "peerDependencies": {
-    "@chiastack/utils": "^2.0.2",
+    "@chiastack/utils": "^2.0.3",
     "react": "^18.3.0 || ^19.0.0",
     "react-dom": "^18.3.0 || ^19.0.0",
     "zod": "^3.24.0 || ^4.0.0",
