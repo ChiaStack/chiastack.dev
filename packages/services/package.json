@@ -34,7 +34,7 @@
     "zod": "catalog:"
   },
   "peerDependencies": {
-    "@chiastack/utils": "^2.0.1"
+    "@chiastack/utils": "^2.0.2"
   },
   "exports": {
     "./package.json": "./package.json",
