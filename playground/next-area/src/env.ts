@@ -6,26 +6,22 @@ export const env = createEnv({
     NEXT_PUBLIC_CAPTCHA_PROVIDER: z
       .enum(["cloudflare-turnstile", "google-recaptcha"])
       .default("cloudflare-turnstile"),
-    NEXT_PUBLIC_CAPTCHA_SITE_KEY: z.string().min(1),
+    NEXT_PUBLIC_CAPTCHA_SITE_KEY: z
+      .string()
+      .default("1x00000000000000000000AA"),
   },
   server: {
-    CAPTCHA_SECRET_KEY: z.string().min(1),
+    CAPTCHA_SECRET_KEY: z
+      .string()
+      .default("1x0000000000000000000000000000000AA"),
   },
   runtimeEnv: {
     NEXT_PUBLIC_CAPTCHA_PROVIDER:
       process.env.NEXT_PUBLIC_CAPTCHA_PROVIDER ?? "cloudflare-turnstile",
     CAPTCHA_SECRET_KEY:
-      process.env.NODE_ENV === "development" || process.env.NODE_ENV === "test"
-        ? process.env.NEXT_PUBLIC_CAPTCHA_PROVIDER === "google-recaptcha"
-          ? "6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe"
-          : "1x0000000000000000000000000000000AA"
-        : process.env.CAPTCHA_SECRET_KEY,
+      process.env.CAPTCHA_SECRET_KEY ?? "1x0000000000000000000000000000000AA",
     NEXT_PUBLIC_CAPTCHA_SITE_KEY:
-      process.env.NODE_ENV === "development" || process.env.NODE_ENV === "test"
-        ? process.env.NEXT_PUBLIC_CAPTCHA_PROVIDER === "google-recaptcha"
-          ? "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
-          : "1x00000000000000000000AA"
-        : process.env.NEXT_PUBLIC_CAPTCHA_SITE_KEY,
+      process.env.NEXT_PUBLIC_CAPTCHA_SITE_KEY ?? "1x00000000000000000000AA",
   },
 
   skipValidation:
