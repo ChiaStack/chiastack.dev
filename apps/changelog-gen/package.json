@@ -3,6 +3,6 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "build": "cargo build"
+    "build": "cargo build --release"
   }
 }

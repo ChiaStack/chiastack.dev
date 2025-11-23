@@ -6,5 +6,8 @@ edition = "2024"
 [dependencies]
 anyhow = "1.0"
 chrono = "0.4.42"
-clap = "4.5.53"
+clap = { version = "4.5.53", features = ["derive"] }
+conventional_commit_parser = "0.9.4"
 git2 = "0.20.2"
+serde = "1.0.228"
+toml = "0.9.8"

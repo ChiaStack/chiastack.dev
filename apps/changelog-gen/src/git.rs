@@ -28,39 +28,60 @@ pub fn get_commits(
         repo.head()?.target().context("failed to get HEAD")?
     };
 
-    let mut revwalk = repo.revwalk()?;
-    revwalk.push(to_oid)?;
-
     if let Some(from) = from_oid {
-        revwalk.hide(from)?;
+        if from == to_oid {
+            return Ok(Vec::new());
+        }
+        return get_commits_between(&repo, from, to_oid);
     }
 
-    let mut commits = Vec::new();
+    let mut revwalk = repo.revwalk()?;
+    revwalk.set_sorting(git2::Sort::TOPOLOGICAL | git2::Sort::TIME)?;
+    revwalk.push(to_oid)?;
 
+    let mut commits = Vec::new();
     for oid in revwalk {
-        let oid = oid?;
-        let commit = repo.find_commit(oid)?;
-        
+        let commit = repo.find_commit(oid?)?;
         commits.push(extract_commit_info(&commit)?);
     }
 
     Ok(commits)
 }
 
+fn get_commits_between(
+    repo: &Repository,
+    from: Oid,
+    to: Oid,
+) -> Result<Vec<CommitInfo>> {
+    let mut revwalk = repo.revwalk()?;
+    revwalk.set_sorting(git2::Sort::TOPOLOGICAL | git2::Sort::TIME)?;
+    revwalk.push(to)?;
+    
+    let mut commits = Vec::new();
+    for oid in revwalk {
+        let oid = oid?;
+        if oid == from {
+            break;
+        }
+        let commit = repo.find_commit(oid)?;
+        commits.push(extract_commit_info(&commit)?);
+    }
+    
+    Ok(commits)
+}
+
 fn resolve_reference(repo: &Repository, reference: &str) -> Result<Oid> {
-    // Git tag
-    if let Ok(tag) = repo.find_reference(&format!("refs/tags/{}", reference)) {
-        return Ok(tag.peel_to_commit()?.id());
+    match repo.revparse_single(reference) {
+        Ok(obj) => {
+            let commit = obj.peel_to_commit()
+                .context(format!("reference '{}' does not point to a commit", reference))?;
+            Ok(commit.id())
+        }
+        Err(_) => {
+            Oid::from_str(reference)
+                .context(format!("failed to resolve reference: {}", reference))
+        }
     }
-    
-    // Git branch
-    if let Ok(branch) = repo.find_reference(&format!("refs/heads/{}", reference)) {
-        return Ok(branch.peel_to_commit()?.id());
-    }
-    
-    // Git commit hash
-    Oid::from_str(reference)
-        .context(format!("failed to resolve reference: {}", reference))
 }
 
 fn extract_commit_info(commit: &Commit) -> Result<CommitInfo> {
