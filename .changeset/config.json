@@ -12,5 +12,5 @@
   "access": "public",
   "baseBranch": "main",
   "updateInternalDependencies": "patch",
-  "ignore": ["docs", "vite-area", "@chiastack/ui", "next-area", "changelog-gen"]
+  "ignore": ["docs", "vite-area", "@chiastack/ui", "next-area"]
 }
