@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useRef } from "react";
+import * as React from "react";
 
 import { useStore } from "zustand";
 import type { StateCreator, StoreApi } from "zustand/vanilla";
@@ -35,7 +35,7 @@ const createTodoStore =
     ...createTodoActions(...params),
   });
 
-const TodoStoreContext = createContext<StoreApi<TodoStore> | null>(null);
+const TodoStoreContext = React.createContext<StoreApi<TodoStore> | null>(null);
 
 const devtools = createDevtools("TodoStore");
 
@@ -55,7 +55,7 @@ export const TodoStoreProvider = ({
   children,
   initialState,
 }: TodoStoreProviderProps) => {
-  const store = useRef<StoreApi<TodoStore>>(null);
+  const store = React.useRef<StoreApi<TodoStore>>(null);
 
   if (!store.current) {
     store.current = creator(initialState);
@@ -72,7 +72,7 @@ export const useTodoStore = <T,>(
   selector: (store: TodoStore) => T,
   name = "useTodoStore"
 ): T => {
-  const store = useContext(TodoStoreContext);
+  const store = React.useContext(TodoStoreContext);
   if (!store) {
     throw new Error(`${name} must be used within a TodoStoreProvider.`);
   }

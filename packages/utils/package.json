@@ -81,6 +81,7 @@
   "devDependencies": {
     "@chiastack/eslint": "workspace:*",
     "@chiastack/tsconfig": "workspace:*",
+    "@types/node": "catalog:",
     "dayjs": "catalog:",
     "eslint": "catalog:eslint",
     "tsdown": "catalog:",

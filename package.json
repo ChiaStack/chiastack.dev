@@ -35,7 +35,8 @@
     "clean:workspaces": "turbo clean --parallel",
     "test": "vitest run",
     "test:watch": "vitest",
-    "update-deps:all": "pnpm up --latest --filter '@chiastack/*' --filter docs --filter vite-area"
+    "update-deps:all": "pnpm up --latest --filter '@chiastack/*' --filter docs --filter vite-area",
+    "changelog-gen": "./target/release/changelog-gen"
   },
   "engines": {
     "node": ">=22.*"

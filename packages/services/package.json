@@ -26,6 +26,7 @@
     "@chiastack/eslint": "workspace:*",
     "@chiastack/tsconfig": "workspace:*",
     "@chiastack/utils": "workspace:*",
+    "@types/node": "catalog:",
     "eslint": "catalog:eslint",
     "ky": "catalog:",
     "tsdown": "catalog:",

@@ -49,112 +49,28 @@
     "@chiastack/utils": "^2.0.3",
     "react": "^18.3.0 || ^19.0.0",
     "react-dom": "^18.3.0 || ^19.0.0",
-    "zod": "^3.24.0 || ^4.0.0",
-    "zustand": "^5.0.0"
+    "zod": "^3.24.0 || ^4.0.0"
   },
   "exports": {
-    "./package.json": "./package.json",
-    "./chat/store": {
-      "import": "./dist/chat/store/index.mjs",
-      "types": "./dist/chat/store/index.d.mts"
-    },
-    "./chat/utils": {
-      "import": "./dist/chat/utils.mjs",
-      "types": "./dist/chat/utils.d.mts"
-    },
-    "./chat/types": {
-      "import": "./dist/chat/types.mjs",
-      "types": "./dist/chat/types.d.mts"
-    },
-    "./chat/enums": {
-      "import": "./dist/chat/enums.mjs",
-      "types": "./dist/chat/enums.d.mts"
-    },
-    "./tic-tac-toe/store": {
-      "import": "./dist/tic-tac-toe/store.mjs",
-      "types": "./dist/tic-tac-toe/store.d.mts"
-    },
-    "./tic-tac-toe/action": {
-      "import": "./dist/tic-tac-toe/action.mjs",
-      "types": "./dist/tic-tac-toe/action.d.mts"
-    },
-    "./tic-tac-toe/utils": {
-      "import": "./dist/tic-tac-toe/utils.mjs",
-      "types": "./dist/tic-tac-toe/utils.d.mts"
-    },
-    "./todo/store": {
-      "import": "./dist/todo/store.mjs",
-      "types": "./dist/todo/store.d.mts"
-    },
-    "./todo/actions": {
-      "import": "./dist/todo/actions.mjs",
-      "types": "./dist/todo/actions.d.mts"
-    },
-    "./utils/uuid": {
-      "import": "./dist/utils/uuid.mjs",
-      "types": "./dist/utils/uuid.d.mts"
-    },
-    "./utils/logger": {
-      "import": "./dist/utils/logger.mjs",
-      "types": "./dist/utils/logger.d.mts"
-    },
-    "./utils/stream": {
-      "import": "./dist/utils/stream.mjs",
-      "types": "./dist/utils/stream.d.mts"
-    },
-    "./utils/storeDebug": {
-      "import": "./dist/utils/storeDebug.mjs",
-      "types": "./dist/utils/storeDebug.d.mts"
-    },
-    "./utils/middleware": {
-      "import": "./dist/utils/middleware.mjs",
-      "types": "./dist/utils/middleware.d.mts"
-    }
-  },
-  "typesVersions": {
-    "*": {
-      "chat/store": [
-        "./dist/chat/store/index.d.mts"
-      ],
-      "chat/utils": [
-        "./dist/chat/utils.d.mts"
-      ],
-      "chat/types": [
-        "./dist/chat/types.d.mts"
-      ],
-      "chat/enums": [
-        "./dist/chat/enums.d.mts"
-      ],
-      "tic-tac-toe/store": [
-        "./dist/tic-tac-toe/store.d.mts"
-      ],
-      "tic-tac-toe/action": [
-        "./dist/tic-tac-toe/action.d.mts"
-      ],
-      "tic-tac-toe/utils": [
-        "./dist/tic-tac-toe/utils.d.mts"
-      ],
-      "todo/store": [
-        "./dist/todo/store.d.mts"
-      ],
-      "todo/actions": [
-        "./dist/todo/actions.d.mts"
-      ],
-      "utils/uuid": [
-        "./dist/utils/uuid.d.mts"
-      ],
-      "utils/logger": [
-        "./dist/utils/logger.d.mts"
-      ],
-      "utils/stream": [
-        "./dist/utils/stream.d.mts"
-      ],
-      "utils/storeDebug": [
-        "./dist/utils/storeDebug.d.mts"
-      ],
-      "utils/middleware": [
-        "./dist/utils/middleware.d.mts"
-      ]
-    }
+    "./chat": "./dist/chat/index.js",
+    "./chat/enums/chat-status.enum": "./dist/chat/enums/chat-status.enum.js",
+    "./chat/enums/message-role.enum": "./dist/chat/enums/message-role.enum.js",
+    "./chat/store": "./dist/chat/store/index.js",
+    "./chat/types/message": "./dist/chat/types/message.js",
+    "./chat/utils": "./dist/chat/utils.js",
+    "./tic-tac-toe": "./dist/tic-tac-toe/index.js",
+    "./tic-tac-toe/action": "./dist/tic-tac-toe/action.js",
+    "./tic-tac-toe/store": "./dist/tic-tac-toe/store.js",
+    "./tic-tac-toe/utils": "./dist/tic-tac-toe/utils.js",
+    "./todo": "./dist/todo/index.js",
+    "./todo/actions": "./dist/todo/actions.js",
+    "./todo/store": "./dist/todo/store.js",
+    "./utils": "./dist/utils/index.js",
+    "./utils/logger": "./dist/utils/logger.js",
+    "./utils/middleware/create-devtools": "./dist/utils/middleware/create-devtools.js",
+    "./utils/storeDebug": "./dist/utils/storeDebug.js",
+    "./utils/stream": "./dist/utils/stream.js",
+    "./utils/uuid": "./dist/utils/uuid.js",
+    "./package.json": "./package.json"
   }
 }

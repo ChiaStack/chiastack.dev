@@ -1,7 +1,6 @@
 "use client";
 
-import type { ReactNode } from "react";
-import { createContext, useContext, useRef } from "react";
+import * as React from "react";
 
 import { useStore } from "zustand";
 import type { StateCreator, StoreApi } from "zustand/vanilla";
@@ -43,7 +42,7 @@ export interface ChatStoreProviderProps<
   TStreamRequestDTO,
   TContext,
 > {
-  children: ReactNode;
+  children: React.ReactNode;
   values?: Partial<ChatState<TMessageItem, TStreamRequestDTO, TContext>>;
 }
 
@@ -113,7 +112,7 @@ export const defineChatStore = <
     );
   };
 
-  const ChatStoreContext = createContext<
+  const ChatStoreContext = React.createContext<
     StoreApi<ChatStore<TMessageItem, TStreamRequestDTO, TContext>> | undefined
   >(undefined);
 
@@ -122,9 +121,9 @@ export const defineChatStore = <
     values,
   }: ChatStoreProviderProps<TMessageItem, TStreamRequestDTO, TContext>) => {
     const storeRef =
-      useRef<StoreApi<ChatStore<TMessageItem, TStreamRequestDTO, TContext>>>(
-        null
-      );
+      React.useRef<
+        StoreApi<ChatStore<TMessageItem, TStreamRequestDTO, TContext>>
+      >(null);
     if (!storeRef.current) {
       storeRef.current = creator(values);
     }
@@ -142,7 +141,7 @@ export const defineChatStore = <
     ) => T,
     name = "useChatStore"
   ): T => {
-    const chatStoreContext = useContext(ChatStoreContext);
+    const chatStoreContext = React.useContext(ChatStoreContext);
     if (!chatStoreContext) {
       throw new Error(`${name} must be used within ChatStoreProvider`);
     }
