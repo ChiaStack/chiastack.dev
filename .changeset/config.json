@@ -1,11 +1,6 @@
 {
   "$schema": "https://unpkg.com/@changesets/config@2.29.7/schema.json",
-  "changelog": [
-    "@changesets/changelog-github",
-    {
-      "repo": "chia1104/chiastack.dev"
-    }
-  ],
+  "changelog": "@changesets/cli/changelog",
   "commit": false,
   "fixed": [],
   "linked": [],
