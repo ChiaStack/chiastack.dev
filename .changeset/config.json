@@ -7,5 +7,5 @@
   "access": "public",
   "baseBranch": "main",
   "updateInternalDependencies": "patch",
-  "ignore": ["docs", "vite-area", "next-area", "changelog-gen"]
+  "ignore": ["docs", "vite-area", "next-area"]
 }
