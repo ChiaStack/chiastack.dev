@@ -14,7 +14,7 @@ pub fn generate(commits: &[ParsedCommit], config: &Config) -> Result<String> {
             continue;
         }
 
-        output.push_str(&format!("## {}\n\n", type_name));
+        output.push_str(&format!("### {}\n\n", type_name));
 
         for commit in type_commits {
             let scope_str = commit.scope.as_ref()
@@ -23,9 +23,10 @@ pub fn generate(commits: &[ParsedCommit], config: &Config) -> Result<String> {
 
             let breaking_str = if commit.breaking { "⚠️ BREAKING: " } else { "" };
 
+            // TODO: add different git provider support
             output.push_str(&format!(
-                "- {}{}{} ([{}])\n",
-                breaking_str, scope_str, commit.summary, commit.hash
+                "- {}{}{} ([{}](https://github.com/Chia1104/chiastack.dev/commit/{}))\n",
+                breaking_str, scope_str, commit.summary, commit.hash, commit.hash
             ));
         }
 

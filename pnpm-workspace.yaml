@@ -28,7 +28,7 @@ catalogs:
     '@next/bundle-analyzer': 16.0.3
     '@next/eslint-plugin-next': 16.0.3
     '@next/third-parties': 16.0.3
-    next: 16.0.3
+    next: 16.0.7
   react-canary:
     react: 19.3.0-canary-fb2177c1-20251114
     react-dom: 19.3.0-canary-fb2177c1-20251114
