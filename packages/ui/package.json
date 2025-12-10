@@ -41,8 +41,8 @@
   },
   "peerDependencies": {
     "lightweight-charts": "^5.0.0",
-    "react": "^19.2.0",
-    "react-dom": "^19.2.0",
+    "react": "^18.3.0 || ^19.0.0",
+    "react-dom": "^18.3.0 || ^19.0.0",
     "technicalindicators": "^3.1.0"
   },
   "peerDependenciesMeta": {
@@ -86,10 +86,6 @@
     "./error-boundary": {
       "import": "./dist/error-boundary/error-boundary.js",
       "types": "./dist/error-boundary/error-boundary.d.ts"
-    },
-    "./image": {
-      "import": "./dist/image/image.js",
-      "types": "./dist/image/image.d.ts"
     }
   },
   "typesVersions": {
@@ -117,9 +113,6 @@
       ],
       "error-boundary": [
         "./dist/error-boundary/error-boundary.d.ts"
-      ],
-      "image": [
-        "./dist/image/image.d.ts"
       ]
     }
   }
