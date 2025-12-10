@@ -86,6 +86,10 @@
     "./error-boundary": {
       "import": "./dist/error-boundary/error-boundary.js",
       "types": "./dist/error-boundary/error-boundary.d.ts"
+    },
+    "./image": {
+      "import": "./dist/image/image.js",
+      "types": "./dist/image/image.d.ts"
     }
   },
   "typesVersions": {
@@ -113,6 +117,9 @@
       ],
       "error-boundary": [
         "./dist/error-boundary/error-boundary.d.ts"
+      ],
+      "image": [
+        "./dist/image/image.d.ts"
       ]
     }
   }

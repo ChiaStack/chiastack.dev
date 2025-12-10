@@ -21,6 +21,7 @@ const ESEntries = [
   "./src/trading-chart/rsi-series.tsx",
   "./src/trading-chart/subscrib-visible-logical-range.tsx",
   "./src/error-boundary/error-boundary.tsx",
+  "./src/image/image.tsx",
 ];
 
 export default defineConfig((opts) => {
