@@ -1,0 +1,149 @@
+---
+title: Image
+description: React image component with loading status and fallback support
+---
+
+A compound component for handling image loading states, providing fallback UI while images load and error handling.
+
+## Installation
+
+<Tabs items={['npm', 'pnpm', 'yarn', 'bun']}>
+  <Tab value="npm">
+    ```bash
+    npm install @chiastack/ui
+    ```
+  </Tab>
+  <Tab value="pnpm">
+    ```bash
+    pnpm add @chiastack/ui
+    ```
+  </Tab>
+  <Tab value="yarn">
+    ```bash
+    yarn add @chiastack/ui
+    ```
+  </Tab>
+  <Tab value="bun">
+    ```bash
+    bun add @chiastack/ui
+    ```
+  </Tab>
+</Tabs>
+
+## Basic Usage
+
+```tsx
+import { Image } from '@chiastack/ui/image';
+
+function Avatar() {
+  return (
+    <Image.Root>
+      <Image.Resource src="/avatar.png" alt="User avatar" />
+      <Image.Fallback>Loading...</Image.Fallback>
+    </Image.Root>
+  );
+}
+```
+
+## Components
+
+### Image.Root
+
+The container component that manages image loading state.
+
+**Props:**
+- `status?: ImageLoadingStatus` - Initial loading status
+- `onStatusChange?: (status: ImageLoadingStatus) => void` - Status change callback
+- All standard `span` HTML attributes
+
+### Image.Resource
+
+The actual image element that handles loading.
+
+**Props:**
+- `onLoadingStatusChange?: (status: ImageLoadingStatus) => void` - Loading status change callback
+- All standard `img` HTML attributes
+
+### Image.Fallback
+
+Fallback content displayed while the image is loading or on error.
+
+**Props:**
+- `delay?: number` - Delay in milliseconds before showing the fallback
+- All standard `span` HTML attributes
+
+## Loading Status
+
+The `ImageLoadingStatus` enum provides the following states:
+
+- `idle` - Initial state
+- `loading` - Image is loading
+- `loaded` - Image loaded successfully
+- `error` - Image failed to load
+
+## Advanced Usage
+
+### With Delay
+
+```tsx
+import { Image } from '@chiastack/ui/image';
+
+function Avatar() {
+  return (
+    <Image.Root>
+      <Image.Resource src="/avatar.png" alt="User avatar" />
+      <Image.Fallback delay={500}>
+        <Spinner />
+      </Image.Fallback>
+    </Image.Root>
+  );
+}
+```
+
+### With Status Callback
+
+```tsx
+import { Image, ImageLoadingStatus } from '@chiastack/ui/image';
+
+function Avatar() {
+  const handleStatusChange = (status: ImageLoadingStatus) => {
+    console.log('Image status:', status);
+  };
+
+  return (
+    <Image.Root onStatusChange={handleStatusChange}>
+      <Image.Resource src="/avatar.png" alt="User avatar" />
+      <Image.Fallback>Loading...</Image.Fallback>
+    </Image.Root>
+  );
+}
+```
+
+## Hooks
+
+### useImageContext
+
+Access the image context within child components.
+
+```tsx
+import { useImageContext } from '@chiastack/ui/image';
+
+function CustomComponent() {
+  const { status, onStatusChange } = useImageContext();
+  // Use status to conditionally render UI
+}
+```
+
+### useImageLoadingStatus
+
+Hook to track image loading status for a given source.
+
+```tsx
+import { useImageLoadingStatus } from '@chiastack/ui/image';
+
+function CustomImage({ src }: { src: string }) {
+  const status = useImageLoadingStatus(src);
+  // Returns 'idle' | 'loading' | 'loaded' | 'error'
+}
+```
+
