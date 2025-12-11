@@ -12,6 +12,11 @@
     "email": "yuyuchia7423@gmail.com",
     "url": "https://github.com/chia1104"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ChiaStack/chiastack.dev.git",
+    "directory": "packages/utils"
+  },
   "keywords": [
     "utils",
     "typescript",
