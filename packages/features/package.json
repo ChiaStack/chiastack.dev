@@ -41,14 +41,14 @@
     "@types/react": "catalog:react-is",
     "@types/react-dom": "catalog:react-is",
     "eslint": "catalog:eslint",
-    "happy-dom": "^20.0.10",
+    "happy-dom": "^20.0.11",
     "nanoid": "^5.1.6",
     "react": "catalog:react-is",
     "react-dom": "catalog:react-is",
     "tsdown": "catalog:",
     "uuid": "^13.0.0",
     "zod": "catalog:",
-    "zustand": "^5.0.8"
+    "zustand": "^5.0.9"
   },
   "peerDependencies": {
     "@chiastack/utils": "^2.0.4",

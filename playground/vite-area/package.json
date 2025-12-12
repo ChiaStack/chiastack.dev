@@ -19,13 +19,13 @@
     "clsx": "^2.1.1",
     "dayjs": "catalog:",
     "lightweight-charts": "^5.0.9",
-    "lucide-react": "^0.554.0",
+    "lucide-react": "^0.560.0",
     "react": "catalog:react-canary",
     "react-dom": "catalog:react-canary",
     "tailwind-merge": "^3.4.0",
     "technicalindicators": "^3.1.0",
     "zod": "catalog:",
-    "zustand": "^5.0.8"
+    "zustand": "^5.0.9"
   },
   "devDependencies": {
     "@chiastack/eslint": "workspace:*",

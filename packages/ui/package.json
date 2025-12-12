@@ -37,7 +37,7 @@
     "@types/react": "catalog:react-is",
     "@types/react-dom": "catalog:react-is",
     "eslint": "catalog:eslint",
-    "happy-dom": "^20.0.10",
+    "happy-dom": "^20.0.11",
     "lightweight-charts": "^5.0.9",
     "react": "catalog:react-is",
     "react-dom": "catalog:react-is",
