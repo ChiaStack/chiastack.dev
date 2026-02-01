@@ -362,6 +362,24 @@ importers:
         specifier: ^5.0.11
         version: 5.0.11(@types/react@19.2.10)(react@19.2.4)(use-sync-external-store@1.6.0(react@19.2.4))
 
+  packages/oxlint:
+    devDependencies:
+      '@chiastack/tsconfig':
+        specifier: workspace:*
+        version: link:../tsconfig
+      '@types/node':
+        specifier: 'catalog:'
+        version: 25.2.0
+      oxlint:
+        specifier: catalog:oxc
+        version: 1.42.0
+      tsdown:
+        specifier: 'catalog:'
+        version: 0.20.1(typescript@5.9.3)
+      typescript:
+        specifier: 'catalog:'
+        version: 5.9.3
+
   packages/services:
     devDependencies:
       '@chiastack/eslint':
