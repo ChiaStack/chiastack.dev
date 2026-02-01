@@ -18,14 +18,14 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "dayjs": "catalog:",
-    "lightweight-charts": "^5.0.9",
-    "lucide-react": "^0.560.0",
+    "lightweight-charts": "^5.1.0",
+    "lucide-react": "^0.563.0",
     "react": "catalog:react-canary",
     "react-dom": "catalog:react-canary",
     "tailwind-merge": "^3.4.0",
     "technicalindicators": "^3.1.0",
     "zod": "catalog:",
-    "zustand": "^5.0.9"
+    "zustand": "^5.0.11"
   },
   "devDependencies": {
     "@chiastack/eslint": "workspace:*",

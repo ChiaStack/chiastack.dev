@@ -50,17 +50,17 @@
     "@chiastack/tsconfig": "workspace:*",
     "@manypkg/cli": "^0.25.1",
     "@total-typescript/ts-reset": "0.6.1",
-    "@trivago/prettier-plugin-sort-imports": "^6.0.0",
-    "@turbo/gen": "^2.6.3",
+    "@trivago/prettier-plugin-sort-imports": "^6.0.2",
+    "@turbo/gen": "^2.8.1",
     "dotenv": "^17.2.3",
     "husky": "^9.1.7",
     "lint-staged": "^16.2.7",
-    "prettier": "^3.7.4",
+    "prettier": "^3.8.1",
     "prettier-plugin-tailwindcss": "^0.7.2",
     "tsx": "^4.21.0",
-    "turbo": "2.6.3",
+    "turbo": "2.8.1",
     "typescript": "catalog:",
-    "vitest": "^4.0.15"
+    "vitest": "^4.0.18"
   },
   "manypkg": {
     "ignoredRules": [
