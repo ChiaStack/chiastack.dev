@@ -30,7 +30,6 @@
     "access": "public"
   },
   "scripts": {
-    "build": "tsdown",
     "clean": "rm -rf .turbo node_modules .cache"
   },
   "devDependencies": {
