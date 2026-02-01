@@ -34,6 +34,9 @@ catalogs:
     '@next/eslint-plugin-next': 16.1.6
     '@next/third-parties': 16.0.10
     next: 16.1.6
+  oxc:
+    oxfmt: 0.27.0
+    oxlint: 1.42.0
   react-canary:
     react: 19.3.0-canary-fb2177c1-20251114
     react-dom: 19.3.0-canary-fb2177c1-20251114
