@@ -8,6 +8,7 @@ import { createStore } from "zustand/vanilla";
 
 import { createDevtools } from "../../utils/middleware/create-devtools";
 import type { MessageItem } from "../types/message";
+
 import { initialChatState } from "./initial-state";
 import type { ChatState } from "./initial-state";
 import { chatActions } from "./slices/chat/actions";

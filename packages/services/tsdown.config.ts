@@ -1,4 +1,5 @@
 import { readFile, writeFile } from "node:fs/promises";
+
 import { defineConfig, type UserConfig } from "tsdown";
 
 type PackageJson = {

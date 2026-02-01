@@ -1,9 +1,11 @@
 {
   "name": "@chiastack/tsconfig",
   "version": "2.1.1",
-  "publishConfig": {
-    "access": "public"
-  },
+  "keywords": [
+    "chiastack",
+    "tsconfig",
+    "typescript"
+  ],
   "license": "MIT",
   "author": {
     "name": "Chia1104",
@@ -15,15 +17,13 @@
     "url": "git+https://github.com/ChiaStack/chiastack.dev.git",
     "directory": "packages/tsconfig"
   },
-  "keywords": [
-    "tsconfig",
-    "typescript",
-    "chiastack"
-  ],
   "files": [
     "base.json",
     "nestjs.json",
     "react.json",
     "compiled-package.json"
-  ]
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
 }

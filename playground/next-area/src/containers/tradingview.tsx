@@ -30,9 +30,9 @@ const MOCK_DATA = Array.from({ length: 100 }, (_, i) => {
 
 export const TradingView = () => {
   return (
-    <div className="w-full h-full">
+    <div className="h-full w-full">
       <ErrorBoundary fallback={<div>Error</div>}>
-        <div className="w-full h-[600px]">
+        <div className="h-[600px] w-full">
           <Chart className="h-full w-full">
             <Series
               series={CandlestickSeries}

@@ -1,11 +1,12 @@
+import "../global.css";
+
+import { Inter } from "next/font/google";
+
 import { Analytics } from "@vercel/analytics/react";
 import { defineI18nUI } from "fumadocs-ui/i18n";
 import { RootProvider } from "fumadocs-ui/provider/next";
-import { Inter } from "next/font/google";
 
 import { i18n } from "@/lib/i18n";
-
-import "../global.css";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -31,7 +32,7 @@ export default async function Layout({
   const { locale } = await params;
   return (
     <html lang="en" className={inter.className} suppressHydrationWarning>
-      <body className="flex flex-col min-h-screen">
+      <body className="flex min-h-screen flex-col">
         <RootProvider
           i18n={provider(locale)}
           theme={{

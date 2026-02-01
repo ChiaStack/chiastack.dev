@@ -1,10 +1,13 @@
 {
   "name": "@chiastack/eslint",
   "version": "2.0.4",
-  "type": "module",
-  "publishConfig": {
-    "access": "public"
-  },
+  "keywords": [
+    "chiastack",
+    "eslint",
+    "nextjs",
+    "react",
+    "typescript"
+  ],
   "license": "MIT",
   "author": {
     "name": "Chia1104",
@@ -16,26 +19,23 @@
     "url": "git+https://github.com/ChiaStack/chiastack.dev.git",
     "directory": "packages/eslint"
   },
-  "keywords": [
-    "eslint",
-    "typescript",
-    "react",
-    "nextjs",
-    "chiastack"
-  ],
+  "type": "module",
   "exports": {
     "./base": {
-      "import": "./dist/base.mjs",
-      "types": "./dist/base.d.mts"
+      "types": "./dist/base.d.mts",
+      "import": "./dist/base.mjs"
     },
     "./nextjs": {
-      "import": "./dist/nextjs.mjs",
-      "types": "./dist/nextjs.d.mts"
+      "types": "./dist/nextjs.d.mts",
+      "import": "./dist/nextjs.mjs"
     },
     "./react": {
-      "import": "./dist/react.mjs",
-      "types": "./dist/react.d.mts"
+      "types": "./dist/react.d.mts",
+      "import": "./dist/react.mjs"
     }
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "scripts": {
     "build": "tsdown",

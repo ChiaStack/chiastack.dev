@@ -2,10 +2,13 @@
   "$schema": "https://json.schemastore.org/package",
   "name": "@chiastack/features",
   "version": "1.1.2",
-  "type": "module",
-  "publishConfig": {
-    "access": "public"
-  },
+  "keywords": [
+    "chiastack",
+    "features",
+    "react",
+    "typescript",
+    "zustand"
+  ],
   "license": "MIT",
   "author": {
     "name": "Chia1104",
@@ -17,16 +20,35 @@
     "url": "git+https://github.com/ChiaStack/chiastack.dev.git",
     "directory": "packages/features"
   },
-  "keywords": [
-    "features",
-    "react",
-    "chiastack",
-    "typescript",
-    "zustand"
-  ],
+  "type": "module",
+  "sideEffects": false,
   "main": "./dist/index.mjs",
   "types": "./dist/index.d.mts",
-  "sideEffects": false,
+  "exports": {
+    "./chat": "./dist/chat/index.js",
+    "./chat/enums/chat-status.enum": "./dist/chat/enums/chat-status.enum.js",
+    "./chat/enums/message-role.enum": "./dist/chat/enums/message-role.enum.js",
+    "./chat/store": "./dist/chat/store/index.js",
+    "./chat/types/message": "./dist/chat/types/message.js",
+    "./chat/utils": "./dist/chat/utils.js",
+    "./tic-tac-toe": "./dist/tic-tac-toe/index.js",
+    "./tic-tac-toe/action": "./dist/tic-tac-toe/action.js",
+    "./tic-tac-toe/store": "./dist/tic-tac-toe/store.js",
+    "./tic-tac-toe/utils": "./dist/tic-tac-toe/utils.js",
+    "./todo": "./dist/todo/index.js",
+    "./todo/actions": "./dist/todo/actions.js",
+    "./todo/store": "./dist/todo/store.js",
+    "./utils": "./dist/utils/index.js",
+    "./utils/logger": "./dist/utils/logger.js",
+    "./utils/middleware/create-devtools": "./dist/utils/middleware/create-devtools.js",
+    "./utils/storeDebug": "./dist/utils/storeDebug.js",
+    "./utils/stream": "./dist/utils/stream.js",
+    "./utils/uuid": "./dist/utils/uuid.js",
+    "./package.json": "./package.json"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "tsdown",
     "clean": "git clean -xdf .turbo node_modules dist",
@@ -55,27 +77,5 @@
     "react": "^18.3.0 || ^19.0.0",
     "react-dom": "^18.3.0 || ^19.0.0",
     "zod": "^3.24.0 || ^4.0.0"
-  },
-  "exports": {
-    "./chat": "./dist/chat/index.js",
-    "./chat/enums/chat-status.enum": "./dist/chat/enums/chat-status.enum.js",
-    "./chat/enums/message-role.enum": "./dist/chat/enums/message-role.enum.js",
-    "./chat/store": "./dist/chat/store/index.js",
-    "./chat/types/message": "./dist/chat/types/message.js",
-    "./chat/utils": "./dist/chat/utils.js",
-    "./tic-tac-toe": "./dist/tic-tac-toe/index.js",
-    "./tic-tac-toe/action": "./dist/tic-tac-toe/action.js",
-    "./tic-tac-toe/store": "./dist/tic-tac-toe/store.js",
-    "./tic-tac-toe/utils": "./dist/tic-tac-toe/utils.js",
-    "./todo": "./dist/todo/index.js",
-    "./todo/actions": "./dist/todo/actions.js",
-    "./todo/store": "./dist/todo/store.js",
-    "./utils": "./dist/utils/index.js",
-    "./utils/logger": "./dist/utils/logger.js",
-    "./utils/middleware/create-devtools": "./dist/utils/middleware/create-devtools.js",
-    "./utils/storeDebug": "./dist/utils/storeDebug.js",
-    "./utils/stream": "./dist/utils/stream.js",
-    "./utils/uuid": "./dist/utils/uuid.js",
-    "./package.json": "./package.json"
   }
 }

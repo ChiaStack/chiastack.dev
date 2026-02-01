@@ -1,9 +1,10 @@
+import https from "node:https";
+import { resolve } from "node:path";
+
 /// <reference types="vitest/config" />
 import tailwindcss from "@tailwindcss/vite";
 import { tanstackRouter } from "@tanstack/router-plugin/vite";
 import viteReact from "@vitejs/plugin-react";
-import https from "node:https";
-import { resolve } from "node:path";
 import { defineConfig, loadEnv, type ConfigEnv } from "vite";
 
 // https://vitejs.dev/config/

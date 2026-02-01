@@ -1,11 +1,11 @@
 "use client";
 
+import { useTheme } from "next-themes";
+import Link from "next/link";
 import type { RefObject } from "react";
 import { useRef } from "react";
 
 import { Leva } from "leva";
-import { useTheme } from "next-themes";
-import Link from "next/link";
 import { useHover } from "usehooks-ts";
 
 import { GL } from "@/components/gl";
@@ -17,15 +17,15 @@ export const Home = () => {
   const { resolvedTheme } = useTheme();
 
   return (
-    <section className="flex flex-col h-[calc(90vh-64px)] justify-between relative">
+    <section className="relative flex h-[calc(90vh-64px)] flex-col justify-between">
       <GL hovering={isHovered} isDark={resolvedTheme === "dark"} />
       <Leva hidden />
 
-      <div className="pb-16 mt-auto text-center relative">
-        <h1 className="text-5xl sm:text-6xl md:text-7xl font-sentient">
+      <div className="relative mt-auto pb-16 text-center">
+        <h1 className="font-sentient text-5xl sm:text-6xl md:text-7xl">
           ChiaStack
         </h1>
-        <p className="font-mono text-sm sm:text-base text-foreground/60 text-balance mt-8 max-w-[440px] mx-auto">
+        <p className="text-foreground/60 mx-auto mt-8 max-w-[440px] font-mono text-sm text-balance sm:text-base">
           A collection of packages for building web applications.
         </p>
 
@@ -35,7 +35,7 @@ export const Home = () => {
           </Button>
         </Link>
       </div>
-      <span className="text-foreground/60 text-sm mx-auto block absolute bottom-4 left-1/2 -translate-x-1/2">
+      <span className="text-foreground/60 absolute bottom-4 left-1/2 mx-auto block -translate-x-1/2 text-sm">
         Powered by{" "}
         <Link
           href="https://v0.app/templates/skal-ventures-template-tnZGzubtsTc?ref=VH1R97"

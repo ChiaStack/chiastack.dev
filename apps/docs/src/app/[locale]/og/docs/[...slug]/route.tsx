@@ -1,6 +1,7 @@
-import { generate as DefaultImage } from "fumadocs-ui/og";
 import { notFound } from "next/navigation";
 import { ImageResponse } from "next/og";
+
+import { generate as DefaultImage } from "fumadocs-ui/og";
 
 import { getPageImage, source } from "@/lib/source";
 
@@ -15,13 +16,11 @@ export async function GET(
   if (!page) notFound();
 
   return new ImageResponse(
-    (
-      <DefaultImage
-        title={page.data.title}
-        description={page.data.description}
-        site="Chia Stack"
-      />
-    ),
+    <DefaultImage
+      title={page.data.title}
+      description={page.data.description}
+      site="Chia Stack"
+    />,
     {
       width: 1200,
       height: 630,

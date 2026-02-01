@@ -2,10 +2,10 @@
   "$schema": "https://json.schemastore.org/package",
   "name": "@chiastack/services",
   "version": "2.0.5",
-  "type": "module",
-  "publishConfig": {
-    "access": "public"
-  },
+  "keywords": [
+    "chiastack",
+    "services"
+  ],
   "license": "MIT",
   "author": {
     "name": "Chia1104",
@@ -17,10 +17,38 @@
     "url": "git+https://github.com/ChiaStack/chiastack.dev.git",
     "directory": "packages/services"
   },
-  "keywords": [
-    "services",
-    "chiastack"
-  ],
+  "type": "module",
+  "typesVersions": {
+    "*": {
+      "captcha": [
+        "./dist/captcha/captcha.d.mts"
+      ],
+      "demo": [
+        "./dist/demo/demo.d.mts"
+      ],
+      "demo/env": [
+        "./dist/demo/env.d.mts"
+      ]
+    }
+  },
+  "exports": {
+    "./package.json": "./package.json",
+    "./captcha": {
+      "types": "./dist/captcha/captcha.d.mts",
+      "import": "./dist/captcha/captcha.mjs"
+    },
+    "./demo": {
+      "types": "./dist/demo/demo.d.mts",
+      "import": "./dist/demo/demo.mjs"
+    },
+    "./demo/env": {
+      "types": "./dist/demo/env.d.mts",
+      "import": "./dist/demo/env.mjs"
+    }
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "tsdown",
     "clean": "git clean -xdf .turbo node_modules dist",
@@ -39,33 +67,5 @@
   },
   "peerDependencies": {
     "@chiastack/utils": "^2.0.4"
-  },
-  "exports": {
-    "./package.json": "./package.json",
-    "./captcha": {
-      "import": "./dist/captcha/captcha.mjs",
-      "types": "./dist/captcha/captcha.d.mts"
-    },
-    "./demo": {
-      "import": "./dist/demo/demo.mjs",
-      "types": "./dist/demo/demo.d.mts"
-    },
-    "./demo/env": {
-      "import": "./dist/demo/env.mjs",
-      "types": "./dist/demo/env.d.mts"
-    }
-  },
-  "typesVersions": {
-    "*": {
-      "captcha": [
-        "./dist/captcha/captcha.d.mts"
-      ],
-      "demo": [
-        "./dist/demo/demo.d.mts"
-      ],
-      "demo/env": [
-        "./dist/demo/env.d.mts"
-      ]
-    }
   }
 }

@@ -36,7 +36,10 @@
     "vscode",
     ".vscode",
     ".idea",
-    ".map.ts"
+    ".map.ts",
+    ".github",
+    "apps/changelog-gen",
+    "*.mdx"
   ],
   "experimentalSortImports": {
     "groups": [

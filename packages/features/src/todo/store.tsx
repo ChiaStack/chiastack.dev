@@ -7,6 +7,7 @@ import type { StateCreator, StoreApi } from "zustand/vanilla";
 import { createStore } from "zustand/vanilla";
 
 import { createDevtools } from "../utils/middleware/create-devtools";
+
 import type { TodoActions } from "./actions";
 import { createTodoActions } from "./actions";
 import type { InitialState } from "./initial-state";

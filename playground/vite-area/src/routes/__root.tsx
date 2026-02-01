@@ -11,12 +11,12 @@ export const Route = createRootRoute({
     </>
   ),
   notFoundComponent: () => (
-    <div className="flex flex-col items-center justify-center h-screen w-full">
+    <div className="flex h-screen w-full flex-col items-center justify-center">
       <span>Not Found</span>
     </div>
   ),
   errorComponent: () => (
-    <div className="flex flex-col items-center justify-center h-screen w-full">
+    <div className="flex h-screen w-full flex-col items-center justify-center">
       <span>Error</span>
     </div>
   ),

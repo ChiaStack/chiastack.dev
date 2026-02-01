@@ -2,10 +2,11 @@
   "$schema": "https://json.schemastore.org/package",
   "name": "@chiastack/utils",
   "version": "2.1.1",
-  "type": "module",
-  "publishConfig": {
-    "access": "public"
-  },
+  "keywords": [
+    "chiastack",
+    "typescript",
+    "utils"
+  ],
   "license": "MIT",
   "author": {
     "name": "Chia1104",
@@ -17,58 +18,9 @@
     "url": "git+https://github.com/ChiaStack/chiastack.dev.git",
     "directory": "packages/utils"
   },
-  "keywords": [
-    "utils",
-    "typescript",
-    "chiastack"
-  ],
-  "scripts": {
-    "build": "tsdown",
-    "clean": "git clean -xdf .turbo node_modules dist",
-    "lint": "eslint",
-    "type:check": "tsc --noEmit"
-  },
+  "type": "module",
   "main": "./dist/index.mjs",
   "types": "./dist/index.d.mts",
-  "exports": {
-    "./package.json": "./package.json",
-    ".": {
-      "import": "./dist/index.mjs",
-      "types": "./dist/index.d.mts"
-    },
-    "./set-search-params": {
-      "import": "./dist/set-search-params/set-search-params.mjs",
-      "types": "./dist/set-search-params/set-search-params.d.mts"
-    },
-    "./day": {
-      "import": "./dist/day/day.mjs",
-      "types": "./dist/day/day.d.mts"
-    },
-    "./try-catch": {
-      "import": "./dist/try-catch/try-catch.mjs",
-      "types": "./dist/try-catch/try-catch.d.mts"
-    },
-    "./is": {
-      "import": "./dist/is/is.mjs",
-      "types": "./dist/is/is.d.mts"
-    },
-    "./delay": {
-      "import": "./dist/delay/delay.mjs",
-      "types": "./dist/delay/delay.d.mts"
-    },
-    "./server": {
-      "import": "./dist/server/server.mjs",
-      "types": "./dist/server/server.d.mts"
-    },
-    "./algorithms": {
-      "import": "./dist/algorithms/algorithms.mjs",
-      "types": "./dist/algorithms/algorithms.d.mts"
-    },
-    "./mathex": {
-      "import": "./dist/mathex/mathex.mjs",
-      "types": "./dist/mathex/mathex.d.mts"
-    }
-  },
   "typesVersions": {
     "*": {
       "set-search-params": [
@@ -96,6 +48,54 @@
         "./dist/mathex/mathex.d.mts"
       ]
     }
+  },
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "types": "./dist/index.d.mts",
+      "import": "./dist/index.mjs"
+    },
+    "./set-search-params": {
+      "types": "./dist/set-search-params/set-search-params.d.mts",
+      "import": "./dist/set-search-params/set-search-params.mjs"
+    },
+    "./day": {
+      "types": "./dist/day/day.d.mts",
+      "import": "./dist/day/day.mjs"
+    },
+    "./try-catch": {
+      "types": "./dist/try-catch/try-catch.d.mts",
+      "import": "./dist/try-catch/try-catch.mjs"
+    },
+    "./is": {
+      "types": "./dist/is/is.d.mts",
+      "import": "./dist/is/is.mjs"
+    },
+    "./delay": {
+      "types": "./dist/delay/delay.d.mts",
+      "import": "./dist/delay/delay.mjs"
+    },
+    "./server": {
+      "types": "./dist/server/server.d.mts",
+      "import": "./dist/server/server.mjs"
+    },
+    "./algorithms": {
+      "types": "./dist/algorithms/algorithms.d.mts",
+      "import": "./dist/algorithms/algorithms.mjs"
+    },
+    "./mathex": {
+      "types": "./dist/mathex/mathex.d.mts",
+      "import": "./dist/mathex/mathex.mjs"
+    }
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsdown",
+    "clean": "git clean -xdf .turbo node_modules dist",
+    "lint": "eslint",
+    "type:check": "tsc --noEmit"
   },
   "devDependencies": {
     "@chiastack/eslint": "workspace:*",
