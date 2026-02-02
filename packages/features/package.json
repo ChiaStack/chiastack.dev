@@ -52,6 +52,9 @@
     "lint": "eslint",
     "type:check": "tsc --noEmit"
   },
+  "dependencies": {
+    "better-result": "catalog:"
+  },
   "devDependencies": {
     "@chiastack/eslint": "workspace:*",
     "@chiastack/tsconfig": "workspace:*",

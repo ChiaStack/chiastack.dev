@@ -1,14 +1,14 @@
 "use client";
 
-import type { Time } from "lightweight-charts";
+import dayjs from "dayjs";
 import { CandlestickSeries } from "lightweight-charts";
+import type { Time } from "lightweight-charts";
 
 import { ErrorBoundary } from "@chiastack/ui/error-boundary";
 import { Chart } from "@chiastack/ui/trading-chart/chart";
 import { MacdSeries } from "@chiastack/ui/trading-chart/macd-series";
 import { RsiSeries } from "@chiastack/ui/trading-chart/rsi-series";
 import { Series } from "@chiastack/ui/trading-chart/series";
-import { dayjs } from "@chiastack/utils/day";
 
 const MOCK_DATA = Array.from({ length: 100 }, (_, i) => {
   const basePrice = 100;

@@ -3,7 +3,6 @@ import { ViewTransition } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 
 import { Image } from "@chiastack/ui/image";
-import { dayjs } from "@chiastack/utils/day";
 
 export const Route = createFileRoute("/")({
   component: RouteComponent,
@@ -14,9 +13,6 @@ function RouteComponent() {
     <main className="flex h-screen w-full flex-col items-center justify-center gap-4">
       <section className="flex flex-col items-center justify-center">
         <h1 className="text-2xl font-bold">Hello "/"!</h1>
-        <span className="text-sm text-gray-500">
-          {dayjs().format("YYYY-MM-DD HH:mm:ss")}
-        </span>
       </section>
       <section className="flex flex-col items-center justify-center">
         <div className="relative flex h-10 w-10 items-center justify-center overflow-hidden rounded-full">

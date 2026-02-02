@@ -14,14 +14,11 @@ type PackageJson = {
 };
 
 const ESEntries = [
-  "./src/set-search-params/set-search-params.ts",
-  "./src/day/day.ts",
-  "./src/try-catch/try-catch.ts",
   "./src/is/is.ts",
-  "./src/delay/delay.ts",
   "./src/server/server.ts",
   "./src/algorithms/algorithms.ts",
   "./src/mathex/mathex.ts",
+  "./src/set-search-params/set-search-params.ts",
 ];
 
 export default defineConfig((opts) => {

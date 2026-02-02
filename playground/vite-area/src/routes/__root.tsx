@@ -1,12 +1,9 @@
 import { Outlet, createRootRoute, HeadContent } from "@tanstack/react-router";
 
-import { AppPlugin } from "@/components/commons/app-plugin";
-
 export const Route = createRootRoute({
   component: () => (
     <>
       <HeadContent />
-      <AppPlugin />
       <Outlet />
     </>
   ),

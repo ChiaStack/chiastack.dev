@@ -23,20 +23,8 @@
   "types": "./dist/index.d.mts",
   "typesVersions": {
     "*": {
-      "set-search-params": [
-        "./dist/set-search-params/set-search-params.d.mts"
-      ],
-      "day": [
-        "./dist/day/day.d.mts"
-      ],
-      "try-catch": [
-        "./dist/try-catch/try-catch.d.mts"
-      ],
       "is": [
         "./dist/is/is.d.mts"
-      ],
-      "delay": [
-        "./dist/delay/delay.d.mts"
       ],
       "server": [
         "./dist/server/server.d.mts"
@@ -46,6 +34,9 @@
       ],
       "mathex": [
         "./dist/mathex/mathex.d.mts"
+      ],
+      "set-search-params": [
+        "./dist/set-search-params/set-search-params.d.mts"
       ]
     }
   },
@@ -55,25 +46,9 @@
       "import": "./dist/index.mjs",
       "types": "./dist/index.d.mts"
     },
-    "./set-search-params": {
-      "import": "./dist/set-search-params/set-search-params.mjs",
-      "types": "./dist/set-search-params/set-search-params.d.mts"
-    },
-    "./day": {
-      "import": "./dist/day/day.mjs",
-      "types": "./dist/day/day.d.mts"
-    },
-    "./try-catch": {
-      "import": "./dist/try-catch/try-catch.mjs",
-      "types": "./dist/try-catch/try-catch.d.mts"
-    },
     "./is": {
       "import": "./dist/is/is.mjs",
       "types": "./dist/is/is.d.mts"
-    },
-    "./delay": {
-      "import": "./dist/delay/delay.mjs",
-      "types": "./dist/delay/delay.d.mts"
     },
     "./server": {
       "import": "./dist/server/server.mjs",
@@ -86,6 +61,10 @@
     "./mathex": {
       "import": "./dist/mathex/mathex.mjs",
       "types": "./dist/mathex/mathex.d.mts"
+    },
+    "./set-search-params": {
+      "import": "./dist/set-search-params/set-search-params.mjs",
+      "types": "./dist/set-search-params/set-search-params.d.mts"
     }
   },
   "publishConfig": {
@@ -101,13 +80,11 @@
     "@chiastack/eslint": "workspace:*",
     "@chiastack/tsconfig": "workspace:*",
     "@types/node": "catalog:",
-    "dayjs": "catalog:",
     "eslint": "catalog:eslint",
     "tsdown": "catalog:",
     "zod": "catalog:"
   },
   "peerDependencies": {
-    "dayjs": "^1.11.19",
     "zod": "^3.24.0 || ^4.0.0"
   }
 }

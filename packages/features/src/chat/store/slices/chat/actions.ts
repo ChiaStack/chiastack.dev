@@ -1,9 +1,8 @@
+import { Result } from "better-result";
 import * as z from "zod";
 import type { StateCreator } from "zustand/vanilla";
 
-import { dayjs } from "@chiastack/utils/day";
 import { isAbortError } from "@chiastack/utils/is";
-import { tryCatch } from "@chiastack/utils/try-catch";
 
 import type { ChatStore } from "../..";
 import { logger } from "../../../../utils/logger";
@@ -98,7 +97,7 @@ export const chatActions: StateCreator<
         role: "user",
         content: content ?? get().input,
         rawContent: parts?.rawContent,
-        createdAt: dayjs().toDate(),
+        createdAt: new Date(),
         id: userId,
         parentId: lastMessage?.id ?? null,
         reasoning: null,
@@ -110,7 +109,7 @@ export const chatActions: StateCreator<
       {
         role: "assistant",
         content: "",
-        createdAt: dayjs().toDate(),
+        createdAt: new Date(),
         id: assistantId,
         parentId: userId,
         reasoning: null,
@@ -150,7 +149,7 @@ export const chatActions: StateCreator<
       error: null,
       content: "",
       reasoning: null,
-      createdAt: dayjs().toDate(),
+      createdAt: new Date(),
     });
     set({ status: ChatStatus.Streaming }, false);
     set({ isPending: true }, false);
@@ -230,19 +229,21 @@ export const chatActions: StateCreator<
     const messages = z.array(get().messageSchema).parse(_messages);
     try {
       await get().preRequest?.({ set, get, ctx, messages });
-      const { data: response, error } = await tryCatch(
+      const result = await Result.tryPromise(() =>
         get().internal_stream(messages)
       );
-      if (error) {
-        logger(["Error in internal_handleSSE:", error], { type: "error" });
-        if (isAbortError(error)) {
+      if (!Result.isOk(result)) {
+        logger(["Error in internal_handleSSE:", result.error], {
+          type: "error",
+        });
+        if (isAbortError(result.error)) {
           logger("Request was aborted", { type: "info" });
           return;
         }
         set({ status: ChatStatus.Error }, false);
         return;
       }
-      await get().messageProcessor({ set, get, ctx, response });
+      await get().messageProcessor({ set, get, ctx, response: result.value });
       await get().postRequest?.({ set, get, ctx });
     } catch (error) {
       if (isAbortError(error)) {
