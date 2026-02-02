@@ -10,7 +10,7 @@ export interface ChatConfigAction<TMessageItem extends MessageItem, TContext> {
 
 export const chatConfigActions: StateCreator<
   ChatStore<MessageItem, unknown, unknown>,
-  [["zustand/devtools", never]],
+  [],
   [],
   ChatConfigAction<MessageItem, unknown>
 > = (set, get) => ({

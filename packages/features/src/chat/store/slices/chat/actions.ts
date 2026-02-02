@@ -1,21 +1,17 @@
+import { Result } from "better-result";
 import * as z from "zod";
 import type { StateCreator } from "zustand/vanilla";
 
-import { dayjs } from "@chiastack/utils/day";
 import { isAbortError } from "@chiastack/utils/is";
-import { tryCatch } from "@chiastack/utils/try-catch";
 
 import type { ChatStore } from "../..";
 import { logger } from "../../../../utils/logger";
-import { setNamespace } from "../../../../utils/storeDebug";
 import { fetchStream } from "../../../../utils/stream";
 import { uuid } from "../../../../utils/uuid";
 import { ChatStatus } from "../../../enums/chat-status.enum";
 import type { MessageItem } from "../../../types/message";
 import { DEFAULT_THREAD_ID } from "../../../utils";
 import type { BaseContext } from "../config/initial-state";
-
-const nameSpace = setNamespace("chat/chat");
 
 export interface ChatAction<TMessageItem extends MessageItem, TContext> {
   setInput: (input: string) => void;
@@ -70,15 +66,15 @@ class BypassRequest extends Error {
 
 export const chatActions: StateCreator<
   ChatStore<MessageItem, unknown, unknown>,
-  [["zustand/devtools", never]],
+  [],
   [],
   ChatAction<MessageItem, unknown>
 > = (set, get, ctx) => ({
   setInput: (input: string) => {
-    set({ input }, false, nameSpace("setInput", input));
+    set({ input }, false);
   },
   setStatus: (status: ChatStatus) => {
-    set({ status }, false, nameSpace("setStatus", status));
+    set({ status }, false);
   },
   handleSubmit: async (
     content,
@@ -101,7 +97,7 @@ export const chatActions: StateCreator<
         role: "user",
         content: content ?? get().input,
         rawContent: parts?.rawContent,
-        createdAt: dayjs().toDate(),
+        createdAt: new Date(),
         id: userId,
         parentId: lastMessage?.id ?? null,
         reasoning: null,
@@ -113,7 +109,7 @@ export const chatActions: StateCreator<
       {
         role: "assistant",
         content: "",
-        createdAt: dayjs().toDate(),
+        createdAt: new Date(),
         id: assistantId,
         parentId: userId,
         reasoning: null,
@@ -123,12 +119,8 @@ export const chatActions: StateCreator<
         error: null,
       },
     ]);
-    set(
-      { status: ChatStatus.Streaming, input: "" },
-      false,
-      nameSpace("handleSubmit")
-    );
-    set({ isPending: true }, false, nameSpace("handleSubmit"));
+    set({ status: ChatStatus.Streaming, input: "" }, false);
+    set({ isPending: true }, false);
 
     if (preSubmit) {
       await preSubmit({ set, get, ctx });
@@ -157,10 +149,10 @@ export const chatActions: StateCreator<
       error: null,
       content: "",
       reasoning: null,
-      createdAt: dayjs().toDate(),
+      createdAt: new Date(),
     });
-    set({ status: ChatStatus.Streaming }, false, nameSpace("handleRetry", id));
-    set({ isPending: true }, false, nameSpace("handleRetry", id));
+    set({ status: ChatStatus.Streaming }, false);
+    set({ isPending: true }, false);
     if (get().stream && stream) {
       void get().internal_handleSSE(get().items);
     } else {
@@ -168,10 +160,10 @@ export const chatActions: StateCreator<
     }
   },
   handleCancel: () => {
-    set({ status: ChatStatus.Idle }, false, nameSpace("handleCancel"));
+    set({ status: ChatStatus.Idle }, false);
     try {
       get().internal_abort();
-      set({ isPending: false }, false, nameSpace("handleCancel"));
+      set({ isPending: false }, false);
       const lastMessage = get().getLastMessage();
       if (lastMessage) {
         void get().updateMessage(lastMessage.id, {
@@ -184,20 +176,16 @@ export const chatActions: StateCreator<
     }
   },
   resetSession: () => {
-    set({ threadId: DEFAULT_THREAD_ID }, false, nameSpace("resetSession"));
+    set({ threadId: DEFAULT_THREAD_ID }, false);
   },
   setThreadId: (threadId: string) => {
-    set({ threadId }, false, nameSpace("setThreadId", threadId));
+    set({ threadId }, false);
   },
   /**
    * INTERNAL USE ONLY
    */
   internal_setStream: (stream: string) => {
-    set(
-      { currentStream: stream },
-      false,
-      nameSpace("internal_setStream", stream)
-    );
+    set({ currentStream: stream }, false);
   },
   /**
    * INTERNAL USE ONLY
@@ -206,7 +194,7 @@ export const chatActions: StateCreator<
     let abortController = get().abortController;
     if (!abortController || abortController.signal.aborted) {
       abortController = new AbortController();
-      set({ abortController }, false, nameSpace("internal_stream"));
+      set({ abortController }, false);
     }
     const dto = get().requestDTO?.({ set, get, ctx, messages });
     return await fetchStream(
@@ -225,7 +213,7 @@ export const chatActions: StateCreator<
     const abortController = get().abortController;
     if (abortController && !abortController.signal.aborted) {
       abortController.abort();
-      set({ abortController: undefined }, false, nameSpace("internal_abort"));
+      set({ abortController: undefined }, false);
     }
   },
   /**
@@ -241,23 +229,21 @@ export const chatActions: StateCreator<
     const messages = z.array(get().messageSchema).parse(_messages);
     try {
       await get().preRequest?.({ set, get, ctx, messages });
-      const { data: response, error } = await tryCatch(
+      const result = await Result.tryPromise(() =>
         get().internal_stream(messages)
       );
-      if (error) {
-        logger(["Error in internal_handleSSE:", error], { type: "error" });
-        if (isAbortError(error)) {
+      if (!Result.isOk(result)) {
+        logger(["Error in internal_handleSSE:", result.error], {
+          type: "error",
+        });
+        if (isAbortError(result.error)) {
           logger("Request was aborted", { type: "info" });
           return;
         }
-        set(
-          { status: ChatStatus.Error },
-          false,
-          nameSpace("internal_handleSSE")
-        );
+        set({ status: ChatStatus.Error }, false);
         return;
       }
-      await get().messageProcessor({ set, get, ctx, response });
+      await get().messageProcessor({ set, get, ctx, response: result.value });
       await get().postRequest?.({ set, get, ctx });
     } catch (error) {
       if (isAbortError(error)) {
@@ -266,15 +252,11 @@ export const chatActions: StateCreator<
       }
       if (error instanceof BypassRequest) {
         logger("BypassRequest", { type: "info" });
-        set(
-          { status: ChatStatus.Idle },
-          false,
-          nameSpace("internal_handleSSE")
-        );
+        set({ status: ChatStatus.Idle }, false);
         return;
       }
       logger(["Error in internal_handleSSE:", error], { type: "error" });
-      set({ status: ChatStatus.Error }, false, nameSpace("internal_handleSSE"));
+      set({ status: ChatStatus.Error }, false);
     }
   },
   /**
@@ -286,7 +268,7 @@ export const chatActions: StateCreator<
     let abortController = get().abortController;
     if (!abortController || abortController.signal.aborted) {
       abortController = new AbortController();
-      set({ abortController }, false, nameSpace("internal_handleFetch"));
+      set({ abortController }, false);
     }
     try {
       await get().preRequest?.({ set, get, ctx, messages });
@@ -313,15 +295,11 @@ export const chatActions: StateCreator<
       }
       if (error instanceof BypassRequest) {
         logger("BypassRequest", { type: "info" });
-        set(
-          { status: ChatStatus.Idle },
-          false,
-          nameSpace("internal_handleSSE")
-        );
+        set({ status: ChatStatus.Idle }, false);
         return;
       }
       logger(["Error in internal_handleSSE:", error], { type: "error" });
-      set({ status: ChatStatus.Error }, false, nameSpace("internal_handleSSE"));
+      set({ status: ChatStatus.Error }, false);
     }
   },
 });

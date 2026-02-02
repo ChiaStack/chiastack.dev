@@ -1,7 +1,9 @@
 import { readFile, writeFile } from "node:fs/promises";
-import { defineConfig, type UserConfig } from "tsdown";
 
-type PackageJson = {
+import { defineConfig } from "tsdown";
+import type { UserConfig } from "tsdown";
+
+interface PackageJson {
   name: string;
   exports: Record<string, { import: string; types: string } | string>;
   typesVersions: Record<"*", Record<string, string[]>>;
@@ -10,17 +12,14 @@ type PackageJson = {
   pnpm: {
     overrides: Record<string, string>;
   };
-};
+}
 
 const ESEntries = [
-  "./src/set-search-params/set-search-params.ts",
-  "./src/day/day.ts",
-  "./src/try-catch/try-catch.ts",
   "./src/is/is.ts",
-  "./src/delay/delay.ts",
   "./src/server/server.ts",
   "./src/algorithms/algorithms.ts",
   "./src/mathex/mathex.ts",
+  "./src/set-search-params/set-search-params.ts",
 ];
 
 export default defineConfig((opts) => {

@@ -9,7 +9,7 @@ export function getMDXComponents(components?: MDXComponents): MDXComponents {
     ...TabsComponents,
     ...components,
     img: (props: any) => (
-      <ImageZoom {...props} className="w-full object-cover h-auto rounded-lg" />
+      <ImageZoom {...props} className="h-auto w-full rounded-lg object-cover" />
     ),
   };
 }

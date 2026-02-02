@@ -36,10 +36,10 @@ export const TicTacToe = () => {
 
   return (
     <ViewTransition>
-      <div className="rounded-2xl shadow-2xl p-8 max-w-2xl w-full bg-foreground/5 backdrop-blur-xl flex flex-col items-center justify-center">
-        <h2 className="text-4xl font-bold text-center mb-8">Tic Tac Toe</h2>
+      <div className="bg-foreground/5 flex w-full max-w-2xl flex-col items-center justify-center rounded-2xl p-8 shadow-2xl backdrop-blur-xl">
+        <h2 className="mb-8 text-center text-4xl font-bold">Tic Tac Toe</h2>
 
-        <div className="grid w-full max-w-sm items-center gap-3 mb-6">
+        <div className="mb-6 grid w-full max-w-sm items-center gap-3">
           <Label htmlFor={id}>Set Size</Label>
           <div className="flex w-full max-w-sm items-center gap-2">
             <Input
@@ -53,13 +53,13 @@ export const TicTacToe = () => {
             />
             <Button onClick={handleConfirmSize}>Set Size</Button>
           </div>
-          <p className="text-xs text-muted-foreground">
+          <p className="text-muted-foreground text-xs">
             The size of the board.
           </p>
         </div>
 
-        <div className="text-center mb-6">
-          <p className="text-lg font-semibold text-muted-foreground">
+        <div className="mb-6 text-center">
+          <p className="text-muted-foreground text-lg font-semibold">
             {winner
               ? `Winner: ${winner}`
               : isDraw
@@ -69,7 +69,7 @@ export const TicTacToe = () => {
         </div>
 
         <div
-          className="grid gap-2 mb-8 justify-items-center mx-auto"
+          className="mx-auto mb-8 grid justify-items-center gap-2"
           style={{
             gridTemplateColumns: `repeat(${size}, 1fr)`,
             maxWidth: `${size * 80}px`,
@@ -99,7 +99,7 @@ export const TicTacToe = () => {
 
         <Button onClick={resetGame}>Reset</Button>
 
-        <div className="mt-8 text-center text-sm text-muted-foreground">
+        <div className="text-muted-foreground mt-8 text-center text-sm">
           <p>The size of the board is {size}.</p>
         </div>
       </div>

@@ -2,10 +2,13 @@
   "$schema": "https://json.schemastore.org/package",
   "name": "@chiastack/features",
   "version": "1.1.2",
-  "type": "module",
-  "publishConfig": {
-    "access": "public"
-  },
+  "keywords": [
+    "chiastack",
+    "features",
+    "react",
+    "typescript",
+    "zustand"
+  ],
   "license": "MIT",
   "author": {
     "name": "Chia1104",
@@ -17,45 +20,9 @@
     "url": "git+https://github.com/ChiaStack/chiastack.dev.git",
     "directory": "packages/features"
   },
-  "keywords": [
-    "features",
-    "react",
-    "chiastack",
-    "typescript",
-    "zustand"
-  ],
-  "main": "./dist/index.mjs",
-  "types": "./dist/index.d.mts",
+  "type": "module",
   "sideEffects": false,
-  "scripts": {
-    "build": "tsdown",
-    "clean": "git clean -xdf .turbo node_modules dist",
-    "lint": "eslint",
-    "type:check": "tsc --noEmit"
-  },
-  "devDependencies": {
-    "@chiastack/eslint": "workspace:*",
-    "@chiastack/tsconfig": "workspace:*",
-    "@chiastack/utils": "workspace:*",
-    "@types/node": "catalog:",
-    "@types/react": "catalog:react-is",
-    "@types/react-dom": "catalog:react-is",
-    "eslint": "catalog:eslint",
-    "happy-dom": "^20.0.11",
-    "nanoid": "^5.1.6",
-    "react": "catalog:react-is",
-    "react-dom": "catalog:react-is",
-    "tsdown": "catalog:",
-    "uuid": "^13.0.0",
-    "zod": "catalog:",
-    "zustand": "^5.0.9"
-  },
-  "peerDependencies": {
-    "@chiastack/utils": "^2.0.4",
-    "react": "^18.3.0 || ^19.0.0",
-    "react-dom": "^18.3.0 || ^19.0.0",
-    "zod": "^3.24.0 || ^4.0.0"
-  },
+  "types": "./dist/index.d.mts",
   "exports": {
     "./chat": "./dist/chat/index.js",
     "./chat/enums/chat-status.enum": "./dist/chat/enums/chat-status.enum.js",
@@ -72,10 +39,43 @@
     "./todo/store": "./dist/todo/store.js",
     "./utils": "./dist/utils/index.js",
     "./utils/logger": "./dist/utils/logger.js",
-    "./utils/middleware/create-devtools": "./dist/utils/middleware/create-devtools.js",
-    "./utils/storeDebug": "./dist/utils/storeDebug.js",
     "./utils/stream": "./dist/utils/stream.js",
     "./utils/uuid": "./dist/utils/uuid.js",
     "./package.json": "./package.json"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsdown",
+    "clean": "git clean -xdf .turbo node_modules dist",
+    "lint": "oxlint",
+    "lint:fix": "oxlint --fix",
+    "type:check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "better-result": "catalog:"
+  },
+  "devDependencies": {
+    "@chiastack/tsconfig": "workspace:*",
+    "@chiastack/utils": "workspace:*",
+    "@types/node": "catalog:",
+    "@types/react": "catalog:react-is",
+    "@types/react-dom": "catalog:react-is",
+    "happy-dom": "^20.4.0",
+    "nanoid": "^5.1.6",
+    "oxlint": "catalog:oxc",
+    "react": "catalog:react-is",
+    "react-dom": "catalog:react-is",
+    "tsdown": "catalog:",
+    "uuid": "^13.0.0",
+    "zod": "catalog:",
+    "zustand": "^5.0.11"
+  },
+  "peerDependencies": {
+    "@chiastack/utils": "^2.0.4",
+    "react": "^18.3.0 || ^19.0.0",
+    "react-dom": "^18.3.0 || ^19.0.0",
+    "zod": "^3.24.0 || ^4.0.0"
   }
 }

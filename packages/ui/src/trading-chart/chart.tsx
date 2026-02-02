@@ -17,7 +17,8 @@ export interface ChartContainerProps {
 }
 
 interface ChartProps
-  extends Omit<ChartContainerProps, "container">,
+  extends
+    Omit<ChartContainerProps, "container">,
     Omit<React.ComponentPropsWithoutRef<"div">, "children"> {}
 
 export const Chart = React.forwardRef<IChartApi, ChartProps>(

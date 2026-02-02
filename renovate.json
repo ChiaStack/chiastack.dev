@@ -4,9 +4,7 @@
   "labels": ["dependencies", "renovate"],
   "ignorePaths": ["**/node_modules/**", "**/playground/**", "**/templates/**"],
   "rebaseWhen": "conflicted",
-  "ignoreDeps": [
-    "node"
-  ],
+  "ignoreDeps": ["node"],
   "nvm": {
     "enabled": false
   },

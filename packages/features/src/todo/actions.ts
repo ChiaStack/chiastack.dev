@@ -1,6 +1,7 @@
 import type { StateCreator } from "zustand/vanilla";
 
 import { nanoid } from "../utils/uuid";
+
 import type { Todo, InitialState } from "./initial-state";
 
 export interface TodoActions {

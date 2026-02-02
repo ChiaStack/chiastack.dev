@@ -57,9 +57,9 @@ export const GL = ({
   const adjustedPointSize = isDark ? pointSize : pointSize * 0.8;
 
   return (
-    <div id="webgl" className="fixed inset-0 pointer-events-none h-svh w-full">
+    <div id="webgl" className="pointer-events-none fixed inset-0 h-svh w-full">
       <Canvas
-        className="w-full h-full"
+        className="h-full w-full"
         camera={{
           position: [
             1.2629783123314589, 2.664606471394044, -1.8178993743288914,

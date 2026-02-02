@@ -6,7 +6,6 @@ import { useStore } from "zustand";
 import type { StateCreator, StoreApi } from "zustand/vanilla";
 import { createStore } from "zustand/vanilla";
 
-import { createDevtools } from "../utils/middleware/create-devtools";
 import type { TicTacToeActions } from "./action";
 import { createTicTacToeActions } from "./action";
 import type { InitialState } from "./initial-state";
@@ -14,19 +13,12 @@ import { initialState } from "./initial-state";
 
 export type TicTacToeStore = InitialState & TicTacToeActions;
 
-export type TicTacToeStoreApi = StateCreator<
-  TicTacToeStore,
-  [["zustand/devtools", never]],
-  [],
-  TicTacToeStore
->;
+export type TicTacToeStoreApi = StateCreator<TicTacToeStore, [], []>;
 
 export interface TicTacToeStoreProviderProps {
   children: React.ReactNode;
   initialState?: Partial<InitialState>;
 }
-
-const devtools = createDevtools("TicTacToeStore");
 
 const creator = (state?: Partial<InitialState>) => {
   const _state = {
@@ -34,11 +26,7 @@ const creator = (state?: Partial<InitialState>) => {
     ...state,
   };
 
-  return createStore<TicTacToeStore, [["zustand/devtools", never]]>(
-    devtools(createTicTacToeStore(_state), {
-      enabled: true,
-    })
-  );
+  return createStore<TicTacToeStore>(createTicTacToeStore(_state));
 };
 
 export const createTicTacToeStore =
@@ -57,7 +45,7 @@ export const useTicTacToeStore = <T,>(
   selector: (store: TicTacToeStore) => T,
   name = "useTicTacToeStore"
 ): T => {
-  const store = React.useContext(TicTacToeStoreContext);
+  const store = React.use(TicTacToeStoreContext);
   if (!store) {
     throw new Error(`${name} must be used within a TicTacToeStoreProvider.`);
   }
@@ -75,8 +63,8 @@ export const TicTacToeStoreProvider = ({
   }
 
   return (
-    <TicTacToeStoreContext.Provider value={store.current}>
+    <TicTacToeStoreContext value={store.current}>
       {children}
-    </TicTacToeStoreContext.Provider>
+    </TicTacToeStoreContext>
   );
 };

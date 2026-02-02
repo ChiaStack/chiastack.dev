@@ -1,4 +1,5 @@
 import type { MessageItem } from "../types/message";
+
 import { initialChatState as _initialChatState } from "./slices/chat/initial-state";
 import type { ChatState as _ChatState } from "./slices/chat/initial-state";
 import { initialChatConfig } from "./slices/config/initial-state";

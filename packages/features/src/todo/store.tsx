@@ -6,7 +6,6 @@ import { useStore } from "zustand";
 import type { StateCreator, StoreApi } from "zustand/vanilla";
 import { createStore } from "zustand/vanilla";
 
-import { createDevtools } from "../utils/middleware/create-devtools";
 import type { TodoActions } from "./actions";
 import { createTodoActions } from "./actions";
 import type { InitialState } from "./initial-state";
@@ -14,12 +13,7 @@ import { initialState } from "./initial-state";
 
 export type TodoStore = InitialState & TodoActions;
 
-export type TodoStoreApi = StateCreator<
-  TodoStore,
-  [["zustand/devtools", never]],
-  [],
-  TodoStore
->;
+export type TodoStoreApi = StateCreator<TodoStore, [], []>;
 
 export interface TodoStoreProviderProps {
   children: React.ReactNode;
@@ -37,19 +31,13 @@ const createTodoStore =
 
 const TodoStoreContext = React.createContext<StoreApi<TodoStore> | null>(null);
 
-const devtools = createDevtools("TodoStore");
-
 const creator = (state?: Partial<InitialState>) => {
   const _state = {
     ...initialState,
     ...state,
   };
 
-  return createStore<TodoStore, [["zustand/devtools", never]]>(
-    devtools(createTodoStore(_state), {
-      enabled: true,
-    })
-  );
+  return createStore<TodoStore>(createTodoStore(_state));
 };
 export const TodoStoreProvider = ({
   children,
@@ -61,18 +49,14 @@ export const TodoStoreProvider = ({
     store.current = creator(initialState);
   }
 
-  return (
-    <TodoStoreContext.Provider value={store.current}>
-      {children}
-    </TodoStoreContext.Provider>
-  );
+  return <TodoStoreContext value={store.current}>{children}</TodoStoreContext>;
 };
 
 export const useTodoStore = <T,>(
   selector: (store: TodoStore) => T,
   name = "useTodoStore"
 ): T => {
-  const store = React.useContext(TodoStoreContext);
+  const store = React.use(TodoStoreContext);
   if (!store) {
     throw new Error(`${name} must be used within a TodoStoreProvider.`);
   }

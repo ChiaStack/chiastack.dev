@@ -2,10 +2,10 @@
   "$schema": "https://json.schemastore.org/package",
   "name": "@chiastack/services",
   "version": "2.0.5",
-  "type": "module",
-  "publishConfig": {
-    "access": "public"
-  },
+  "keywords": [
+    "chiastack",
+    "services"
+  ],
   "license": "MIT",
   "author": {
     "name": "Chia1104",
@@ -17,28 +17,19 @@
     "url": "git+https://github.com/ChiaStack/chiastack.dev.git",
     "directory": "packages/services"
   },
-  "keywords": [
-    "services",
-    "chiastack"
-  ],
-  "scripts": {
-    "build": "tsdown",
-    "clean": "git clean -xdf .turbo node_modules dist",
-    "lint": "eslint",
-    "type:check": "tsc --noEmit"
-  },
-  "devDependencies": {
-    "@chiastack/eslint": "workspace:*",
-    "@chiastack/tsconfig": "workspace:*",
-    "@chiastack/utils": "workspace:*",
-    "@types/node": "catalog:",
-    "eslint": "catalog:eslint",
-    "ky": "catalog:",
-    "tsdown": "catalog:",
-    "zod": "catalog:"
-  },
-  "peerDependencies": {
-    "@chiastack/utils": "^2.0.4"
+  "type": "module",
+  "typesVersions": {
+    "*": {
+      "captcha": [
+        "./dist/captcha/captcha.d.mts"
+      ],
+      "demo": [
+        "./dist/demo/demo.d.mts"
+      ],
+      "demo/env": [
+        "./dist/demo/env.d.mts"
+      ]
+    }
   },
   "exports": {
     "./package.json": "./package.json",
@@ -55,17 +46,26 @@
       "types": "./dist/demo/env.d.mts"
     }
   },
-  "typesVersions": {
-    "*": {
-      "captcha": [
-        "./dist/captcha/captcha.d.mts"
-      ],
-      "demo": [
-        "./dist/demo/demo.d.mts"
-      ],
-      "demo/env": [
-        "./dist/demo/env.d.mts"
-      ]
-    }
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsdown",
+    "clean": "git clean -xdf .turbo node_modules dist",
+    "lint": "oxlint",
+    "lint:fix": "oxlint --fix",
+    "type:check": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@chiastack/tsconfig": "workspace:*",
+    "@chiastack/utils": "workspace:*",
+    "@types/node": "catalog:",
+    "ky": "catalog:",
+    "oxlint": "catalog:oxc",
+    "tsdown": "catalog:",
+    "zod": "catalog:"
+  },
+  "peerDependencies": {
+    "@chiastack/utils": "^2.0.4"
   }
 }

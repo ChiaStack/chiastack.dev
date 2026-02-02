@@ -2,10 +2,12 @@
   "$schema": "https://json.schemastore.org/package",
   "name": "@chiastack/ui",
   "version": "1.1.2",
-  "type": "module",
-  "publishConfig": {
-    "access": "public"
-  },
+  "keywords": [
+    "chiastack",
+    "react",
+    "tradingview",
+    "ui"
+  ],
   "license": "MIT",
   "author": {
     "name": "Chia1104",
@@ -17,45 +19,43 @@
     "url": "git+https://github.com/ChiaStack/chiastack.dev.git",
     "directory": "packages/ui"
   },
-  "keywords": [
-    "ui",
-    "react",
-    "chiastack",
-    "tradingview"
-  ],
+  "type": "module",
   "sideEffects": false,
-  "scripts": {
-    "build": "tsdown",
-    "clean": "git clean -xdf .turbo node_modules dist",
-    "lint": "eslint",
-    "type:check": "tsc --noEmit"
-  },
-  "devDependencies": {
-    "@chiastack/eslint": "workspace:*",
-    "@chiastack/tsconfig": "workspace:*",
-    "@types/node": "catalog:",
-    "@types/react": "catalog:react-is",
-    "@types/react-dom": "catalog:react-is",
-    "eslint": "catalog:eslint",
-    "happy-dom": "^20.0.11",
-    "lightweight-charts": "^5.0.9",
-    "react": "catalog:react-is",
-    "react-dom": "catalog:react-is",
-    "technicalindicators": "^3.1.0",
-    "tsdown": "catalog:"
-  },
-  "peerDependencies": {
-    "lightweight-charts": "^5.0.0",
-    "react": "^19.2.0",
-    "react-dom": "^19.2.0",
-    "technicalindicators": "^3.1.0"
-  },
-  "peerDependenciesMeta": {
-    "lightweight-charts": {
-      "optional": true
-    },
-    "technicalindicators": {
-      "optional": true
+  "typesVersions": {
+    "*": {
+      "trading-chart/chart": [
+        "./dist/trading-chart/chart.d.ts"
+      ],
+      "trading-chart/chart.context": [
+        "./dist/trading-chart/chart.context.d.ts"
+      ],
+      "trading-chart/series": [
+        "./dist/trading-chart/series.d.ts"
+      ],
+      "trading-chart/series.context": [
+        "./dist/trading-chart/series.context.d.ts"
+      ],
+      "trading-chart/macd-series": [
+        "./dist/trading-chart/macd-series.d.ts"
+      ],
+      "trading-chart/rsi-series": [
+        "./dist/trading-chart/rsi-series.d.ts"
+      ],
+      "trading-chart/subscrib-visible-logical-range": [
+        "./dist/trading-chart/subscrib-visible-logical-range.d.ts"
+      ],
+      "error-boundary": [
+        "./dist/error-boundary/error-boundary.d.ts"
+      ],
+      "image": [
+        "./dist/image/image.d.ts"
+      ],
+      "utils/create-context": [
+        "./dist/utils/create-context.d.ts"
+      ],
+      "utils/use-is-hydrated": [
+        "./dist/utils/use-is-hydrated.d.ts"
+      ]
     }
   },
   "exports": {
@@ -95,37 +95,51 @@
     "./image": {
       "import": "./dist/image/image.js",
       "types": "./dist/image/image.d.ts"
+    },
+    "./utils/create-context": {
+      "import": "./dist/utils/create-context.js",
+      "types": "./dist/utils/create-context.d.ts"
+    },
+    "./utils/use-is-hydrated": {
+      "import": "./dist/utils/use-is-hydrated.js",
+      "types": "./dist/utils/use-is-hydrated.d.ts"
     }
   },
-  "typesVersions": {
-    "*": {
-      "trading-chart/chart": [
-        "./dist/trading-chart/chart.d.ts"
-      ],
-      "trading-chart/chart.context": [
-        "./dist/trading-chart/chart.context.d.ts"
-      ],
-      "trading-chart/series": [
-        "./dist/trading-chart/series.d.ts"
-      ],
-      "trading-chart/series.context": [
-        "./dist/trading-chart/series.context.d.ts"
-      ],
-      "trading-chart/macd-series": [
-        "./dist/trading-chart/macd-series.d.ts"
-      ],
-      "trading-chart/rsi-series": [
-        "./dist/trading-chart/rsi-series.d.ts"
-      ],
-      "trading-chart/subscrib-visible-logical-range": [
-        "./dist/trading-chart/subscrib-visible-logical-range.d.ts"
-      ],
-      "error-boundary": [
-        "./dist/error-boundary/error-boundary.d.ts"
-      ],
-      "image": [
-        "./dist/image/image.d.ts"
-      ]
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsdown",
+    "clean": "git clean -xdf .turbo node_modules dist",
+    "lint": "oxlint",
+    "lint:fix": "oxlint --fix",
+    "type:check": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@chiastack/tsconfig": "workspace:*",
+    "@types/node": "catalog:",
+    "@types/react": "catalog:react-is",
+    "@types/react-dom": "catalog:react-is",
+    "happy-dom": "^20.4.0",
+    "lightweight-charts": "^5.1.0",
+    "oxlint": "catalog:oxc",
+    "react": "catalog:react-is",
+    "react-dom": "catalog:react-is",
+    "technicalindicators": "^3.1.0",
+    "tsdown": "catalog:"
+  },
+  "peerDependencies": {
+    "lightweight-charts": "^5.0.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "technicalindicators": "^3.1.0"
+  },
+  "peerDependenciesMeta": {
+    "lightweight-charts": {
+      "optional": true
+    },
+    "technicalindicators": {
+      "optional": true
     }
   }
 }

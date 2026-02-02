@@ -6,8 +6,8 @@ import { useStore } from "zustand";
 import type { StateCreator, StoreApi } from "zustand/vanilla";
 import { createStore } from "zustand/vanilla";
 
-import { createDevtools } from "../../utils/middleware/create-devtools";
 import type { MessageItem } from "../types/message";
+
 import { initialChatState } from "./initial-state";
 import type { ChatState } from "./initial-state";
 import { chatActions } from "./slices/chat/actions";
@@ -30,12 +30,7 @@ export type ChatStoreApi<
   TMessageItem extends MessageItem,
   TStreamRequestDTO,
   TContext,
-> = StateCreator<
-  ChatStore<TMessageItem, TStreamRequestDTO, TContext>,
-  [["zustand/devtools", never]],
-  [],
-  ChatStore<TMessageItem, TStreamRequestDTO, TContext>
->;
+> = StateCreator<ChatStore<TMessageItem, TStreamRequestDTO, TContext>, [], []>;
 
 export interface ChatStoreProviderProps<
   TMessageItem extends MessageItem,
@@ -57,10 +52,7 @@ export interface DefineChatStoreProps<
     TStreamRequestDTO,
     TContext
   >["messageProcessor"];
-  enableDevtools?: boolean;
 }
-
-const devtools = createDevtools("chat.store");
 
 const createChatStore =
   <
@@ -93,22 +85,16 @@ export const defineChatStore = <
 >({
   initState,
   messageProcessor,
-  enableDevtools,
 }: DefineChatStoreProps<TMessageItem, TStreamRequestDTO, TContext>) => {
   const creator = (
     state?: Partial<ChatState<TMessageItem, TStreamRequestDTO, TContext>>
   ) => {
-    const _state = Object.assign({ ...initState }, state, { messageProcessor });
-    return createStore<
-      ChatStore<TMessageItem, TStreamRequestDTO, TContext>,
-      [["zustand/devtools", never]]
-    >(
-      devtools(
-        createChatStore<TMessageItem, TStreamRequestDTO, TContext>(_state),
-        {
-          enabled: enableDevtools,
-        }
-      )
+    return createStore<ChatStore<TMessageItem, TStreamRequestDTO, TContext>>(
+      createChatStore<TMessageItem, TStreamRequestDTO, TContext>({
+        ...initState,
+        ...state,
+        messageProcessor,
+      })
     );
   };
 
@@ -129,9 +115,7 @@ export const defineChatStore = <
     }
 
     return (
-      <ChatStoreContext.Provider value={storeRef.current}>
-        {children}
-      </ChatStoreContext.Provider>
+      <ChatStoreContext value={storeRef.current}>{children}</ChatStoreContext>
     );
   };
 
@@ -141,7 +125,7 @@ export const defineChatStore = <
     ) => T,
     name = "useChatStore"
   ): T => {
-    const chatStoreContext = React.useContext(ChatStoreContext);
+    const chatStoreContext = React.use(ChatStoreContext);
     if (!chatStoreContext) {
       throw new Error(`${name} must be used within ChatStoreProvider`);
     }

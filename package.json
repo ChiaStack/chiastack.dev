@@ -3,7 +3,6 @@
   "name": "chiastack.dev",
   "version": "3.0.0",
   "private": true,
-  "sideEffects": false,
   "license": "MIT",
   "author": {
     "name": "Chia1104",
@@ -15,6 +14,7 @@
     "packages/*",
     "playground/*"
   ],
+  "sideEffects": false,
   "scripts": {
     "release": "changeset publish",
     "version": "changeset version",
@@ -28,8 +28,9 @@
     "dev": "turbo run dev --parallel",
     "start": "turbo run start --parallel",
     "lint": "turbo run lint",
-    "format": "prettier --write \"**/*.{js,jsx,cjs,mjs,ts,tsx,md,vue}\"",
-    "format:check": "prettier --check \"**/*.{js,jsx,cjs,mjs,ts,tsx,md,vue}\"",
+    "lint:fix": "turbo run lint:fix",
+    "format": "oxfmt",
+    "format:check": "oxfmt --check",
     "type:check": "turbo run type:check",
     "clean": "git clean -xdf node_modules",
     "clean:workspaces": "turbo clean --parallel",
@@ -40,40 +41,39 @@
     "update-deps:packages": "pnpm up --latest --filter '@chiastack/*'",
     "changelog-gen": "./target/release/changelog-gen"
   },
-  "engines": {
-    "node": ">=22.*"
-  },
-  "packageManager": "pnpm@10.25.0",
   "devDependencies": {
     "@changesets/changelog-github": "^0.5.2",
     "@changesets/cli": "^2.29.8",
     "@chiastack/tsconfig": "workspace:*",
     "@manypkg/cli": "^0.25.1",
     "@total-typescript/ts-reset": "0.6.1",
-    "@trivago/prettier-plugin-sort-imports": "^6.0.0",
-    "@turbo/gen": "^2.6.3",
+    "@turbo/gen": "^2.8.1",
     "dotenv": "^17.2.3",
     "husky": "^9.1.7",
     "lint-staged": "^16.2.7",
-    "prettier": "^3.7.4",
-    "prettier-plugin-tailwindcss": "^0.7.2",
+    "oxfmt": "catalog:oxc",
+    "oxlint": "catalog:oxc",
     "tsx": "^4.21.0",
-    "turbo": "2.6.3",
+    "turbo": "2.8.1",
     "typescript": "catalog:",
-    "vitest": "^4.0.15"
+    "vitest": "^4.0.18"
   },
+  "lint-staged": {
+    "*.{js,jsx,cjs,mjs,ts,mts,tsx}": [
+      "oxfmt --no-error-on-unmatched-pattern"
+    ],
+    "*.{json,md}": [
+      "oxfmt --no-error-on-unmatched-pattern"
+    ]
+  },
+  "engines": {
+    "node": ">=22.*"
+  },
+  "packageManager": "pnpm@10.25.0",
   "manypkg": {
     "ignoredRules": [
       "ROOT_HAS_PROD_DEPENDENCIES"
     ],
     "workspaceProtocol": "require"
-  },
-  "lint-staged": {
-    "*.{js,jsx,cjs,mjs,ts,mts,tsx}": [
-      "prettier --write"
-    ],
-    "*.{json,md}": [
-      "prettier --write"
-    ]
   }
 }

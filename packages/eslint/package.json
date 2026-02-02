@@ -1,10 +1,13 @@
 {
   "name": "@chiastack/eslint",
   "version": "2.0.4",
-  "type": "module",
-  "publishConfig": {
-    "access": "public"
-  },
+  "keywords": [
+    "chiastack",
+    "eslint",
+    "nextjs",
+    "react",
+    "typescript"
+  ],
   "license": "MIT",
   "author": {
     "name": "Chia1104",
@@ -16,26 +19,23 @@
     "url": "git+https://github.com/ChiaStack/chiastack.dev.git",
     "directory": "packages/eslint"
   },
-  "keywords": [
-    "eslint",
-    "typescript",
-    "react",
-    "nextjs",
-    "chiastack"
-  ],
+  "type": "module",
   "exports": {
     "./base": {
-      "import": "./dist/base.mjs",
-      "types": "./dist/base.d.mts"
+      "types": "./dist/base.d.mts",
+      "import": "./dist/base.mjs"
     },
     "./nextjs": {
-      "import": "./dist/nextjs.mjs",
-      "types": "./dist/nextjs.d.mts"
+      "types": "./dist/nextjs.d.mts",
+      "import": "./dist/nextjs.mjs"
     },
     "./react": {
-      "import": "./dist/react.mjs",
-      "types": "./dist/react.d.mts"
+      "types": "./dist/react.d.mts",
+      "import": "./dist/react.mjs"
     }
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "scripts": {
     "build": "tsdown",
@@ -43,16 +43,16 @@
     "format": "prettier --check . --ignore-path ../../.gitignore"
   },
   "dependencies": {
-    "@eslint/compat": "^2.0.0",
+    "@eslint/compat": "^2.0.2",
     "@eslint/js": "catalog:eslint",
     "@next/eslint-plugin-next": "catalog:next-is",
-    "eslint-config-turbo": "^2.6.3",
+    "eslint-config-turbo": "^2.8.1",
     "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-jsx-a11y": "^6.10.2",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^7.0.1",
-    "eslint-plugin-turbo": "^2.6.3",
-    "typescript-eslint": "^8.49.0"
+    "eslint-plugin-turbo": "^2.8.1",
+    "typescript-eslint": "^8.54.0"
   },
   "devDependencies": {
     "@chiastack/tsconfig": "workspace:*",
