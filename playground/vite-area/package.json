@@ -8,7 +8,8 @@
     "dev": "vite dev --port 4000",
     "start": "vite start",
     "type:check": "tsc --noEmit",
-    "lint": "oxlint"
+    "lint": "oxlint",
+    "lint:fix": "oxlint --fix"
   },
   "dependencies": {
     "@radix-ui/react-label": "^2.1.8",

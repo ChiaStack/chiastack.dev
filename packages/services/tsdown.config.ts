@@ -1,8 +1,9 @@
 import { readFile, writeFile } from "node:fs/promises";
 
-import { defineConfig, type UserConfig } from "tsdown";
+import { defineConfig } from "tsdown";
+import type { UserConfig } from "tsdown";
 
-type PackageJson = {
+interface PackageJson {
   name: string;
   exports: Record<string, { import: string; types: string } | string>;
   typesVersions: Record<"*", Record<string, string[]>>;
@@ -11,7 +12,7 @@ type PackageJson = {
   pnpm: {
     overrides: Record<string, string>;
   };
-};
+}
 
 const ESEntries = [
   "./src/captcha/captcha.ts",

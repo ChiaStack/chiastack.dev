@@ -1,8 +1,9 @@
 import { readFile, writeFile } from "node:fs/promises";
 
-import { defineConfig, type UserConfig } from "tsdown";
+import { defineConfig } from "tsdown";
+import type { UserConfig } from "tsdown";
 
-type PackageJson = {
+interface PackageJson {
   name: string;
   exports: Record<string, { import: string; types: string } | string>;
   typesVersions: Record<"*", Record<string, string[]>>;
@@ -11,7 +12,7 @@ type PackageJson = {
   pnpm?: {
     overrides: Record<string, string>;
   };
-};
+}
 
 const ESEntries = [
   "./src/trading-chart/chart.tsx",
@@ -27,7 +28,7 @@ const ESEntries = [
   "./src/utils/use-is-hydrated.ts",
 ];
 
-export default defineConfig((opts) => {
+export default defineConfig(() => {
   const common = {
     clean: true,
     dts: true,

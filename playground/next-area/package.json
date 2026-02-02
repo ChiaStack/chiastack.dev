@@ -8,7 +8,8 @@
     "dev": "next dev --port 4001",
     "start": "next start",
     "type:check": "tsc --noEmit",
-    "lint": "oxlint"
+    "lint": "oxlint",
+    "lint:fix": "oxlint --fix"
   },
   "dependencies": {
     "@chiastack/features": "workspace:*",

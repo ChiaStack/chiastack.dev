@@ -13,8 +13,11 @@
     },
     "lint": {
       "dependsOn": ["build"],
-      "cache": true,
-      "outputs": [".cache/.eslintcache"]
+      "cache": true
+    },
+    "lint:fix": {
+      "dependsOn": ["build"],
+      "cache": true
     },
     "type:check": {
       "dependsOn": ["build"],

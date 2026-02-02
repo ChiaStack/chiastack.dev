@@ -8,7 +8,8 @@
     "start": "next start",
     "type:check": "fumadocs-mdx && tsc --noEmit",
     "postinstall": "fumadocs-mdx",
-    "lint": "oxlint"
+    "lint": "oxlint",
+    "lint:fix": "oxlint --fix"
   },
   "dependencies": {
     "@chiastack/utils": "workspace:*",

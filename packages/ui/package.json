@@ -112,6 +112,7 @@
     "build": "tsdown",
     "clean": "git clean -xdf .turbo node_modules dist",
     "lint": "oxlint",
+    "lint:fix": "oxlint --fix",
     "type:check": "tsc --noEmit"
   },
   "devDependencies": {

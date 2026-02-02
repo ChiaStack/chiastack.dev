@@ -5,7 +5,8 @@ import { resolve } from "node:path";
 import tailwindcss from "@tailwindcss/vite";
 import { tanstackRouter } from "@tanstack/router-plugin/vite";
 import viteReact from "@vitejs/plugin-react";
-import { defineConfig, loadEnv, type ConfigEnv } from "vite";
+import { defineConfig, loadEnv } from "vite";
+import type { ConfigEnv } from "vite";
 
 // https://vitejs.dev/config/
 export default ({ mode }: ConfigEnv) => {
