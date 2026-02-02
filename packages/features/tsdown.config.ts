@@ -36,4 +36,5 @@ export default defineConfig({
       jsx: "react",
     },
   },
+  inlineOnly: false,
 });
