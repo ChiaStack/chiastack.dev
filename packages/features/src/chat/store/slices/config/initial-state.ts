@@ -15,7 +15,7 @@ export interface BaseContext<
   set: Parameters<
     StateCreator<
       ChatStore<TMessageItem, TStreamRequestDTO, TContext>,
-      [["zustand/devtools", never]],
+      [],
       [],
       ChatAction<TMessageItem, TContext>
     >
@@ -23,7 +23,7 @@ export interface BaseContext<
   get: Parameters<
     StateCreator<
       ChatStore<TMessageItem, TStreamRequestDTO, TContext>,
-      [["zustand/devtools", never]],
+      [],
       [],
       ChatAction<TMessageItem, TContext>
     >
@@ -31,7 +31,7 @@ export interface BaseContext<
   ctx: Parameters<
     StateCreator<
       ChatStore<TMessageItem, TStreamRequestDTO, TContext>,
-      [["zustand/devtools", never]],
+      [],
       [],
       ChatAction<TMessageItem, TContext>
     >

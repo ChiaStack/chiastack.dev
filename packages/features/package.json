@@ -39,8 +39,6 @@
     "./todo/store": "./dist/todo/store.js",
     "./utils": "./dist/utils/index.js",
     "./utils/logger": "./dist/utils/logger.js",
-    "./utils/middleware/create-devtools": "./dist/utils/middleware/create-devtools.js",
-    "./utils/storeDebug": "./dist/utils/storeDebug.js",
     "./utils/stream": "./dist/utils/stream.js",
     "./utils/uuid": "./dist/utils/uuid.js",
     "./package.json": "./package.json"

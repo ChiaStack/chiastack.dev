@@ -17,8 +17,6 @@ const ESEntries = [
   "./src/utils/uuid.ts",
   "./src/utils/logger.ts",
   "./src/utils/stream.ts",
-  "./src/utils/storeDebug.ts",
-  "./src/utils/middleware/create-devtools.ts",
   "./src/utils/index.ts",
 ];
 

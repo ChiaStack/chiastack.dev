@@ -1,11 +1,8 @@
 import type { StateCreator } from "zustand/vanilla";
 
 import type { ChatStore } from "../..";
-import { setNamespace } from "../../../../utils/storeDebug";
 import type { MessageItem } from "../../../types/message";
 import { DEFAULT_THREAD_ID } from "../../../utils";
-
-const nameSpace = setNamespace("chat/message");
 
 export interface MessageAction<TMessageItem extends MessageItem> {
   pushMessage: (messages: TMessageItem[]) => void;
@@ -27,23 +24,15 @@ export interface MessageAction<TMessageItem extends MessageItem> {
 
 export const messageActions: StateCreator<
   ChatStore<MessageItem, unknown, unknown>,
-  [["zustand/devtools", never]],
+  [],
   [],
   MessageAction<MessageItem>
 > = (set, get) => ({
   pushMessage: (messages: MessageItem[]) => {
-    set(
-      { items: [...get().items, ...messages] },
-      false,
-      nameSpace("pushMessage", messages)
-    );
+    set({ items: [...get().items, ...messages] }, false);
   },
   deleteMessage: (id: string) => {
-    set(
-      { items: get().items.filter((item) => item.id !== id) },
-      false,
-      nameSpace("deleteMessage", id)
-    );
+    set({ items: get().items.filter((item) => item.id !== id) }, false);
   },
   updateLastMessageContent: (content: string) => {
     set(
@@ -54,8 +43,7 @@ export const messageActions: StateCreator<
             : item
         ),
       },
-      false,
-      nameSpace("updateLastMessageContent", content)
+      false
     );
   },
   updateLastMessage: (message: Partial<MessageItem>) => {
@@ -67,8 +55,7 @@ export const messageActions: StateCreator<
             : item
         ),
       },
-      false,
-      nameSpace("updateLastMessage", message)
+      false
     );
   },
   updateMessage: (id: string, message: Partial<MessageItem>) => {
@@ -78,16 +65,11 @@ export const messageActions: StateCreator<
           item.id === id ? { ...item, ...message } : item
         ),
       },
-      false,
-      nameSpace("updateMessage", id)
+      false
     );
   },
   deleteLastMessage: () => {
-    set(
-      { items: get().items.slice(0, -1) },
-      false,
-      nameSpace("deleteLastMessage")
-    );
+    set({ items: get().items.slice(0, -1) }, false);
   },
   getMessage: (id: string) => {
     return get().items.find((item) => item.id === id);
@@ -108,11 +90,7 @@ export const messageActions: StateCreator<
     return get().getMessage(assistantMessage.parentId);
   },
   setNewMessage: (message: MessageItem) => {
-    set(
-      { items: [...get().items, message] },
-      false,
-      nameSpace("setNewMessage", message)
-    );
+    set({ items: [...get().items, message] }, false);
   },
   clearMessagesKeepToken: () => {
     set(
@@ -121,11 +99,10 @@ export const messageActions: StateCreator<
         currentStream: null,
         threadId: DEFAULT_THREAD_ID,
       },
-      false,
-      nameSpace("clearMessagesKeepToken")
+      false
     );
   },
   setMessages: (messages: MessageItem[]) => {
-    set({ items: messages }, false, nameSpace("setMessages", messages));
+    set({ items: messages }, false);
   },
 });
