@@ -16,11 +16,7 @@ export interface CreateContextOptions<ContextType> {
   defaultValue?: ContextType;
 }
 
-export type CreateContextReturn<T> = [
-  React.Provider<T>,
-  (name?: string) => T,
-  React.Context<T>,
-];
+export type CreateContextReturn<T> = [React.Context<T>, (name?: string) => T];
 
 export function createContext<ContextType>(
   options: CreateContextOptions<ContextType> = {}
@@ -30,7 +26,7 @@ export function createContext<ContextType>(
   const Context = React.createContext<ContextType | null>(defaultValue);
 
   function useContext(name = "useContext") {
-    const context = React.useContext(Context);
+    const context = React.use(Context);
 
     if (!context && strict) {
       const error = new Error(`${name} must be used within a ${namespace}`);
@@ -43,9 +39,5 @@ export function createContext<ContextType>(
     return context;
   }
 
-  return [
-    Context.Provider,
-    useContext,
-    Context,
-  ] as CreateContextReturn<ContextType>;
+  return [Context, useContext] as CreateContextReturn<ContextType>;
 }

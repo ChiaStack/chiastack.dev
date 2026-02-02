@@ -23,6 +23,8 @@ const ESEntries = [
   "./src/trading-chart/subscrib-visible-logical-range.tsx",
   "./src/error-boundary/error-boundary.tsx",
   "./src/image/image.tsx",
+  "./src/utils/create-context.ts",
+  "./src/utils/use-is-hydrated.ts",
 ];
 
 export default defineConfig((opts) => {

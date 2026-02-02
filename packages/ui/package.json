@@ -49,6 +49,12 @@
       ],
       "image": [
         "./dist/image/image.d.ts"
+      ],
+      "utils/create-context": [
+        "./dist/utils/create-context.d.ts"
+      ],
+      "utils/use-is-hydrated": [
+        "./dist/utils/use-is-hydrated.d.ts"
       ]
     }
   },
@@ -89,6 +95,14 @@
     "./image": {
       "import": "./dist/image/image.js",
       "types": "./dist/image/image.d.ts"
+    },
+    "./utils/create-context": {
+      "import": "./dist/utils/create-context.js",
+      "types": "./dist/utils/create-context.d.ts"
+    },
+    "./utils/use-is-hydrated": {
+      "import": "./dist/utils/use-is-hydrated.js",
+      "types": "./dist/utils/use-is-hydrated.d.ts"
     }
   },
   "publishConfig": {

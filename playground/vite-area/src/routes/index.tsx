@@ -1,3 +1,5 @@
+import { ViewTransition } from "react";
+
 import { createFileRoute } from "@tanstack/react-router";
 
 import { Image } from "@chiastack/ui/image";
@@ -17,13 +19,22 @@ function RouteComponent() {
         </span>
       </section>
       <section className="flex flex-col items-center justify-center">
-        <Image.Root className="flex h-10 w-10 items-center justify-center overflow-hidden rounded-full">
-          <Image.Resource
-            src="https://avatars.githubusercontent.com/u/38397958?v=4"
-            alt="avatar"
-          />
-          <Image.Fallback className="flex h-full w-full animate-pulse items-center justify-center bg-gray-200" />
-        </Image.Root>
+        <div className="relative flex h-10 w-10 items-center justify-center overflow-hidden rounded-full">
+          <Image.Root>
+            <ViewTransition>
+              <Image.Resource
+                src="https://avatars.githubusercontent.com/u/38397958?v=4"
+                alt="avatar"
+                className="absolute inset-0 h-full w-full rounded-full object-cover"
+              />
+            </ViewTransition>
+            <ViewTransition>
+              <Image.Fallback className="absolute inset-0 flex h-full w-full animate-pulse items-center justify-center rounded-full bg-gray-200">
+                C
+              </Image.Fallback>
+            </ViewTransition>
+          </Image.Root>
+        </div>
       </section>
     </main>
   );

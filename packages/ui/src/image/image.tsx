@@ -32,33 +32,32 @@ export const [ImageContextProvider, useImageContext] =
     namespace: "Image",
   });
 
-export type ImageRootProps = React.HTMLAttributes<HTMLSpanElement> &
-  Partial<ImageContext>;
+export type ImageRootProps = Partial<ImageContext> & {
+  children: React.ReactNode;
+};
 
-export type ImageRootRef = React.ComponentRef<"span">;
+export const Root = (props: ImageRootProps) => {
+  const [status, setStatus] = React.useState<ImageLoadingStatus>(
+    props.status ?? ImageLoadingStatus.Idle
+  );
 
-export const Root = React.forwardRef<ImageRootRef, ImageRootProps>(
-  (props, ref) => {
-    const [status, setStatus] = React.useState<ImageLoadingStatus>(
-      props.status ?? ImageLoadingStatus.Idle
-    );
-
-    const handleStatusVhange = React.useCallback(
-      (status: ImageLoadingStatus) => {
+  const handleStatusVhange = React.useCallback(
+    (status: ImageLoadingStatus) => {
+      React.startTransition(() => {
         setStatus(status);
-        props.onStatusChange?.(status);
-      },
-      [props]
-    );
+      });
+      props.onStatusChange?.(status);
+    },
+    [props]
+  );
 
-    return (
-      <ImageContextProvider
-        value={{ status, onStatusChange: handleStatusVhange }}>
-        <span {...props} ref={ref} />
-      </ImageContextProvider>
-    );
-  }
-);
+  return (
+    <ImageContextProvider
+      value={{ status, onStatusChange: handleStatusVhange }}>
+      {props.children}
+    </ImageContextProvider>
+  );
+};
 
 export type ImageResourceProps = React.ImgHTMLAttributes<HTMLImageElement> & {
   onLoadingStatusChange?: (status: ImageLoadingStatus) => void;
@@ -66,31 +65,44 @@ export type ImageResourceProps = React.ImgHTMLAttributes<HTMLImageElement> & {
 
 export type ImageResourceRef = React.ComponentRef<"img">;
 
+export const ResourcePrimitive = React.forwardRef<
+  ImageResourceRef,
+  ImageResourceProps
+>((props, ref) => {
+  return <img {...props} ref={ref} />;
+});
+
+export const ResourceActivity = (
+  props: ImageResourceProps & { children: React.ReactNode }
+) => {
+  const context = useImageContext();
+  const loadingStatus = useImageLoadingStatus(props.src);
+
+  const handleLoadingStatusChange = React.useEffectEvent(
+    (status: ImageLoadingStatus) => {
+      props.onLoadingStatusChange?.(status);
+      context.onStatusChange(status);
+    }
+  );
+
+  React.useLayoutEffect(() => {
+    handleLoadingStatusChange(loadingStatus);
+  }, [loadingStatus]);
+
+  return (
+    <React.Activity
+      mode={loadingStatus === ImageLoadingStatus.Loaded ? "visible" : "hidden"}>
+      {props.children}
+    </React.Activity>
+  );
+};
+
 export const Resource = React.forwardRef<ImageResourceRef, ImageResourceProps>(
-  (props, ref) => {
-    const context = useImageContext();
-    const loadingStatus = useImageLoadingStatus(props.src);
-
-    const handleLoadingStatusChange = React.useEffectEvent(
-      (status: ImageLoadingStatus) => {
-        props.onLoadingStatusChange?.(status);
-        context.onStatusChange(status);
-      }
-    );
-
-    React.useLayoutEffect(() => {
-      handleLoadingStatusChange(loadingStatus);
-    }, [loadingStatus]);
-
-    return (
-      <React.Activity
-        mode={
-          loadingStatus === ImageLoadingStatus.Loaded ? "visible" : "hidden"
-        }>
-        <img {...props} ref={ref} />
-      </React.Activity>
-    );
-  }
+  (props, ref) => (
+    <ResourceActivity {...props}>
+      <ResourcePrimitive {...props} ref={ref} />
+    </ResourceActivity>
+  )
 );
 
 export type ImageFallbackProps = React.HTMLAttributes<HTMLSpanElement> & {
@@ -99,32 +111,44 @@ export type ImageFallbackProps = React.HTMLAttributes<HTMLSpanElement> & {
 
 export type ImageFallbackRef = React.ComponentRef<"span">;
 
+export const FallbackActivity = (
+  props: ImageFallbackProps & { children: React.ReactNode }
+) => {
+  const context = useImageContext();
+  const [isVisible, setIsVisible] = React.useState(props.delay === undefined);
+
+  React.useEffect(() => {
+    if (props.delay !== undefined) {
+      const timerId = window.setTimeout(() => setIsVisible(true), props.delay);
+      return () => window.clearTimeout(timerId);
+    }
+  }, [props.delay]);
+
+  return (
+    <React.Activity
+      mode={
+        isVisible && context.status !== ImageLoadingStatus.Loaded
+          ? "visible"
+          : "hidden"
+      }>
+      {props.children}
+    </React.Activity>
+  );
+};
+
+export const FallbackPrimitive = React.forwardRef<
+  ImageFallbackRef,
+  ImageFallbackProps
+>((props, ref) => {
+  return <span {...props} ref={ref} />;
+});
+
 export const Fallback = React.forwardRef<ImageFallbackRef, ImageFallbackProps>(
-  (props, ref) => {
-    const context = useImageContext();
-    const [isVisible, setIsVisible] = React.useState(props.delay === undefined);
-
-    React.useEffect(() => {
-      if (props.delay !== undefined) {
-        const timerId = window.setTimeout(
-          () => setIsVisible(true),
-          props.delay
-        );
-        return () => window.clearTimeout(timerId);
-      }
-    }, [props.delay]);
-
-    return (
-      <React.Activity
-        mode={
-          isVisible && context.status !== ImageLoadingStatus.Loaded
-            ? "visible"
-            : "hidden"
-        }>
-        <span {...props} ref={ref} />
-      </React.Activity>
-    );
-  }
+  (props, ref) => (
+    <FallbackActivity {...props}>
+      <FallbackPrimitive {...props} ref={ref} />
+    </FallbackActivity>
+  )
 );
 
 export function resolveLoadingStatus(
@@ -188,5 +212,9 @@ export function useImageLoadingStatus(src: string | undefined) {
 export const Image = {
   Root,
   Resource,
+  ResourcePrimitive,
+  ResourceActivity,
   Fallback,
+  FallbackPrimitive,
+  FallbackActivity,
 };
