@@ -84,37 +84,6 @@ Chia Stack 中的每個套件都可以獨立安裝和使用。
   </Tab>
 </Tabs>
 
-## 使用範例
-
-### Utils 範例
-
-```typescript
-import { delay, tryCatch } from '@chiastack/utils';
-
-// 延遲執行
-await delay(1000); // 等待 1 秒
-
-// 安全的錯誤處理
-const result = await tryCatch(fetch('/api/data'));
-if (result.error) {
-  console.error(result.error);
-} else {
-  console.log(result.data);
-}
-```
-
-### Services 範例
-
-```typescript
-import { captchaSiteverify } from '@chiastack/services/captcha';
-
-// 驗證 CAPTCHA
-const response = await captchaSiteverify(request, {
-  provider: 'cloudflare-turnstile',
-  captchaSecretKey: process.env.CAPTCHA_SECRET_KEY!,
-});
-```
-
 ## 下一步
 
 - 查看 [Utils 文件](/zh/docs/utils) 了解所有可用的工具函式

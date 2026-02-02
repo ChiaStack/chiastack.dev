@@ -84,37 +84,6 @@ Each package in Chia Stack can be installed and used independently.
   </Tab>
 </Tabs>
 
-## Usage Examples
-
-### Utils Example
-
-```typescript
-import { delay, tryCatch } from '@chiastack/utils';
-
-// Delay execution
-await delay(1000); // Wait 1 second
-
-// Safe error handling
-const result = await tryCatch(fetch('/api/data'));
-if (result.error) {
-  console.error(result.error);
-} else {
-  console.log(result.data);
-}
-```
-
-### Services Example
-
-```typescript
-import { captchaSiteverify } from '@chiastack/services/captcha';
-
-// Verify CAPTCHA
-const response = await captchaSiteverify(request, {
-  provider: 'cloudflare-turnstile',
-  captchaSecretKey: process.env.CAPTCHA_SECRET_KEY!,
-});
-```
-
 ## Next Steps
 
 - Check out the [Utils documentation](/docs/utils) to learn about all available utility functions

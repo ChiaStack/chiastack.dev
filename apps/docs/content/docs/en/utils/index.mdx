@@ -33,28 +33,6 @@ description: Collection of utility functions
 ## Modules
 
 <Cards>
-  <Card title="Day" href="/docs/utils/day" description="Date and time handling" />
-  <Card title="Delay" href="/docs/utils/delay" description="Delay execution function" />
-  <Card title="Try Catch" href="/docs/utils/try-catch" description="Safe error handling" />
-  <Card title="Is" href="/docs/utils/is" description="Type checking utilities" />
   <Card title="Server" href="/docs/utils/server" description="Server-side utilities" />
   <Card title="Set Search Params" href="/docs/utils/set-search-params" description="URL query parameter handling" />
 </Cards>
-
-## Basic Usage
-
-```typescript
-import { delay, tryCatch, isNumber } from '@chiastack/utils';
-
-// Delay execution
-await delay(1000);
-
-// Safe error handling
-const result = await tryCatch(fetch('/api/data'));
-
-// Type checking
-if (isNumber(value)) {
-  console.log(value + 1);
-}
-```
-

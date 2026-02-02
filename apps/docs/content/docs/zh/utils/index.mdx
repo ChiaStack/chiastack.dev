@@ -33,28 +33,6 @@ description: 實用的工具函式集合
 ## 模組
 
 <Cards>
-  <Card title="Day" href="/zh/docs/utils/day" description="日期和時間處理" />
-  <Card title="Delay" href="/zh/docs/utils/delay" description="延遲執行函數" />
-  <Card title="Try Catch" href="/zh/docs/utils/try-catch" description="安全的錯誤處理" />
-  <Card title="Is" href="/zh/docs/utils/is" description="型別檢查工具" />
   <Card title="Server" href="/zh/docs/utils/server" description="伺服器端工具" />
   <Card title="Set Search Params" href="/zh/docs/utils/set-search-params" description="URL 查詢參數處理" />
 </Cards>
-
-## 基本用法
-
-```typescript
-import { delay, tryCatch, isNumber } from '@chiastack/utils';
-
-// 延遲執行
-await delay(1000);
-
-// 安全的錯誤處理
-const result = await tryCatch(fetch('/api/data'));
-
-// 型別檢查
-if (isNumber(value)) {
-  console.log(value + 1);
-}
-```
-
