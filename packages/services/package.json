@@ -34,16 +34,16 @@
   "exports": {
     "./package.json": "./package.json",
     "./captcha": {
-      "types": "./dist/captcha/captcha.d.mts",
-      "import": "./dist/captcha/captcha.mjs"
+      "import": "./dist/captcha/captcha.mjs",
+      "types": "./dist/captcha/captcha.d.mts"
     },
     "./demo": {
-      "types": "./dist/demo/demo.d.mts",
-      "import": "./dist/demo/demo.mjs"
+      "import": "./dist/demo/demo.mjs",
+      "types": "./dist/demo/demo.d.mts"
     },
     "./demo/env": {
-      "types": "./dist/demo/env.d.mts",
-      "import": "./dist/demo/env.mjs"
+      "import": "./dist/demo/env.mjs",
+      "types": "./dist/demo/env.d.mts"
     }
   },
   "publishConfig": {

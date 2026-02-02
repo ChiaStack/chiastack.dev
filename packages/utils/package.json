@@ -52,40 +52,40 @@
   "exports": {
     "./package.json": "./package.json",
     ".": {
-      "types": "./dist/index.d.mts",
-      "import": "./dist/index.mjs"
+      "import": "./dist/index.mjs",
+      "types": "./dist/index.d.mts"
     },
     "./set-search-params": {
-      "types": "./dist/set-search-params/set-search-params.d.mts",
-      "import": "./dist/set-search-params/set-search-params.mjs"
+      "import": "./dist/set-search-params/set-search-params.mjs",
+      "types": "./dist/set-search-params/set-search-params.d.mts"
     },
     "./day": {
-      "types": "./dist/day/day.d.mts",
-      "import": "./dist/day/day.mjs"
+      "import": "./dist/day/day.mjs",
+      "types": "./dist/day/day.d.mts"
     },
     "./try-catch": {
-      "types": "./dist/try-catch/try-catch.d.mts",
-      "import": "./dist/try-catch/try-catch.mjs"
+      "import": "./dist/try-catch/try-catch.mjs",
+      "types": "./dist/try-catch/try-catch.d.mts"
     },
     "./is": {
-      "types": "./dist/is/is.d.mts",
-      "import": "./dist/is/is.mjs"
+      "import": "./dist/is/is.mjs",
+      "types": "./dist/is/is.d.mts"
     },
     "./delay": {
-      "types": "./dist/delay/delay.d.mts",
-      "import": "./dist/delay/delay.mjs"
+      "import": "./dist/delay/delay.mjs",
+      "types": "./dist/delay/delay.d.mts"
     },
     "./server": {
-      "types": "./dist/server/server.d.mts",
-      "import": "./dist/server/server.mjs"
+      "import": "./dist/server/server.mjs",
+      "types": "./dist/server/server.d.mts"
     },
     "./algorithms": {
-      "types": "./dist/algorithms/algorithms.d.mts",
-      "import": "./dist/algorithms/algorithms.mjs"
+      "import": "./dist/algorithms/algorithms.mjs",
+      "types": "./dist/algorithms/algorithms.d.mts"
     },
     "./mathex": {
-      "types": "./dist/mathex/mathex.d.mts",
-      "import": "./dist/mathex/mathex.mjs"
+      "import": "./dist/mathex/mathex.mjs",
+      "types": "./dist/mathex/mathex.d.mts"
     }
   },
   "publishConfig": {

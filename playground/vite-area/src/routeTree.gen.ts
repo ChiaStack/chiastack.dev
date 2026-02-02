@@ -8,97 +8,97 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
-import { Route as rootRouteImport } from "./routes/__root";
-import { Route as IndexRouteImport } from "./routes/index";
-import { Route as TicTacToeRouteImport } from "./routes/tic-tac-toe";
-import { Route as TodoRouteImport } from "./routes/todo";
-import { Route as TradingviewRouteImport } from "./routes/tradingview";
+import { Route as rootRouteImport } from './routes/__root'
+import { Route as TradingviewRouteImport } from './routes/tradingview'
+import { Route as TodoRouteImport } from './routes/todo'
+import { Route as TicTacToeRouteImport } from './routes/tic-tac-toe'
+import { Route as IndexRouteImport } from './routes/index'
 
 const TradingviewRoute = TradingviewRouteImport.update({
-  id: "/tradingview",
-  path: "/tradingview",
+  id: '/tradingview',
+  path: '/tradingview',
   getParentRoute: () => rootRouteImport,
-} as any);
+} as any)
 const TodoRoute = TodoRouteImport.update({
-  id: "/todo",
-  path: "/todo",
+  id: '/todo',
+  path: '/todo',
   getParentRoute: () => rootRouteImport,
-} as any);
+} as any)
 const TicTacToeRoute = TicTacToeRouteImport.update({
-  id: "/tic-tac-toe",
-  path: "/tic-tac-toe",
+  id: '/tic-tac-toe',
+  path: '/tic-tac-toe',
   getParentRoute: () => rootRouteImport,
-} as any);
+} as any)
 const IndexRoute = IndexRouteImport.update({
-  id: "/",
-  path: "/",
+  id: '/',
+  path: '/',
   getParentRoute: () => rootRouteImport,
-} as any);
+} as any)
 
 export interface FileRoutesByFullPath {
-  "/": typeof IndexRoute;
-  "/tic-tac-toe": typeof TicTacToeRoute;
-  "/todo": typeof TodoRoute;
-  "/tradingview": typeof TradingviewRoute;
+  '/': typeof IndexRoute
+  '/tic-tac-toe': typeof TicTacToeRoute
+  '/todo': typeof TodoRoute
+  '/tradingview': typeof TradingviewRoute
 }
 export interface FileRoutesByTo {
-  "/": typeof IndexRoute;
-  "/tic-tac-toe": typeof TicTacToeRoute;
-  "/todo": typeof TodoRoute;
-  "/tradingview": typeof TradingviewRoute;
+  '/': typeof IndexRoute
+  '/tic-tac-toe': typeof TicTacToeRoute
+  '/todo': typeof TodoRoute
+  '/tradingview': typeof TradingviewRoute
 }
 export interface FileRoutesById {
-  __root__: typeof rootRouteImport;
-  "/": typeof IndexRoute;
-  "/tic-tac-toe": typeof TicTacToeRoute;
-  "/todo": typeof TodoRoute;
-  "/tradingview": typeof TradingviewRoute;
+  __root__: typeof rootRouteImport
+  '/': typeof IndexRoute
+  '/tic-tac-toe': typeof TicTacToeRoute
+  '/todo': typeof TodoRoute
+  '/tradingview': typeof TradingviewRoute
 }
 export interface FileRouteTypes {
-  fileRoutesByFullPath: FileRoutesByFullPath;
-  fullPaths: "/" | "/tic-tac-toe" | "/todo" | "/tradingview";
-  fileRoutesByTo: FileRoutesByTo;
-  to: "/" | "/tic-tac-toe" | "/todo" | "/tradingview";
-  id: "__root__" | "/" | "/tic-tac-toe" | "/todo" | "/tradingview";
-  fileRoutesById: FileRoutesById;
+  fileRoutesByFullPath: FileRoutesByFullPath
+  fullPaths: '/' | '/tic-tac-toe' | '/todo' | '/tradingview'
+  fileRoutesByTo: FileRoutesByTo
+  to: '/' | '/tic-tac-toe' | '/todo' | '/tradingview'
+  id: '__root__' | '/' | '/tic-tac-toe' | '/todo' | '/tradingview'
+  fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute;
-  TicTacToeRoute: typeof TicTacToeRoute;
-  TodoRoute: typeof TodoRoute;
-  TradingviewRoute: typeof TradingviewRoute;
+  IndexRoute: typeof IndexRoute
+  TicTacToeRoute: typeof TicTacToeRoute
+  TodoRoute: typeof TodoRoute
+  TradingviewRoute: typeof TradingviewRoute
 }
 
-declare module "@tanstack/react-router" {
+declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    "/tradingview": {
-      id: "/tradingview";
-      path: "/tradingview";
-      fullPath: "/tradingview";
-      preLoaderRoute: typeof TradingviewRouteImport;
-      parentRoute: typeof rootRouteImport;
-    };
-    "/todo": {
-      id: "/todo";
-      path: "/todo";
-      fullPath: "/todo";
-      preLoaderRoute: typeof TodoRouteImport;
-      parentRoute: typeof rootRouteImport;
-    };
-    "/tic-tac-toe": {
-      id: "/tic-tac-toe";
-      path: "/tic-tac-toe";
-      fullPath: "/tic-tac-toe";
-      preLoaderRoute: typeof TicTacToeRouteImport;
-      parentRoute: typeof rootRouteImport;
-    };
-    "/": {
-      id: "/";
-      path: "/";
-      fullPath: "/";
-      preLoaderRoute: typeof IndexRouteImport;
-      parentRoute: typeof rootRouteImport;
-    };
+    '/tradingview': {
+      id: '/tradingview'
+      path: '/tradingview'
+      fullPath: '/tradingview'
+      preLoaderRoute: typeof TradingviewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/todo': {
+      id: '/todo'
+      path: '/todo'
+      fullPath: '/todo'
+      preLoaderRoute: typeof TodoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tic-tac-toe': {
+      id: '/tic-tac-toe'
+      path: '/tic-tac-toe'
+      fullPath: '/tic-tac-toe'
+      preLoaderRoute: typeof TicTacToeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -107,7 +107,7 @@ const rootRouteChildren: RootRouteChildren = {
   TicTacToeRoute: TicTacToeRoute,
   TodoRoute: TodoRoute,
   TradingviewRoute: TradingviewRoute,
-};
+}
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
-  ._addFileTypes<FileRouteTypes>();
+  ._addFileTypes<FileRouteTypes>()

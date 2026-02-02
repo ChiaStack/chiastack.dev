@@ -39,7 +39,9 @@
     ".map.ts",
     ".github",
     "apps/changelog-gen",
-    "*.mdx"
+    "*.mdx",
+    "**/*/routeTree.gen.ts",
+    "packages/**/*/package.json"
   ],
   "experimentalSortImports": {
     "groups": [
