@@ -52,16 +52,15 @@
   "scripts": {
     "build": "tsdown",
     "clean": "git clean -xdf .turbo node_modules dist",
-    "lint": "eslint",
+    "lint": "oxlint",
     "type:check": "tsc --noEmit"
   },
   "devDependencies": {
-    "@chiastack/eslint": "workspace:*",
     "@chiastack/tsconfig": "workspace:*",
     "@chiastack/utils": "workspace:*",
     "@types/node": "catalog:",
-    "eslint": "catalog:eslint",
     "ky": "catalog:",
+    "oxlint": "catalog:oxc",
     "tsdown": "catalog:",
     "zod": "catalog:"
   },

@@ -49,22 +49,21 @@
   "scripts": {
     "build": "tsdown",
     "clean": "git clean -xdf .turbo node_modules dist",
-    "lint": "eslint",
+    "lint": "oxlint",
     "type:check": "tsc --noEmit"
   },
   "dependencies": {
     "better-result": "catalog:"
   },
   "devDependencies": {
-    "@chiastack/eslint": "workspace:*",
     "@chiastack/tsconfig": "workspace:*",
     "@chiastack/utils": "workspace:*",
     "@types/node": "catalog:",
     "@types/react": "catalog:react-is",
     "@types/react-dom": "catalog:react-is",
-    "eslint": "catalog:eslint",
     "happy-dom": "^20.4.0",
     "nanoid": "^5.1.6",
+    "oxlint": "catalog:oxc",
     "react": "catalog:react-is",
     "react-dom": "catalog:react-is",
     "tsdown": "catalog:",
