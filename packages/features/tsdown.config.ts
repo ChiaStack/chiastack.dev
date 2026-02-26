@@ -34,4 +34,9 @@ export default defineConfig({
   deps: {
     onlyAllowBundle: false,
   },
+  inputOptions: {
+    transform: {
+      jsx: "react",
+    },
+  },
 });

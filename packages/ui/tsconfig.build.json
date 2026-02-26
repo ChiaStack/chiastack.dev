@@ -1,5 +1,14 @@
 {
   "extends": ["./tsconfig.json"],
   "include": ["src"],
-  "exclude": ["dist", "build", "node_modules", "**/*.test.ts", "**/*.spec.ts"]
+  "exclude": [
+    "dist",
+    "build",
+    "node_modules",
+    "**/*.test.ts",
+    "**/*.spec.ts",
+    "tsdown.config.ts",
+    "vitest.config.ts",
+    "oxlint.config.ts"
+  ]
 }

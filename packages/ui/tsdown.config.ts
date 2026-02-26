@@ -38,6 +38,12 @@ export default defineConfig(() => {
     platform: "neutral",
     sourcemap: false,
     exports: true,
+    tsconfig: "./tsconfig.build.json",
+    inputOptions: {
+      transform: {
+        jsx: "react",
+      },
+    },
   } satisfies UserConfig;
 
   return [
