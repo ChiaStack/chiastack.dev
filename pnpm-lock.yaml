@@ -22,8 +22,8 @@ catalogs:
       specifier: ^1.14.3
       version: 1.14.3
     tsdown:
-      specifier: 0.21.0-beta.1
-      version: 0.21.0-beta.1
+      specifier: 0.21.0-beta.2
+      version: 0.21.0-beta.2
     typescript:
       specifier: ^5.9.3
       version: 5.9.3
@@ -161,6 +161,8 @@ importers:
       vitest:
         specifier: ^4.0.18
         version: 4.0.18(@types/node@25.3.1)(happy-dom@20.7.0)(jiti@2.6.1)(jsdom@27.2.0)(lightningcss@1.31.1)(tsx@4.21.0)(yaml@2.8.2)
+
+  apps/changelog-gen: {}
 
   apps/docs:
     dependencies:
@@ -315,7 +317,7 @@ importers:
         version: 10.0.2(jiti@2.6.1)
       tsdown:
         specifier: 'catalog:'
-        version: 0.21.0-beta.1(typescript@5.9.3)
+        version: 0.21.0-beta.2(typescript@5.9.3)
       typescript:
         specifier: 'catalog:'
         version: 5.9.3
@@ -361,7 +363,7 @@ importers:
         version: 19.2.4(react@19.2.4)
       tsdown:
         specifier: 'catalog:'
-        version: 0.21.0-beta.1(typescript@5.9.3)
+        version: 0.21.0-beta.2(typescript@5.9.3)
       uuid:
         specifier: ^13.0.0
         version: 13.0.0
@@ -385,7 +387,7 @@ importers:
         version: 1.50.0
       tsdown:
         specifier: 'catalog:'
-        version: 0.21.0-beta.1(typescript@5.9.3)
+        version: 0.21.0-beta.2(typescript@5.9.3)
       typescript:
         specifier: 'catalog:'
         version: 5.9.3
@@ -412,7 +414,7 @@ importers:
         version: 1.50.0
       tsdown:
         specifier: 'catalog:'
-        version: 0.21.0-beta.1(typescript@5.9.3)
+        version: 0.21.0-beta.2(typescript@5.9.3)
       zod:
         specifier: 'catalog:'
         version: 4.3.6
@@ -456,7 +458,7 @@ importers:
         version: 3.1.0
       tsdown:
         specifier: 'catalog:'
-        version: 0.21.0-beta.1(typescript@5.9.3)
+        version: 0.21.0-beta.2(typescript@5.9.3)
 
   packages/utils:
     devDependencies:
@@ -474,7 +476,7 @@ importers:
         version: 1.50.0
       tsdown:
         specifier: 'catalog:'
-        version: 0.21.0-beta.1(typescript@5.9.3)
+        version: 0.21.0-beta.2(typescript@5.9.3)
       zod:
         specifier: 'catalog:'
         version: 4.3.6
@@ -3915,8 +3917,8 @@ packages:
   fast-levenshtein@2.0.6:
     resolution: {integrity: sha512-DCXu6Ifhqcks7TZKY3Hxp3y6qphY5SJZmrWMDrKcERSOXWQdMhU9Ig/PYrzyw/ul9jOIyh0N4M0tbC5hodg8dw==}
 
-  fastq@1.19.1:
-    resolution: {integrity: sha512-GwLTyxkCXjXbxqIhTsMI2Nui8huMPtnxg7krajPJAjnEG/iiOS7i+zCtWGZR9G0NBKbXKh6X9m9UIsYX/N6vvQ==}
+  fastq@1.20.1:
+    resolution: {integrity: sha512-GGToxJ/w1x32s/D2EKND7kTil4n8OVk/9mycTc4VDza13lOvpUZTGX3mFSCtV9ksdGBVzvsyAVLM6mHFThxXxw==}
 
   fdir@6.5.0:
     resolution: {integrity: sha512-tIbYtZbucOs0BRGqPJkshJUYdL+SDH7dVM8gjy+ERp3WAUjLEFJE+02kanyHtwjWOnwrKYBiwAmM0p4kLJAnXg==}
@@ -5598,14 +5600,14 @@ packages:
     deprecated: Rimraf versions prior to v4 are no longer supported
     hasBin: true
 
-  rolldown-plugin-dts@0.22.1:
-    resolution: {integrity: sha512-5E0AiM5RSQhU6cjtkDFWH6laW4IrMu0j1Mo8x04Xo1ALHmaRMs9/7zej7P3RrryVHW/DdZAp85MA7Be55p0iUw==}
+  rolldown-plugin-dts@0.22.2:
+    resolution: {integrity: sha512-Ge+XF962Kobjr0hRPx1neVnLU2jpKkD2zevZTfPKf/0el4eYo9SyGPm0stiHDG2JQuL0Q3HLD0Kn+ST8esvVdA==}
     engines: {node: '>=20.19.0'}
     peerDependencies:
       '@ts-macro/tsc': ^0.3.6
       '@typescript/native-preview': '>=7.0.0-dev.20250601.1'
       rolldown: ^1.0.0-rc.3
-      typescript: ^5.0.0
+      typescript: ^5.0.0 || ^6.0.0-beta
       vue-tsc: ~3.2.0
     peerDependenciesMeta:
       '@ts-macro/tsc':
@@ -6033,8 +6035,8 @@ packages:
   tsconfig-paths@3.15.0:
     resolution: {integrity: sha512-2Ac2RgzDe/cn48GvOe3M+o82pEFewD3UPbyoUHHdKasHwJKjds4fLXWf/Ux5kATBKN20oaFGu+jbElp1pos0mg==}
 
-  tsdown@0.21.0-beta.1:
-    resolution: {integrity: sha512-Vtpymgc3MMJ0CbOgYlk/65xjCdNaCQleKErUsJ3WgnD7O3E6yV4ndrmZlLWj3lTEoELfBuQeWdYsqg/Ad4CqeQ==}
+  tsdown@0.21.0-beta.2:
+    resolution: {integrity: sha512-OKj8mKf0ws1ucxuEi3mO/OGyfRQxO9MY2D6SoIE/7RZcbojsZSBhJr4xC4MNivMqrQvi3Ke2e+aRZDemPBWPCw==}
     engines: {node: '>=20.19.0'}
     hasBin: true
     peerDependencies:
@@ -7474,7 +7476,7 @@ snapshots:
   '@nodelib/fs.walk@1.2.8':
     dependencies:
       '@nodelib/fs.scandir': 2.1.5
-      fastq: 1.19.1
+      fastq: 1.20.1
 
   '@orama/orama@3.1.18': {}
 
@@ -9858,7 +9860,7 @@ snapshots:
 
   fast-levenshtein@2.0.6: {}
 
-  fastq@1.19.1:
+  fastq@1.20.1:
     dependencies:
       reusify: 1.1.0
 
@@ -11986,7 +11988,7 @@ snapshots:
     dependencies:
       glob: 7.2.3
 
-  rolldown-plugin-dts@0.22.1(rolldown@1.0.0-rc.5)(typescript@5.9.3):
+  rolldown-plugin-dts@0.22.2(rolldown@1.0.0-rc.5)(typescript@5.9.3):
     dependencies:
       '@babel/generator': 8.0.0-rc.1
       '@babel/helper-validator-identifier': 8.0.0-rc.1
@@ -12513,7 +12515,7 @@ snapshots:
       minimist: 1.2.8
       strip-bom: 3.0.0
 
-  tsdown@0.21.0-beta.1(typescript@5.9.3):
+  tsdown@0.21.0-beta.2(typescript@5.9.3):
     dependencies:
       ansis: 4.2.0
       cac: 6.7.14
@@ -12524,7 +12526,7 @@ snapshots:
       obug: 2.1.1
       picomatch: 4.0.3
       rolldown: 1.0.0-rc.5
-      rolldown-plugin-dts: 0.22.1(rolldown@1.0.0-rc.5)(typescript@5.9.3)
+      rolldown-plugin-dts: 0.22.2(rolldown@1.0.0-rc.5)(typescript@5.9.3)
       semver: 7.7.4
       tinyexec: 1.0.2
       tinyglobby: 0.2.15
