@@ -1,22 +1,25 @@
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "extends": ["../../.oxlintrc.json"],
-  "plugins": ["react"],
-  "categories": {
-    "correctness": "off"
+import { defineConfig } from "oxlint";
+
+import { baseConfig } from "@chiastack/oxlint/base";
+
+export default defineConfig({
+  extends: [baseConfig],
+  plugins: ["react"],
+  categories: {
+    correctness: "off",
   },
-  "env": {
-    "builtin": true
+  env: {
+    builtin: true,
   },
-  "ignorePatterns": [".next/**", "**/.map.ts", "@types/**", "next-env.d.ts"],
-  "rules": {
+  ignorePatterns: [".next/**", "**/.map.ts", "@types/**", "next-env.d.ts"],
+  rules: {
     "react-hooks/rules-of-hooks": "error",
-    "react-hooks/exhaustive-deps": "warn"
+    "react-hooks/exhaustive-deps": "warn",
   },
-  "overrides": [
+  overrides: [
     {
-      "files": ["**/*.ts", "**/*.tsx"],
-      "rules": {
+      files: ["**/*.ts", "**/*.tsx"],
+      rules: {
         "react/react-in-jsx-scope": "off",
         "@next/next/google-font-display": "warn",
         "@next/next/google-font-preconnect": "warn",
@@ -38,15 +41,15 @@
         "@next/next/no-document-import-in-page": "error",
         "@next/next/no-duplicate-head": "off",
         "@next/next/no-head-import-in-document": "error",
-        "@next/next/no-script-component-in-head": "error"
+        "@next/next/no-script-component-in-head": "error",
       },
-      "globals": {
-        "React": "writable"
-      }
+      globals: {
+        React: "writable",
+      },
     },
     {
-      "files": ["**/*.ts", "**/*.tsx"],
-      "plugins": ["nextjs"]
-    }
-  ]
-}
+      files: ["**/*.ts", "**/*.tsx"],
+      plugins: ["nextjs"],
+    },
+  ],
+});

@@ -3,6 +3,9 @@
     "@chiastack/tsconfig/compiled-package.json",
     "@chiastack/tsconfig/react.json"
   ],
+  "compilerOptions": {
+    "jsx": "react"
+  },
   "include": ["src", "tsdown.config.ts"],
   "exclude": ["dist", "build", "node_modules"]
 }

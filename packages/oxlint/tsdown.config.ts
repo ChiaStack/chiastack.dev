@@ -1,17 +1,16 @@
-import { defineConfig, type UserConfig } from "tsdown";
+import { defineConfig } from "tsdown";
+import type { UserConfig } from "tsdown";
 
-export default defineConfig((opts) => {
-  const common = {
-    clean: !opts.watch,
-    dts: true,
-    format: ["esm"],
-    minify: true,
-    outDir: "dist",
-  } satisfies UserConfig;
-  return [
-    {
-      ...common,
-      entry: ["base.ts", "nextjs.ts", "react.ts"],
-    },
-  ] satisfies UserConfig[];
-});
+export default defineConfig(
+  (opts) =>
+    [
+      {
+        clean: !opts.watch,
+        dts: true,
+        format: ["esm", "cjs"],
+        minify: true,
+        outDir: "dist",
+        entry: ["base.ts"],
+      },
+    ] satisfies UserConfig[]
+);

@@ -30,7 +30,11 @@
     "access": "public"
   },
   "scripts": {
-    "clean": "rm -rf .turbo node_modules .cache"
+    "build": "tsdown",
+    "clean": "git clean -xdf .turbo node_modules dist",
+    "lint": "oxlint",
+    "lint:fix": "oxlint --fix",
+    "type:check": "tsc --noEmit"
   },
   "devDependencies": {
     "@chiastack/tsconfig": "workspace:*",
@@ -40,6 +44,6 @@
     "typescript": "catalog:"
   },
   "peerDependencies": {
-    "oxlint": "^1.42.0"
+    "oxlint": "^1.50.0"
   }
 }

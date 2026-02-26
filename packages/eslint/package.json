@@ -46,13 +46,13 @@
     "@eslint/compat": "^2.0.2",
     "@eslint/js": "catalog:eslint",
     "@next/eslint-plugin-next": "catalog:next-is",
-    "eslint-config-turbo": "^2.8.1",
+    "eslint-config-turbo": "^2.8.11",
     "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-jsx-a11y": "^6.10.2",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^7.0.1",
-    "eslint-plugin-turbo": "^2.8.1",
-    "typescript-eslint": "^8.54.0"
+    "eslint-plugin-turbo": "^2.8.11",
+    "typescript-eslint": "^8.56.1"
   },
   "devDependencies": {
     "@chiastack/tsconfig": "workspace:*",

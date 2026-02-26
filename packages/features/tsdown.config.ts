@@ -31,10 +31,12 @@ export default defineConfig({
   platform: "neutral",
   sourcemap: false,
   entry: ESEntries,
+  deps: {
+    onlyAllowBundle: false,
+  },
   inputOptions: {
     transform: {
       jsx: "react",
     },
   },
-  inlineOnly: false,
 });
