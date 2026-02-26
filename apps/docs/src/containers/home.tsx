@@ -1,11 +1,11 @@
 "use client";
 
-import { useTheme } from "next-themes";
 import Link from "next/link";
 import type { RefObject } from "react";
 import { useRef } from "react";
 
 import { Leva } from "leva";
+import { useTheme } from "next-themes";
 import { useHover } from "usehooks-ts";
 
 import { GL } from "@/components/gl";

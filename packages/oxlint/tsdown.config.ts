@@ -12,5 +12,5 @@ export default defineConfig(
         outDir: "dist",
         entry: ["base.ts"],
       },
-    ] satisfies UserConfig[],
+    ] satisfies UserConfig[]
 );
