@@ -1,7 +1,5 @@
 # @chiastack/oxlint
 
-> Work In Progress, wait for oxlint update
-
 Shared OXLint configuration package for all projects in the Chiastack monorepo.
 
 ## Installation

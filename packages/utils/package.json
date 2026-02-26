@@ -78,6 +78,7 @@
     "type:check": "tsc --noEmit"
   },
   "devDependencies": {
+    "@chiastack/oxlint": "workspace:*",
     "@chiastack/tsconfig": "workspace:*",
     "@types/node": "catalog:",
     "oxlint": "catalog:oxc",
