@@ -38,11 +38,6 @@ export default defineConfig(() => {
     platform: "neutral",
     sourcemap: false,
     exports: true,
-    inputOptions: {
-      transform: {
-        jsx: "react",
-      },
-    },
   } satisfies UserConfig;
 
   return [
