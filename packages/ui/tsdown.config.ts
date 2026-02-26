@@ -33,7 +33,6 @@ export default defineConfig(() => {
     clean: true,
     dts: true,
     format: ["esm"],
-    minify: true,
     outDir: "dist",
     platform: "neutral",
     sourcemap: false,
