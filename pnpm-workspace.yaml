@@ -1,6 +1,7 @@
 packages:
   - apps/docs
   - apps/ts-docs
+  - apps/changelog-gen
   - packages/*
   - playground/*
 
