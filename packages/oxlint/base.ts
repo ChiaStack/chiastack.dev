@@ -1,7 +1,7 @@
 import { defineConfig } from "oxlint";
 
 export const baseConfig = defineConfig({
-  plugins: [],
+  plugins: ["typescript", "import"],
   categories: {
     correctness: "off",
   },
@@ -67,7 +67,6 @@ export const baseConfig = defineConfig({
         "no-unsafe-optional-chaining": "error",
         "no-unused-labels": "error",
         "no-unused-private-class-members": "error",
-        "no-unused-vars": "error",
         "no-useless-backreference": "error",
         "no-useless-catch": "error",
         "no-useless-escape": "error",
@@ -75,11 +74,24 @@ export const baseConfig = defineConfig({
         "require-yield": "error",
         "use-isnan": "error",
         "valid-typeof": "error",
+        "no-array-constructor": "error",
+        "no-empty-function": "error",
+        "no-throw-literal": "off",
+        "no-unused-expressions": "error",
+        "prefer-promise-reject-errors": "off",
+        "require-await": "off",
+        "import/consistent-type-specifier-style": ["error", "prefer-top-level"],
+        "no-unused-vars": [
+          "error",
+          {
+            argsIgnorePattern: "^_",
+            varsIgnorePattern: "^_",
+          },
+        ],
       },
     },
     {
       files: ["**/*.js", "**/*.ts", "**/*.tsx"],
-      plugins: ["typescript"],
       rules: {
         "@typescript-eslint/adjacent-overload-signatures": "error",
         "@typescript-eslint/array-type": "error",
@@ -107,17 +119,7 @@ export const baseConfig = defineConfig({
         "@typescript-eslint/prefer-function-type": "error",
         "@typescript-eslint/prefer-namespace-keyword": "error",
         "@typescript-eslint/triple-slash-reference": "error",
-        "no-array-constructor": "error",
-        "no-empty-function": "error",
-        "no-throw-literal": "off",
-        "no-unused-expressions": "error",
-        "prefer-promise-reject-errors": "off",
-        "require-await": "off",
-      },
-    },
-    {
-      files: ["**/*.js", "**/*.ts", "**/*.tsx"],
-      rules: {
+        "@typescript-eslint/no-explicit-any": "warn",
         "@typescript-eslint/consistent-type-imports": [
           "warn",
           {
@@ -125,18 +127,7 @@ export const baseConfig = defineConfig({
             fixStyle: "separate-type-imports",
           },
         ],
-        "@typescript-eslint/no-non-null-assertion": "error",
-        "import/consistent-type-specifier-style": ["error", "prefer-top-level"],
-        "@typescript-eslint/no-explicit-any": "warn",
-        "no-unused-vars": [
-          "error",
-          {
-            argsIgnorePattern: "^_",
-            varsIgnorePattern: "^_",
-          },
-        ],
       },
-      plugins: ["typescript", "import"],
     },
   ],
 });

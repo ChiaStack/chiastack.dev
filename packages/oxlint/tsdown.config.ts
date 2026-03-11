@@ -10,7 +10,7 @@ export default defineConfig(
         format: ["esm", "cjs"],
         minify: true,
         outDir: "dist",
-        entry: ["base.ts"],
+        entry: ["base.ts", "react.ts", "nextjs.ts"],
       },
     ] satisfies UserConfig[]
 );
