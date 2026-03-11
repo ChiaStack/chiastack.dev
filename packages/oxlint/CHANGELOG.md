@@ -1,5 +1,15 @@
 # @chiastack/oxlint
 
+## 1.1.0
+
+### Minor Changes
+
+- [#112](https://github.com/ChiaStack/chiastack.dev/pull/112) [`719d35b`](https://github.com/ChiaStack/chiastack.dev/commit/719d35ba6bd2bb27dfbed3322f513c71e57d6093) Thanks [@Chia1104](https://github.com/Chia1104)! - Introduce new react & nextjs oxlint config
+
+  ### ✨ Features
+  - **oxlint**: introduce new react & nextjs config ([87c285e](https://github.com/Chia1104/chiastack.dev/commit/87c285e))
+  - **oxlint**: introduce new oxlint package ([f00b3a6](https://github.com/Chia1104/chiastack.dev/commit/f00b3a6))
+
 ## 1.0.0
 
 ### Major Changes
