@@ -35,7 +35,7 @@ catalogs:
     '@next/bundle-analyzer': 16.0.10
     '@next/eslint-plugin-next': 16.1.6
     '@next/third-parties': 16.0.10
-    next: 16.1.6
+    next: 16.1.7
   oxc:
     oxfmt: 0.35.0
     oxlint: 1.50.0
