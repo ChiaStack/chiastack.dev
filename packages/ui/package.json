@@ -121,7 +121,7 @@
     "@types/node": "catalog:",
     "@types/react": "catalog:react-is",
     "@types/react-dom": "catalog:react-is",
-    "happy-dom": "^20.7.0",
+    "happy-dom": "^20.8.8",
     "lightweight-charts": "^5.1.0",
     "oxlint": "catalog:oxc",
     "react": "catalog:react-is",
