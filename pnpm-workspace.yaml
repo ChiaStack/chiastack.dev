@@ -61,7 +61,7 @@ catalogs:
     '@tanstack/router-plugin': ^1.163.2
   vite:
     '@vitejs/plugin-react': 5.1.4
-    vite: 7.3.1
+    vite: 7.3.2
     vite-tsconfig-paths: 5.1.4
 
 linkWorkspacePackages: true
