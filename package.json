@@ -55,7 +55,7 @@
     "oxfmt": "catalog:oxc",
     "oxlint": "catalog:oxc",
     "tsx": "^4.21.0",
-    "turbo": "2.8.11",
+    "turbo": "2.9.14",
     "typescript": "catalog:",
     "vitest": "^4.0.18"
   },
