@@ -69,7 +69,7 @@
     "react": "catalog:react-is",
     "react-dom": "catalog:react-is",
     "tsdown": "catalog:",
-    "uuid": "^13.0.0",
+    "uuid": "^14.0.0",
     "zod": "catalog:",
     "zustand": "^5.0.11"
   },
